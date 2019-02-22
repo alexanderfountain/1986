@@ -4,7 +4,7 @@ import React from 'react'
 import Container from './container'
 import Menu from './menu'
 
-import Logo from '../images/logo.png'
+import Logo from '../images/logo_no_comp.png'
 
 const Header = ({ siteTitle }) => (
   <header>
