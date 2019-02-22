@@ -23,7 +23,6 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <div style={{
           overflow: 'hidden',
-          marginTop:'102px',
         }}>
         <PageTransition>
           {children}

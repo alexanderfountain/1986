@@ -9,7 +9,7 @@ import Logo from '../images/logo_no_comp.png'
 const Header = ({ siteTitle }) => (
   <header>
       <div style={{
-      backgroundColor:'#ffffff',
+      backgroundColor:'rgba(255, 255, 255, 0.9)',
       padding: '10px 20px',
       position: 'fixed',
       top: '0px',
@@ -25,7 +25,7 @@ const Header = ({ siteTitle }) => (
       }}>
       <div className="logo" style={{
         flexBasis:'150px',
-      }}><Link to="/" style={{borderBottom:'none',}}><img src={Logo} alt="Underguard logo" style={{
+      }}><Link to="/" style={{borderBottom:'none',}}><img src={Logo} alt="1986 logo" style={{
         width:'100%',
         height:'auto',
         display:'flex',
