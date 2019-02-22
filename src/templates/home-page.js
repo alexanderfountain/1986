@@ -103,7 +103,7 @@ export const HomePageTemplate = ({ intro, contact }) => {
       }}>
       {intro.subheading}
       </div>
-      <Styledlink to={intro.link}>Contact Us!</Styledlink>
+      <Styledlink to={intro.link}>Let's Chat!</Styledlink>
       </Fade>
       </Container>
     </section>
@@ -119,7 +119,7 @@ export const HomePageTemplate = ({ intro, contact }) => {
       </Leftcontact>
       <Rightcontact>
         <Form>
-        <h2>Contact</h2>
+        <h2>Let's Chat</h2>
         <p>Fill out the form below.</p>
       <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
 			<input type="hidden" name="form-name" value="contact" />

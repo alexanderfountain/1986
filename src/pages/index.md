@@ -9,11 +9,8 @@ intro:
   subheading: Brilliant designs that function like no other.
 contact:
   contactleft: >-
-    ## Call Center Outsourcing
-
-
-    Fill out the form to your left to get a Free Quote.
-
+    ## Effective Online Presence
+    
 
     Why choose 1986.io?
 
