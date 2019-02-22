@@ -1,13 +1,14 @@
 ---
 templateKey: blog-post
-title: CSS fundamentals.
+title: Programming fundamentals.
 author: Alexander Fountain
-image: /assets/cc-alley-resized.jpg
+image: /assets/pexels-photo-169573.jpeg
 date: 2019-01-27T00:28:54.883Z
 description: >-
   Comming soon.
 tags:
-  - CSS
+  - Programming
+  - Fundamentals
   - Tutorial
 ---
-CSS fundamentals coming soon.
+Programming fundamentals coming soon.
