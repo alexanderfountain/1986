@@ -103,7 +103,7 @@ export const HomePageTemplate = ({ intro, contact }) => {
       }}>
       {intro.subheading}
       </div>
-      <Styledlink to={intro.link}>CLICK FOR FREE ACCESS</Styledlink>
+      <Styledlink to={intro.link}>Contact Us!</Styledlink>
       </Fade>
       </Container>
     </section>

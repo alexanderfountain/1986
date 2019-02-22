@@ -2,11 +2,11 @@
 templateKey: home-page
 path: /
 intro:
-  heading: USA call centers
-  heading2: Affordable Offshore...
+  heading: Dazzling designs.
+  heading2: Top notch, yet affordable.
   introimage: /assets/front-page-1.jpg
   link: /contact
-  subheading: Call center outsourcing right here in the USA
+  subheading: Brilliant designs that function like no other.
 contact:
   contactleft: >-
     ## Call Center Outsourcing
@@ -15,22 +15,17 @@ contact:
     Fill out the form to your left to get a Free Quote.
 
 
-    Why choose Underguard Teleservices?
+    Why choose 1986.io?
 
 
-    * USA Based Call Center Outsourcing at Nearshore Rates
+    * Stunning designs.
 
-    * We Believe in Social Responsibility
+    * We Believe beauty and functionality.
 
-    * Inbound Call Center Services
+    * Seo important to you? Us too.
 
-    * Outbound Call Center Service
+    * Reasonable hosting. Really reasonable.
 
-    * Blended Call Center Service
-
-
-    Ask them to [subscribe](www.google.om) to discover smarter ways to create
-    and sell profitable digital products and services. [Spam-free
-    policy](www.google.com).
+    * Real humans in America, ready to actually talk to you.
 ---
 
