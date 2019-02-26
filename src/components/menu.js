@@ -27,7 +27,8 @@ const Nav = styled.nav`
     text-decoration:none;
     border-bottom:0px;
     &:hover {
-      color: ${variable.brand1};
+      color: ${variable.brand2};
+      text-decoration: line-through;
     }
   }
   @media (max-width: ${variable.tabletWidth}) {

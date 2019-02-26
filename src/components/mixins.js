@@ -42,7 +42,10 @@ export const styledbutton = styled('button')`
     font-weight:bold;
     border-radius: 10px;
     border: 4px solid ${variable.brand1};
+    text-transform:uppercase;
   &:hover {
-    background-color:${variable.darkGray};
+    background-color:${variable.brand1};
+    color:white;
+    text-decoration:line-through;
   }
 `

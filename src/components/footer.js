@@ -5,7 +5,7 @@ import * as variable from './variables.js'
 import styled from 'styled-components'
 const Leftfooter = styled.div`
 flex-basis:30%;
-background-color:${variable.brand1};
+background-color:${variable.brand2};
 padding:40px 0px;
 padding-right:20px;
 position:relative;
@@ -14,7 +14,7 @@ position:relative;
   height:100%;
   position: absolute;
   left:-2000px;
-  background-color:${variable.brand1};
+  background-color:${variable.brand2};
   width: 2000px;
   top: 0px;
 }
@@ -28,7 +28,7 @@ position:relative;
     height:100%;
     position: absolute;
     right:-2000px;
-    background-color:${variable.brand1};
+    background-color:${variable.brand2};
     width: 2000px;
     top: 0px;
   }

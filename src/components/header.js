@@ -18,6 +18,8 @@ const Header = ({ siteTitle }) => (
       boxShadow: '0px 1px 2px #ccc',
       }}>
 
+      <Container>
+
       <div style={{
         display:'flex',
         justifyContent: 'space-between',
@@ -39,7 +41,7 @@ const Header = ({ siteTitle }) => (
       <Menu></Menu>
       </div>
       </div>
-
+      </Container>
 
     </div>
 
