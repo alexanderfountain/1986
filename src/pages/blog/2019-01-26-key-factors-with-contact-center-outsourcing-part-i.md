@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: Programming fundamentals.
+title: Programming fundamentals part 1
 author: Alexander Fountain
 image: /assets/pexels-photo-169573-1-.jpeg
 date: 2019-01-27T00:28:54.883Z
@@ -45,3 +45,5 @@ c = b + 42
 ## Executing
 
 Writing expressions and statements is nice and all, but computers don't know what to do with them. Computers use utilities to compile or interpret the code so they can understand, or sometimes the code is compiled before the computer runs it.
+
+That's it for now! Stay tuned for part 2 of programming fundamentals where we'll start playing with some examples!
