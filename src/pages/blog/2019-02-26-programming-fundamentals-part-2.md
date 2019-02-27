@@ -11,6 +11,8 @@ tags:
   - Programming
   - Fundamentals
   - Tutorial
+  - Javascript
+  - JS
 ---
 I'll be using Javascript for my examples as it's a language I'm trying to better learn my self and we can easily play with examples right in the development console of most browsers. I'll be using chrome.
 
