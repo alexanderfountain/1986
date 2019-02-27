@@ -14,6 +14,8 @@ tags:
 ---
 
 
+
+
 I'll be using Javascript for my examples as it's a language I'm trying to better learn my self and we can easily play with examples right in the development console of most browsers. I'll be using chrome.
 
 Let's start by opening your browser. Type about:blank into the address bar, and make sure your developer console is open. In chrome you can open your developer tools with the shortcut Command+Option+i. 
@@ -30,8 +32,28 @@ You should see the value "30" printed in your developer console.
 
 So far we have seen how to output values, but how about input? Normally you would get input values from form values. For learning purposes let's use prompt(..) for our input values.
 
+```
+year = prompt( "What year were you born?" ); console.log( year );
+```
+
 ![Javascript programming fundamentals prompt(..)](/assets/screen-shot-2019-02-27-at-10.51.59-am.png "Javascript programming fundamentals prompt(..)")
 
 This should output something like this:
 
 ![Javascript programming fundamentals year log](/assets/screen-shot-2019-02-27-at-10.51.32-am.png "Javascript programming fundamentals year log")
+
+## Operators
+
+Earlier we saw that "+" and "=" are operators. 
+
+"+" performs mathematic addition. 
+
+"=" is used for assignment. We first calculate the value on the right and then assign the value to the variable on the left of "="
+
+"var" is not an operator, but it is how you declare variables.
+
+You should assign variables before they are used, but only once while in scope.
+
+```
+var b = 30;a = a + 1;a = a * 2;console.log( a );
+```
