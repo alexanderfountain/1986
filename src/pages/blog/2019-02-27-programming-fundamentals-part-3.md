@@ -7,6 +7,12 @@ date: 2019-02-27T21:10:36.111Z
 description: >-
   Part 3 of our programming fundamentals with a focus on Javascript. Common
   operators in JavaScript
+tags:
+  - Programming
+  - Fundamentals
+  - Javascript
+  - JS
+  - Tutorial
 ---
 * Assignment:`a = 26`
 * Math: `-`, `+`, `*`, `/` like `c + 2`
