@@ -8,6 +8,14 @@ description: >-
   Part 4 of our programming fundamentals. Values & Types. You can do a lot of
   things with values while programming, but what you do with it might just
   determine the type of value it is!
+tags:
+  - Programming
+  - React
+  - GatsbyJS
+  - Javascript
+  - JS
+  - Tutorial
+  - Fundamentals
 ---
 What you plan on doing with your values will determine the types of values you will be setting.
 
@@ -30,3 +38,7 @@ true;
 ```
 
 Besides those 3 value types some other common types would be functions, arrays, objects, and more! I will talk about these other types later on.
+
+## Converting Between Types
+
+Sometimes you're in a situation where you need to convert value types so you can use them in a different manner.
