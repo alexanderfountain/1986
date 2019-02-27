@@ -20,8 +20,10 @@ Let's start by opening your browser. Type about:blank into the address bar, and 
 
 Type this code in and see what happens. Remember that as soon as you hit enter the Javascript will run. To add new lines you must hold shift and enter at the same time.
 
-```
-b = 11;c = b + 19;console.log( c );
+```js
+b = 11;
+c = b + 19;
+console.log( c );
 ```
 
 You should see the value "30" printed in your developer console.
@@ -30,8 +32,9 @@ You should see the value "30" printed in your developer console.
 
 So far we have seen how to output values, but how about input? Normally you would get input values from form values. For learning purposes let's use prompt(..) for our input values.
 
-```
-year = prompt( "What year were you born?" ); console.log( year );
+```js
+year = prompt( "What year were you born?" );
+console.log( year );
 ```
 
 ![Javascript programming fundamentals prompt(..)](/assets/screen-shot-2019-02-27-at-10.51.59-am.png "Javascript programming fundamentals prompt(..)")
