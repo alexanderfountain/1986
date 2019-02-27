@@ -50,9 +50,9 @@ Earlier we saw that `+` and `=` are operators.
 
 You should assign variables before they are used, but only once while in scope.
 
-```
+```js
 var b = 30;  
 a = a + 1;  
-a = a * 2;  
+a = a * 2;
 console.log( a );  
 ```
