@@ -57,7 +57,9 @@ You should assign variables before they are used, but only once while in scope.
 
 ```js
 var b = 30;  
-a = a + 1;  
-a = a * 2;
-console.log( a );  
+b = b + 1;  
+b = b * 2;
+console.log( b );  
 ```
+
+This should log `62`
