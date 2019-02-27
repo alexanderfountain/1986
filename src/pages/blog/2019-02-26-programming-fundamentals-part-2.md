@@ -12,10 +12,6 @@ tags:
   - Fundamentals
   - Tutorial
 ---
-
-
-
-
 I'll be using Javascript for my examples as it's a language I'm trying to better learn my self and we can easily play with examples right in the development console of most browsers. I'll be using chrome.
 
 Let's start by opening your browser. Type about:blank into the address bar, and make sure your developer console is open. In chrome you can open your developer tools with the shortcut Command+Option+i. 
@@ -55,5 +51,5 @@ Earlier we saw that "+" and "=" are operators.
 You should assign variables before they are used, but only once while in scope.
 
 ```
-var b = 30;a = a + 1;a = a * 2;console.log( a );
+var b = 30;  a = a + 1;  a = a * 2;  console.log( a );
 ```
