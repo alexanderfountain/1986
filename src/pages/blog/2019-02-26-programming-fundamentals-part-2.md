@@ -40,16 +40,19 @@ This should output something like this:
 
 ## Operators
 
-Earlier we saw that "+" and "=" are operators. 
+Earlier we saw that `+` and `=` are operators. 
 
-"+" performs mathematic addition. 
+`+` performs mathematic addition. 
 
-"=" is used for assignment. We first calculate the value on the right and then assign the value to the variable on the left of "="
+`=` is used for assignment. We first calculate the value on the right and then assign the value to the variable on the left of `=`
 
-"var" is not an operator, but it is how you declare variables.
+`var` is not an operator, but it is how you declare variables.
 
 You should assign variables before they are used, but only once while in scope.
 
 ```
-    var b = 30;    a = a + 1;    a = a * 2;    console.log( a );
+var b = 30;  
+a = a + 1;  
+a = a * 2;  
+console.log( a );  
 ```
