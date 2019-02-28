@@ -11,7 +11,7 @@ contact:
   contactleft: |-
     ## Effective Online Presence
 
-    Why choose 1986.io?
+    ### Why choose 1986.io?
 
     * Stunning designs.
     * We Believe beauty and functionality.
