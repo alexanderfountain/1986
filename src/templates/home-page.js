@@ -30,6 +30,8 @@ padding:40px 0px;
 padding-right:20px;
 @media (max-width: ${variable.mobileWidth}) {
   flex-basis:100%;
+  padding:0px;
+  border:0px;
 }
 ul{
   padding:0px;
@@ -42,6 +44,9 @@ li{
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  margin-bottom:20px;
 }
 li:before{
   font-family: 'Font Awesome 5 Free';
@@ -59,6 +64,7 @@ padding-left:20px;
 text-align:center;
 @media (max-width: ${variable.mobileWidth}) {
   flex-basis:100%;
+  padding:0px;
 }
 `
 
@@ -72,7 +78,7 @@ export const HomePageTemplate = ({ intro, contact }) => {
     <section className="hero" style=
     {{ backgroundImage: `url(${intro.introimage})`,
     paddingTop:'150px',
-    paddingBottom:'150px',
+    paddingBottom:'50px',
     backgroundSize:'cover',
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',

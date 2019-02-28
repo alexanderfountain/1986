@@ -21,9 +21,7 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div style={{
-          overflow: 'hidden',
-        }}>
+        <div>
         <PageTransition>
           {children}
         </PageTransition>

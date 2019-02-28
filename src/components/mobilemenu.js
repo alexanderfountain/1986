@@ -15,10 +15,8 @@ const Mobilemenu = () => (
   <a href="#" className="bm-burger-button .hamburger-box">
   </a>
   <Menu right>
-      <li><Link to="#">Home</Link></li>
-      <li><Link to="#">About</Link></li>
-      <li><Link to="#">Portfolio</Link></li>
-      <li><Link to="#">Contact</Link></li>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/blog">Blog</Link></li>
   </Menu>
   </MobileContainer>
 )

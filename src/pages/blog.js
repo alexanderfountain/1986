@@ -12,15 +12,23 @@ const BlogTeaserContainer = styled.div`
 display:flex;
 flex-wrap:wrap;
 justify-content:space-between;
-padding:100px 0px;
+padding:50px 0px;
 border-bottom: thin solid #eee;
+@media (max-width: ${variable.mobileWidth}) {
+  flex-direction: column-reverse;
+}
 `
 const BlogTeaserLeft = styled.div`
 flex-basis:calc(50% - 20px);
+@media (max-width: ${variable.mobileWidth}) {
+  flex-basis:calc(100%);
+}
 `
 const BlogTeaserRight = styled.div`
-flex-basis:50%;
 flex-basis:calc(50% - 20px);
+@media (max-width: ${variable.mobileWidth}) {
+  flex-basis:calc(100%);
+}
 `
 export default class BlogPage extends React.Component {
   render() {

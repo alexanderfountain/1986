@@ -22,11 +22,22 @@ justify-content:space-between;
 const Blogleft = styled.div`
 flex-basis:70%;
 padding-right:20px;
+@media (max-width: ${variable.mobileWidth}) {
+  flex-basis:calc(100%);
+  padding:0px;
+}
 `
 const Blogright = styled.div`
 flex-basis:30%;
-padding:40px 0px 0px 20px;
+padding:0px 0px 0px 20px;
 text-align:center;
+h6{
+  margin:10px 0px 20px 0px;
+}
+@media (max-width: ${variable.mobileWidth}) {
+  flex-basis:calc(100%);
+  padding:0px;
+}
 `
 
 export const BlogPostTemplate = ({
@@ -43,31 +54,25 @@ export const BlogPostTemplate = ({
     <Layout>
       <section className="section" style={{paddingBottom:'40px'}}>
       <Container>
-      <Blogfullcontainer style={{marginTop:'40px'}}>
+      <Blogfullcontainer style={{marginTop:'135px'}}>
       <Blogleft>
-      <div className="who">
+      <h1 style={{marginTop:'5px'}}>{title}</h1>
+      <div className="who" style={{marginBottom:'20px'}}>
         <span className="blog-date">{date} / </span> 
         <span className="blog-teaser-author">{author}</span>
       </div>
-      <h1 style={{marginTop:'5px'}}>{title}</h1>
-      <div style={{
-        float:'left',
-        padding:'0px 20px 20px 0px',
-      }}><img src={image} /></div>
+      <div><img src={image} /></div>
       <PostContent content={content} />
       </Blogleft>
       <Blogright>
-      <Form>
+      <Form style={{position:'sticky', top:'145px'}}>
         <h6>Contact Us</h6>
         <p>Fill out the form below.</p>
       <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
 			<input type="hidden" name="form-name" value="contact" />
 			<p hidden> <label htmlFor="bot-field">Don’t fill this out:{' '}<input name="bot-field" /> </label> </p>
 								<div class="form-group">
-									<input type="text" placeholder="First Name" name="name" id="name" class="form-control" data-required="true" data-interactive="true" />
-								</div>
-								<div class="form-group">
-									<input type="text" name="surname" placeholder="Last Name" id="surname" class="form-control" data-required="true" data-interactive="true" />
+									<input type="text" placeholder="Name" name="name" id="name" class="form-control" data-required="true" data-interactive="true" />
 								</div>
 								<div class="form-group">
 									<input type="email" name="email" placeholder="Email" id="email" class="form-control" data-required="true" data-interactive="true" />
