@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Leftfooter = styled.div`
 flex-basis:30%;
 background-color:${variable.brand2};
-padding:40px 40px;
+padding:40px 0px;
 padding-right:20px;
 position:relative;
 p{
@@ -50,6 +50,7 @@ padding-left:20px;
 color:white;
 h4{
   color:white;
+  margin:0px;
 }
 @media (max-width: ${variable.tabletWidth}) {
   flex-basis:60%;
