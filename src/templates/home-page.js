@@ -131,10 +131,7 @@ export const HomePageTemplate = ({ intro, contact }) => {
 			<input type="hidden" name="form-name" value="contact" />
 			<p hidden> <label htmlFor="bot-field">Don’t fill this out:{' '}<input name="bot-field" /> </label> </p>
 								<div class="form-group">
-									<input type="text" placeholder="First Name" name="name" id="name" class="form-control" data-required="true" data-interactive="true" />
-								</div>
-								<div class="form-group">
-									<input type="text" name="surname" placeholder="Last Name" id="surname" class="form-control" data-required="true" data-interactive="true" />
+									<input type="text" placeholder="Name" name="name" id="name" class="form-control" data-required="true" data-interactive="true" />
 								</div>
 								<div class="form-group">
 									<input type="email" name="email" placeholder="Email" id="email" class="form-control" data-required="true" data-interactive="true" />
