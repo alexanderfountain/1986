@@ -27,7 +27,7 @@ const Nav = styled.nav`
     text-decoration:none;
     border-bottom:0px;
     &:hover {
-      color: ${variable.brand2};
+      color: ${variable.brand1};
       text-decoration: line-through;
     }
   }

@@ -3,34 +3,35 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/layout'
-import Video from '../videos/meeting.mp4'
+import contactphoto from '../images/contact2.jpeg'
 import Container from '../components/container'
 import * as variable from '../components/variables'
 import styled from 'styled-components'
 import * as mixins from '../components/mixins.js'
 import Form from '../components/form'
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 const Styledlink = mixins.styledlink
 
 const Styledbutton = mixins.styledbutton
 
-const BlogTeaserContainer = styled.div`
+const ContactContainer = styled.div`
 display:flex;
 flex-wrap:wrap;
 justify-content:space-between;
 padding:50px 0px;
 border-bottom: thin solid #eee;
 @media (max-width: ${variable.mobileWidth}) {
-  flex-direction: column-reverse;
+
 }
 `
-const BlogTeaserLeft = styled.div`
+const ContactLeft = styled.div`
 flex-basis:calc(50% - 20px);
 @media (max-width: ${variable.mobileWidth}) {
   flex-basis:calc(100%);
 }
 `
-const BlogTeaserRight = styled.div`
+const ContactRight = styled.div`
 flex-basis:calc(50% - 20px);
 @media (max-width: ${variable.mobileWidth}) {
   flex-basis:calc(100%);
@@ -41,15 +42,47 @@ export default class ContactPage extends React.Component {
 
     return (
       <Layout>
-        <section className="section">
+        <section className="hero" style=
+        {{ backgroundImage: `url(${contactphoto})`,
+           paddingTop:'150px',
+           paddingBottom:'50px',
+           backgroundSize:'cover',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    minHeight:'400px',
+    }}
+    >
             <Container style={{
               textAlign:'center',
             }}>
             <h1>Contact</h1>
 
-            <Form>
-        <h2>Let's Chat</h2>
-        <p>Fill out the form below.</p>
+            </Container>
+            </section>
+            
+            <Container style={{
+              textAlign:'center',
+            }}>
+            
+            <section>
+          
+        <ContactContainer>
+        <ContactLeft>
+
+      <div style={{fontSize:'32px'}}>
+        We realize your time is valuable.<br></br>We promise not to waste it.
+      </div>
+        <p>P.O Box 471</p>
+
+        <p>St. Croix Falls, WI 54024</p>
+
+        <p>651-399-9164</p>
+      
+        </ContactLeft>
+      <ContactRight>
+      <Form>
       <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
 			<input type="hidden" name="form-name" value="contact" />
 			<p hidden> <label htmlFor="bot-field">Don’t fill this out:{' '}<input name="bot-field" /> </label> </p>
@@ -76,9 +109,14 @@ export default class ContactPage extends React.Component {
 								</div>
 							</form>
           </Form>
+          </ContactRight>
+
+          </ContactContainer>
+          
+          </section>
             </Container>
 
-        </section>
+        
       </Layout>
     )
   }

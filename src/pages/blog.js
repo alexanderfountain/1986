@@ -60,8 +60,8 @@ export default class BlogPage extends React.Component {
             }}>
             <h1>Blog</h1>
 
-            <p style={{marginBottom:'0px'}}>This is a sample category description, which can be used to boost your SEO rankings.</p>
-            <p style={{marginTop:'0px'}}>Make sure you have this enabled from the Edit Category screen in your dashboard.</p>
+            <p style={{marginBottom:'0px'}}>Blog posts about ReactJS, Drupal, and more!</p>
+            <p style={{marginTop:'0px'}}>Check back often.</p>
 
             </Container>
             </div>

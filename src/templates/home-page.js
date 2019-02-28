@@ -52,7 +52,7 @@ li:before{
   font-family: 'Font Awesome 5 Free';
   content:'\f00c';
   font-weight:900;
-  color:${variable.brand2};
+  color:${variable.brand1};
   font-size:26px;
   margin-right:20px;
 }
