@@ -50,7 +50,7 @@ export const BlogPostTemplate = ({
   slug,
 }) => {
   const PostContent = contentComponent
-  const canonical = "https://1986.io/" + {slug}
+  const canonical = `https://1986.io${slug}`
   return (
 
     <Layout>

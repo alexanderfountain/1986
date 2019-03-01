@@ -65,6 +65,7 @@ h4{
 const Footer = () => (
   <footer style={{
     backgroundColor:variable.darkGray,
+    overflow:'hidden',
     }}>
     <Container style={{
       display:'flex',
