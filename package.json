@@ -14,6 +14,7 @@
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-glamor": "^2.0.7",
     "gatsby-plugin-google-fonts": "0.0.4",
+    "gatsby-plugin-google-tagmanager": "^2.0.9",
     "gatsby-plugin-lodash": "^3.0.3",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-netlify": "^2.0.6",
