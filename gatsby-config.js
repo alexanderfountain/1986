@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `1986`,
     description: `Screaming fast sites.`,
+    siteUrl: `https://1986.io`,
     author: `@alexanderfountain`,
   },
   plugins: [
@@ -116,6 +117,7 @@ module.exports = {
     `gatsby-v2-plugin-page-transitions`,
     `gatsby-plugin-lodash`,
     `gatsby-plugin-glamor`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-netlify`, // make sure to keep it last in the array
     
