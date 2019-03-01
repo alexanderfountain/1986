@@ -73,7 +73,11 @@ export const HomePageTemplate = ({ intro, contact }) => {
 <main id="main" className="main">
 <Helmet>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
-    </Helmet>
+<meta charSet="utf-8" />
+<title>1986.io | Home</title>
+<link rel="canonical" href="https://1986.io" />
+</Helmet>
+
     
     <section className="hero" style=
     {{ backgroundImage: `url(${intro.introimage})`,

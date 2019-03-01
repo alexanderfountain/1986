@@ -9,7 +9,6 @@ import * as variable from '../components/variables'
 import styled from 'styled-components'
 import * as mixins from '../components/mixins.js'
 import Form from '../components/form'
-import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 const Styledlink = mixins.styledlink
 
@@ -42,6 +41,11 @@ export default class ContactPage extends React.Component {
 
     return (
       <Layout>
+              <Helmet>
+      <meta charSet="utf-8" />
+      <title>1986.io | Contact</title>
+      <link rel="canonical" href="https://1986.io/contact"></link>
+      </Helmet>
         <section className="hero" style=
         {{ backgroundImage: `url(${contactphoto})`,
            paddingTop:'150px',

@@ -47,11 +47,19 @@ export const BlogPostTemplate = ({
   content,
   date,
   author,
+  slug,
 }) => {
   const PostContent = contentComponent
+  const canonical = "https://1986.io/" + {slug}
   return (
 
     <Layout>
+
+<Helmet>
+      <meta charSet="utf-8" />
+      <title>1986.io | {title}</title>
+      <link rel="canonical" href={canonical}></link>
+      </Helmet>
       <section className="section" style={{paddingBottom:'40px'}}>
       <Container>
       <Blogfullcontainer style={{marginTop:'135px'}}>
@@ -108,6 +116,7 @@ BlogPostTemplate.propTypes = {
   image: PropTypes.string,
   date: PropTypes.string,
   author: PropTypes.string,
+  slug: PropTypes.string,
 }
 
 const BlogPost = ({ data }) => {
@@ -122,6 +131,7 @@ const BlogPost = ({ data }) => {
         image={post.frontmatter.image}
         date={post.frontmatter.date}
         author={post.frontmatter.author}
+        slug={post.fields.slug}
       />
   )
 }
@@ -139,6 +149,9 @@ export const pageQuery = graphql`
     markdownRemark(id: { eq: $id }) {
       id
       html
+      fields{
+        slug
+      }
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title

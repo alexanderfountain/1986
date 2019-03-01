@@ -37,6 +37,11 @@ export default class BlogPage extends React.Component {
 
     return (
       <Layout>
+              <Helmet>
+      <meta charSet="utf-8" />
+      <title>1986.io | Blog</title>
+      <link rel="canonical" href="https://1986.io/blog"></link>
+      </Helmet>
         <section className="section">
             <div className="content blog-index-header" style={{
               position:'relative',
