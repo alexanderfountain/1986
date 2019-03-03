@@ -8,10 +8,9 @@ import * as variable from '../components/variables'
 import styled from 'styled-components'
 import { HTMLContent } from '../components/Content'
 import Form from '../components/form'
-import * as mixins from '../components/mixins.js'
+import Styledbutton from "../components/atoms/link"
 
 
-const Styledbutton = mixins.styledbutton
 
 const Blogfullcontainer = styled.div`
 display:flex;
@@ -92,11 +91,7 @@ export const BlogPostTemplate = ({
 									<textarea name="textarea" id="textarea" placeholder="Message" class="textarea form-control" data-required="true" data-trim="true"/>
 								</div>
 								<div>
-									<Styledbutton type="submit" style={{
-                    width:'100%',
-                    marginTop:'0px',
-
-                  }}>
+									<Styledlink text="Contact">
                   Contact
                   </Styledbutton>
 								</div>

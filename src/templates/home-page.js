@@ -1,215 +1,235 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import Helmet from 'react-helmet' 
-import { Link } from 'gatsby'
-import Typing from 'react-typing-animation'
-import Container from '../components/container'
-import Form from '../components/form'
-import * as mixins from '../components/mixins.js'
-import Fade from 'react-reveal/Fade'
-import * as variable from '../components/variables'
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
-
-
-
-const element = <FontAwesomeIcon icon={faCoffee} />
-
-const Styledlink = mixins.styledlink
-
-const Styledbutton = mixins.styledbutton
-
-const Leftcontact = styled.div`
-flex-basis:50%;
-border-right: 1px solid ${variable.lightGray};
-padding:40px 0px;
-padding-right:20px;
-@media (max-width: ${variable.mobileWidth}) {
-  flex-basis:100%;
-  padding:0px;
-  border:0px;
-}
-ul{
-  padding:0px;
-  margin:0px;
-}
-li{
-  list-style:none;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import Helmet from "react-helmet";
+import { Link } from "gatsby";
+import Typing from "react-typing-animation";
+import Container from "../components/container";
+import Fade from "react-reveal/Fade";
+import * as variable from "../components/variables";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Leftcontact from "../components/pages/home/leftcontact";
+import Rightcontact from "../components/pages/home/rightcontact";
+import Styledbutton from "../components/atoms/button"
+import Styledlink from "../components/atoms/button"
+const BlogTeaserContainer = styled.div`
   display: flex;
-  align-items: center;
-  margin-bottom:20px;
-}
-li:before{
-  font-family: 'Font Awesome 5 Free';
-  content:'\f00c';
-  font-weight:900;
-  color:${variable.brand1};
-  font-size:26px;
-  margin-right:20px;
-}
-`
-const Rightcontact = styled.div`
-flex-basis:50%;
-padding:40px 0px;
-padding-left:20px;
-text-align:center;
-@media (max-width: ${variable.mobileWidth}) {
-  flex-basis:100%;
-  padding:0px;
-}
-`
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 0px;
+  border-bottom: thin solid #eee;
+  @media (max-width: ${variable.mobileWidth}) {
+    flex-direction: column-reverse;
+  }
+`;
+const BlogTeaserLeft = styled.div`
+  flex-basis: calc(50% - 20px);
+  @media (max-width: ${variable.mobileWidth}) {
+    flex-basis: calc(100%);
+  }
+`;
+const BlogTeaserRight = styled.div`
+  flex-basis: calc(50% - 20px);
+  @media (max-width: ${variable.mobileWidth}) {
+    flex-basis: calc(100%);
+  }
+`;
 
-export const HomePageTemplate = ({ intro, contact }) => {
+
+export const HomePageTemplate = ({ intro, contact, blogs }) => {
+  console.log(blogs);
   return (
-<main id="main" className="main">
-<Helmet>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
-<meta charSet="utf-8" />
-<title>1986.io | Home</title>
-<link rel="canonical" href="https://1986.io" />
-</Helmet>
+    <main id="main" className="main">
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous"
+        />
+        <meta charSet="utf-8" />
+        <title>1986.io | Home</title>
+        <link rel="canonical" href="https://1986.io" />
+      </Helmet>
 
-    
-    <section className="hero" style=
-    {{ backgroundImage: `url(${intro.introimage})`,
-    paddingTop:'150px',
-    paddingBottom:'50px',
-    backgroundSize:'cover',
-    backgroundAttachment: 'fixed',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    }}
-    >
-    <Container>
-      <Fade bottom>
-      <Typing>
-      <h3 style={{ 
-        margin:'0px',
-        color: '#232525',
-      }}>
-      {intro.heading}</h3>
-      <Typing.Delay ms={3000} />
-      <Typing.Backspace count={20} />
-      <h3 style={{
-        margin:'0px',
-        color: '#232525',
-        }}>
-        {intro.heading2}</h3>
-      </Typing>
-      
-      <div style={{
-      fontSize:'28px',
-      fontWeight:'300',
-      }}>
-      {intro.subheading}
-      </div>
-      <Styledlink to={intro.link}>Let's Chat!</Styledlink>
-      </Fade>
-      </Container>
-    </section>
+      <section
+        className="hero"
+        style={{
+          backgroundImage: `url(${intro.introimage})`,
+          paddingTop: "150px",
+          paddingBottom: "50px",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
+        }}
+      >
+        <Container>
+          <Fade bottom>
+            <Typing>
+              <h3
+                style={{
+                  margin: "0px",
+                  color: "#232525"
+                }}
+              >
+                {intro.heading}
+              </h3>
+              <Typing.Delay ms={3000} />
+              <Typing.Backspace count={20} />
+              <h3
+                style={{
+                  margin: "0px",
+                  color: "#232525"
+                }}
+              >
+                {intro.heading2}
+              </h3>
+            </Typing>
 
-    <section id="contact">
-    <Container style={{
-      padding:'0px 20px',
-      display:'flex',
-      flexWrap:'wrap',
-    }}>
-      <Leftcontact>
-      <div dangerouslySetInnerHTML={{ __html: contact.contactleft }} />
-      </Leftcontact>
-      <Rightcontact>
-        <Form>
-        <h2>Let's Chat</h2>
-        <p>Fill out the form below.</p>
-      <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
-			<input type="hidden" name="form-name" value="contact" />
-			<p hidden> <label htmlFor="bot-field">Don’t fill this out:{' '}<input name="bot-field" /> </label> </p>
-								<div class="form-group">
-									<input type="text" placeholder="Name" name="name" id="name" class="form-control" data-required="true" data-interactive="true" />
-								</div>
-								<div class="form-group">
-									<input type="email" name="email" placeholder="Email" id="email" class="form-control" data-required="true" data-interactive="true" />
-								</div>
-								<div class="form-group">
-									<input type="tel" name="phone" id="phone" placeholder="Phone Number" class="form-control" data-required="false" data-interactive="true" />
-								</div>
-								<div class="form-group text">
-									<textarea name="textarea" id="textarea" placeholder="Message" class="textarea form-control" data-required="true" data-trim="true"/>
-								</div>
-								<div>
-									<Styledbutton type="submit" style={{
-                    width:'100%',
-                    marginTop:'0px',
+            <div
+              style={{
+                fontSize: "28px",
+                fontWeight: "300"
+              }}
+            >
+              {intro.subheading}
+            </div>
+            <Styledlink to={intro.link} text="Let's Chat!"></Styledlink>
+          </Fade>
+        </Container>
+      </section>
 
-                  }}>
-                  Contact
-                  </Styledbutton>
-								</div>
-							</form>
-          </Form>
-      </Rightcontact>
-    </Container>
-    </section>
-    
-  </main>
-  )
-}
+      <section id="contact">
+        <Container
+          style={{
+            padding: "0px 20px",
+            display: "flex",
+            flexWrap: "wrap"
+          }}
+        >
+          <Leftcontact leftcontactcopy={ contact.contactleft }></Leftcontact>
+          <Rightcontact></Rightcontact>
+        </Container>
+      </section>
+      <section>
+        <Container className="container blog-index">
+          {blogs.edges.map(({ node: post }) => (
+            <BlogTeaserContainer className="content" key={post.id}>
+              <BlogTeaserLeft>
+                <div className="who">
+                  <span className="blog-date">{post.frontmatter.date} / </span>
+                  <span className="blog-teaser-author">
+                    {post.frontmatter.author}
+                  </span>
+                </div>
+                <h2 style={{ marginTop: "5px" }}>
+                  <Link
+                    className="has-text-primary"
+                    to={post.fields.slug}
+                    style={{ borderBottom: "0px" }}
+                  >
+                    {post.frontmatter.title}
+                  </Link>
+                </h2>
+                <div className="teaser-body">
+                  {post.frontmatter.description}
+                </div>
+                <Link className="btn blog-btn" to={post.fields.slug}>
+                  Read Full Article
+                </Link>
+              </BlogTeaserLeft>
+              <BlogTeaserRight>
+                <div
+                  className="blog-teaser-image"
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
+                  <img src={post.frontmatter.image} />
+                </div>
+              </BlogTeaserRight>
+            </BlogTeaserContainer>
+          ))}
+        </Container>
+      </section>
+    </main>
+  );
+};
 
-HomePageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
-  introheading: PropTypes.string,
-}
+// HomePageTemplate.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   content: PropTypes.string,
+//   contentComponent: PropTypes.func,
+//   introheading: PropTypes.string,
+// }
 
 const HomePage = ({ data }) => {
-  const { markdownRemark: post } = data
+  const { home: post } = data;
+  const { blogs: blogpost } = data;
 
+  // console.log('data' + blogpost)
   return (
     <Layout>
       <HomePageTemplate
         intro={post.frontmatter.intro}
         contact={post.frontmatter.contact}
+        blogs={blogpost}
       />
     </Layout>
-  )
-}
+  );
+};
 
 HomePage.propTypes = {
-  data: PropTypes.object.isRequired,
-}
+  data: PropTypes.object.isRequired
+};
 
-export default HomePage
+export default HomePage;
 
 export const homePageQuery = graphql`
   query HomePage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
+    home: markdownRemark(id: { eq: $id }) {
       fields {
         slug
       }
       html
       frontmatter {
-        intro{
+        intro {
           heading
           heading2
           subheading
           link
           introimage
         }
-        contact{
+        contact {
           contactleft
         }
       }
     }
+    blogs: allMarkdownRemark(
+      limit: 3
+      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+    ) {
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            description
+            title
+            templateKey
+            date(formatString: "MMMM DD, YYYY")
+            image
+            author
+          }
+        }
+      }
+    }
   }
-`
+`;
