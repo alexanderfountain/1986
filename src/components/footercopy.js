@@ -1,7 +1,5 @@
-import { Link } from 'gatsby'
 import React from 'react'
-import Container from './container'
-import * as variable from './variables.js'
+import Container from '../components/layout/container'
 const Footercopy = () => (
   
  

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as variable from './variables.js'
+import * as variable from '../variables'
 const Container = styled.div`
   max-width: ${variable.desktopWidth};
   display:block;

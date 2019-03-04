@@ -4,16 +4,11 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Helmet from "react-helmet";
 import { Link } from "gatsby";
-import Typing from "react-typing-animation";
-import Container from "../components/container";
-import Fade from "react-reveal/Fade";
+import Container from "../components/layout/container";
 import * as variable from "../components/variables";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Leftcontact from "../components/pages/home/leftcontact";
-import Rightcontact from "../components/pages/home/rightcontact";
-import Styledbutton from "../components/atoms/button"
-import Styledlink from "../components/atoms/button"
+import SectionContact from "../components/pages/home/section-contact";
+import SectionTypedHero from "../components/organisms/sections/section-typed-hero";
 const BlogTeaserContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -54,67 +49,18 @@ export const HomePageTemplate = ({ intro, contact, blogs }) => {
         <link rel="canonical" href="https://1986.io" />
       </Helmet>
 
-      <section
-        className="hero"
-        style={{
-          backgroundImage: `url(${intro.introimage})`,
-          paddingTop: "150px",
-          paddingBottom: "50px",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
-        }}
+      <SectionTypedHero
+      introfirst={intro.heading}
+      introsecond={intro.heading2}
+      bgimage={intro.introimage}
+      subheading={intro.subheading}
+      buttonlink={intro.link}
+      buttontext="Let's Chat!"
       >
-        <Container>
-          <Fade bottom>
-            <Typing>
-              <h3
-                style={{
-                  margin: "0px",
-                  color: "#232525"
-                }}
-              >
-                {intro.heading}
-              </h3>
-              <Typing.Delay ms={3000} />
-              <Typing.Backspace count={20} />
-              <h3
-                style={{
-                  margin: "0px",
-                  color: "#232525"
-                }}
-              >
-                {intro.heading2}
-              </h3>
-            </Typing>
+      </SectionTypedHero>
 
-            <div
-              style={{
-                fontSize: "28px",
-                fontWeight: "300"
-              }}
-            >
-              {intro.subheading}
-            </div>
-            <Styledlink to={intro.link} text="Let's Chat!"></Styledlink>
-          </Fade>
-        </Container>
-      </section>
 
-      <section id="contact">
-        <Container
-          style={{
-            padding: "0px 20px",
-            display: "flex",
-            flexWrap: "wrap"
-          }}
-        >
-          <Leftcontact leftcontactcopy={ contact.contactleft }></Leftcontact>
-          <Rightcontact></Rightcontact>
-        </Container>
-      </section>
+      <SectionContact leftcontact={contact.contactleft}></SectionContact>
       <section>
         <Container className="container blog-index">
           {blogs.edges.map(({ node: post }) => (

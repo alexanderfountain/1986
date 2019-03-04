@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import Video from '../videos/meeting.mp4'
-import Container from '../components/container'
+import Container from '../components/layout/container'
 import * as variable from '../components/variables'
 import styled from 'styled-components'
 

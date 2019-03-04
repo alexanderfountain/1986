@@ -4,15 +4,14 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import contactphoto from '../images/contact2.jpeg'
-import Container from '../components/container'
+import Container from '../components/layout/container'
 import * as variable from '../components/variables'
 import styled from 'styled-components'
-import * as mixins from '../components/mixins.js'
 import Form from '../components/form'
 
-const Styledlink = mixins.styledlink
+// const Styledlink = mixins.styledlink
 
-const Styledbutton = mixins.styledbutton
+// const Styledbutton = mixins.styledbutton
 
 const ContactContainer = styled.div`
 display:flex;
@@ -103,13 +102,13 @@ export default class ContactPage extends React.Component {
 									<textarea name="textarea" id="textarea" placeholder="Message" class="textarea form-control" data-required="true" data-trim="true"/>
 								</div>
 								<div>
-									<Styledbutton type="submit" style={{
+									{/* <Styledbutton type="submit" style={{
                     width:'100%',
                     marginTop:'0px',
 
                   }}>
                   Contact
-                  </Styledbutton>
+                  </Styledbutton> */}
 								</div>
 							</form>
           </Form>

@@ -1,7 +1,7 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Container from './container'
+import Container from '../components/layout/container'
 import Menu from './menu'
 
 import Logo from '../images/logo_no_comp.png'

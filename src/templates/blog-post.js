@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
-import Container from '../components/container'
+import Container from '../components/layout/container'
 import * as variable from '../components/variables'
 import styled from 'styled-components'
 import { HTMLContent } from '../components/Content'
@@ -91,9 +91,9 @@ export const BlogPostTemplate = ({
 									<textarea name="textarea" id="textarea" placeholder="Message" class="textarea form-control" data-required="true" data-trim="true"/>
 								</div>
 								<div>
-									<Styledlink text="Contact">
+									{/* <Styledlink text="Contact">
                   Contact
-                  </Styledbutton>
+                  </Styledbutton> */}
 								</div>
 							</form>
           </Form>
