@@ -39,8 +39,8 @@ collections:
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "page"}
       - {label: "Title", name: "title", widget: "string"}
-      - name: "section"
-        label: "Section"
+      - name: "body"
+        label: "Body"
         widget: "list"
         types:
           - label: "Section"
@@ -50,13 +50,19 @@ collections:
               - {label: "Section Title", name: "sectiontitle", widget: "string"}
               - {label: "Background Color", name: "backgroundcolor", widget: "string"}
               - {label: "Background Image", name: "backgroundimage", widget: "image"}
-              - name: "Section Inners"
-                label: "sectioninners"
+              - name: "sectionvalue"
+                label: "Section Value"
                 widget: "list"
                 types:
-                  - label: "text"
-                    name: "text"
-                    widget: "string"
+                  - label: "Entity List"
+                    name: "entitylist"
+                    widget: object
+                    fields:
+                      - label: Entity Type
+                        name: entitytype
+                        widget: select
+                        options: ["blog", "profile"]
+                      - {label: "Limit", name: "limit", widget: "number"}
           # - label: "Services"
           #   name: "services"
           #   widget: "list"
