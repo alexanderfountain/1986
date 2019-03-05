@@ -50,19 +50,19 @@ collections:
               - {label: "Section Title", name: "sectiontitle", widget: "string"}
               - {label: "Background Color", name: "backgroundcolor", widget: "string"}
               - {label: "Background Image", name: "backgroundimage", widget: "image"}
-              - name: "sectionvalue"
-                label: "Section Value"
-                widget: "list"
-                types:
-                  - label: "Entity List"
-                    name: "entitylist"
-                    widget: object
-                    fields:
-                      - label: Entity Type
-                        name: entitytype
-                        widget: select
-                        options: ["blog", "profile"]
-                      - {label: "Limit", name: "limit", widget: "number"}
+              # - name: "sectionvalue"
+              #   label: "Section Value"
+              #   widget: "list"
+              #   types:
+              #     - label: "Entity List"
+              #       name: "entitylist"
+              #       widget: object
+              #       fields:
+              #         - label: Entity Type
+              #           name: entitytype
+              #           widget: select
+              #           options: ["blog", "profile"]
+              #         - {label: "Limit", name: "limit", widget: "number"}
           # - label: "Services"
           #   name: "services"
           #   widget: "list"
