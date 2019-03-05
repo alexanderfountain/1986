@@ -37,39 +37,18 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "page"}
       - {label: "Title", name: "title", widget: "string"}
-      - name: "body"
-        label: "Body"
-        widget: "list"
-        types:
-          - label: "Section"
-            name: "section"
-            widget: "object"
-            fields:
-              - {label: "Section Title", name: "sectiontitle", widget: "string"}
-              # - {label: "Background Color", name: "backgroundcolor", widget: "string"}
-              # - {label: "Background Image", name: "backgroundimage", widget: "image"}
-              # - name: "sectionvalue"
-              #   label: "Section Value"
-              #   widget: "list"
-              #   types:
-              #     - label: "Entity List"
-              #       name: "entitylist"
-              #       widget: object
-              #       fields:
-              #         - label: Entity Type
-              #           name: entitytype
-              #           widget: select
-              #           options: ["blog", "profile"]
-              #         - {label: "Limit", name: "limit", widget: "number"}
-          # - label: "Services"
-          #   name: "services"
-          #   widget: "list"
-          #   fields:
-          #     - label: Icon Text
-          #       name: icontext
-          #       widget: object
-          #       fields:
-          #         - {label: Text, name: text, widget: string}
-          #         - {label: Icon, name: icon, widget: image}
+      - {label: "Content", name: "content", widget: "list", types: [
+          {label: "Section", name: "section", widget: "object", fields: [
+            {label: "Section Title", name: "sectiontitle", widget: "string"},
+            {label: "Background Image", name: "backgroundimage", widget: "image"},
+            {label: "Section Value", name: "sectionvalue", widget: "list", types: [
+              {label: "Entity List", name: "entitylist", widget: "object", fields: [
+                {label: "Entity Type", name: "entitytype", widget: "list", options: [
+                  "blog", 
+                  "profile"
+                ]},
+             ]} 
+            ]}
+          ]}
+        ]}
