@@ -9,6 +9,8 @@ import * as variable from "../components/variables";
 import styled from "styled-components";
 import SectionContact from "../components/pages/home/section-contact";
 import SectionTypedHero from "../components/organisms/sections/section-typed-hero";
+import SectionBlogs from "../components/pages/home/section-blogs"
+
 const BlogTeaserContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +63,11 @@ export const HomePageTemplate = ({ intro, contact, blogs }) => {
 
 
       <SectionContact leftcontact={contact.contactleft}></SectionContact>
-      <section>
+      
+      <SectionBlogs>
+
+      </SectionBlogs>
+      {/* <section>
         <Container className="container blog-index">
           {blogs.edges.map(({ node: post }) => (
             <BlogTeaserContainer className="content" key={post.id}>
@@ -101,7 +107,7 @@ export const HomePageTemplate = ({ intro, contact, blogs }) => {
             </BlogTeaserContainer>
           ))}
         </Container>
-      </section>
+      </section> */}
     </main>
   );
 };

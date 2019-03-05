@@ -31,6 +31,30 @@ collections:
           - {label: "Path", name: "path", widget: "hidden", default: "/"}
           - {label: Intro, name: intro, widget: object, fields: [{label: Intro Image, name: introimage, widget: image},{label: Heading, name: heading, widget: string},{label: Heading 2, name: heading2, widget: string}, {label: Sub Heading, name: subheading, widget: text}, {label: Link, name: link, widget: text}]}
           - {label: Contact, name: contact, widget: object, fields: [{label: Contact Left, name: contactleft, widget: markdown}]}
+  - name: "pages2"
+    label: "Pages2"
+    folder: "src/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "page"}
+      - {label: "Title", name: "title", widget: "string"}
+      - name: "section"
+        label: "Section"
+        widget: "list"
+        types:
+          - label: "Entity List"
+            name: "entitylist"
+            widget: object
+            fields:
+              - {label: "Section Title", name: "sectiontitle", widget: "string"}
+              - {label: "Background Color", name: "backgroundcolor", widget: "string"}
+              - {label: "Background Image", name: "backgroundimage", widget: "image"}
+              - label: Entity Type
+                name: entitytype
+                widget: select
+                options: ["blog", "profile"]
+              - {label: "Limit", name: "limit", widget: "number"}
           # - label: "Services"
           #   name: "services"
           #   widget: "list"
