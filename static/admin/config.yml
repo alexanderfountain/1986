@@ -45,11 +45,11 @@ collections:
         types:
           - label: "Section"
             name: "section"
-            widget: object
+            widget: "object"
             fields:
               - {label: "Section Title", name: "sectiontitle", widget: "string"}
-              - {label: "Background Color", name: "backgroundcolor", widget: "string"}
-              - {label: "Background Image", name: "backgroundimage", widget: "image"}
+              # - {label: "Background Color", name: "backgroundcolor", widget: "string"}
+              # - {label: "Background Image", name: "backgroundimage", widget: "image"}
               # - name: "sectionvalue"
               #   label: "Section Value"
               #   widget: "list"
