@@ -43,18 +43,20 @@ collections:
         label: "Section"
         widget: "list"
         types:
-          - label: "Entity List"
-            name: "entitylist"
+          - label: "Section"
+            name: "section"
             widget: object
             fields:
               - {label: "Section Title", name: "sectiontitle", widget: "string"}
               - {label: "Background Color", name: "backgroundcolor", widget: "string"}
               - {label: "Background Image", name: "backgroundimage", widget: "image"}
-              - label: Entity Type
-                name: entitytype
-                widget: select
-                options: ["blog", "profile"]
-              - {label: "Limit", name: "limit", widget: "number"}
+              - name: "Section Inners"
+                label: "sectioninners"
+                widget: "list"
+                types:
+                  - label: "text"
+                    name: "text"
+                    widget: "string"
           # - label: "Services"
           #   name: "services"
           #   widget: "list"
