@@ -30,7 +30,7 @@ export const PageTemplate = ({  }) => {
 
 const Page = ({ data }) => {
 
-  // console.log('data' + blogpost)
+  console.log(data)
   return (
     <Layout>
       <PageTemplate
@@ -40,8 +40,30 @@ const Page = ({ data }) => {
   );
 };
 
-Page.propTypes = {
-  data: PropTypes.object.isRequired
-};
+// Page.propTypes = {
+//   data: PropTypes.object.isRequired
+// };
 
 export default Page;
+
+
+export const PageQuery = graphql`
+  query Page($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      fields {
+        slug
+      }
+      html
+      frontmatter {
+        title
+        content {
+          sectionvalue{
+            limit
+            entitytype
+            type
+          }
+        }
+      }
+    }
+  }
+`;

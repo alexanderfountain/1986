@@ -1,5 +1,6 @@
 ---
 title: Home Page
+templateKey: page
 content:
   - sectiontitle: Recent Blog Posts
     sectionvalue:

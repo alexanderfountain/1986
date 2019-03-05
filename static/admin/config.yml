@@ -38,16 +38,20 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "page"}
       - {label: "Content", name: "content", widget: "list", types: [
           {label: "Section", name: "section", widget: "object", fields: [
             {label: "Section Title", name: "sectiontitle", widget: "string"},
             {label: "Background Image", name: "backgroundimage", widget: "image"},
             {label: "Section Value", name: "sectionvalue", widget: "list", types: [
+              {label: "Markdown", name: "markdown", widget: "object", fields: [
+                {label: "Markdown", name: "markdown", widget: "markdown"}
+              ]},
               {label: "Entity List", name: "entitylist", widget: "object", fields: [
-                {label: "Entity Type", name: "entitytype", widget: "list", options: [
-                  "blog", 
-                  "profile"
+                {label: "Entity Type", name: "entitytype", widget: "select", options: [
+                  "blog", "profile"
                 ]},
+                {label: "Limit", name: "limit", widget: "number"}
              ]} 
             ]}
           ]}
