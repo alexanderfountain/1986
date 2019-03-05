@@ -114,8 +114,7 @@ export const HomePageTemplate = ({ intro, contact, blogs }) => {
 // }
 
 const HomePage = ({ data }) => {
-  const { home: post } = data;
-  const { blogs: blogpost } = data;
+  const { home: post, blogs: blogpost } = data;
 
   // console.log('data' + blogpost)
   return (
