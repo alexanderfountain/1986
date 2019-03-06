@@ -9,14 +9,21 @@ import * as variable from "../components/variables";
 import styled from "styled-components";
 import SectionContact from "../components/pages/home/section-contact";
 import SectionTypedHero from "../components/organisms/sections/section-typed-hero";
-import SectionBlogs from "../components/pages/home/section-blogs"
+import SectionBlogs from "../components/pages/home/section-blogs";
 
-
-export const PageTemplate = ({  }) => {
+export const PageTemplate = ({ title, content }) => {
   return (
     <main id="main" className="main">
- 
-      <h1>test</h1>
+      <h1>{title}</h1>
+      {content.map(({ sectionvalue }) => (
+        <div className="content">
+          {sectionvalue.map(() => (
+            <div className="content">
+              <h2>test</h2>
+            </div>
+          ))}
+        </div>
+      ))}
     </main>
   );
 };
@@ -29,12 +36,14 @@ export const PageTemplate = ({  }) => {
 // }
 
 const Page = ({ data }) => {
+  const { markdownRemark: post } = data;
 
-  console.log(data)
+  console.log(post.frontmatter);
   return (
     <Layout>
       <PageTemplate
-
+        title={post.frontmatter.title}
+        content={post.frontmatter.content}
       />
     </Layout>
   );
@@ -46,7 +55,6 @@ const Page = ({ data }) => {
 
 export default Page;
 
-
 export const PageQuery = graphql`
   query Page($id: String!) {
     markdownRemark(id: { eq: $id }) {
@@ -57,7 +65,7 @@ export const PageQuery = graphql`
       frontmatter {
         title
         content {
-          sectionvalue{
+          sectionvalue {
             limit
             entitytype
             type
