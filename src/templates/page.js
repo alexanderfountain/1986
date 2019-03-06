@@ -10,35 +10,49 @@ import styled from "styled-components";
 import SectionContact from "../components/pages/home/section-contact";
 import SectionTypedHero from "../components/organisms/sections/section-typed-hero";
 import SectionBlogs from "../components/pages/home/section-blogs";
+import SectionType from "../components/organisms/sections/section-type"
+import SectionMarkdown from "../components/organisms/sections/section-markdown"
+import SectionEntityList from "../components/organisms/sections/section-entitylist"
 
 export const PageTemplate = ({ title, content }) => {
+
+  
+
   return (
     <main id="main" className="main">
       <h1>{title}</h1>
-      {content.map(({ sectionvalue }) => (
-        <div className="content">
-          {sectionvalue.map(() => (
-            <div className="content">
-              <h2>test</h2>
+      {content.map(( section, index ) => (
+        <section id={section.sectionid} key={index}>
+          <h2>{section.sectiontitle}</h2>
+          {section.sectionvalue.map(( sectionvalue, index ) => (
+            <div className="content" key={index}>
+              {(() => {
+                  switch(sectionvalue.type) {
+                    case 'markdown':
+                    return <SectionMarkdown
+                    object={sectionvalue}
+                    ></SectionMarkdown>;
+                    case 'entitylist':
+                    return <SectionEntityList
+                    object={sectionvalue}
+                    ></SectionEntityList>;
+                  }
+              })()}
             </div>
           ))}
-        </div>
+        </section>
       ))}
     </main>
   );
 };
 
-// HomePageTemplate.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   content: PropTypes.string,
-//   contentComponent: PropTypes.func,
-//   introheading: PropTypes.string,
-// }
+
+
 
 const Page = ({ data }) => {
   const { markdownRemark: post } = data;
 
-  console.log(post.frontmatter);
+ 
   return (
     <Layout>
       <PageTemplate
@@ -58,6 +72,7 @@ export default Page;
 export const PageQuery = graphql`
   query Page($id: String!) {
     markdownRemark(id: { eq: $id }) {
+      id
       fields {
         slug
       }
@@ -65,6 +80,8 @@ export const PageQuery = graphql`
       frontmatter {
         title
         content {
+          sectiontitle
+          sectionid
           sectionvalue {
             limit
             entitytype
