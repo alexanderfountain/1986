@@ -44,6 +44,7 @@ collections:
             {label: "Section Title", name: "sectiontitle", widget: "string"},
             {label: "Section ID", name: "sectionid", widget: "string"},
             {label: "Background Image", name: "backgroundimage", widget: "image"},
+            {label: "Background Color", name: "backgroundcolor", widget: "string"},
             {label: "Section Value", name: "sectionvalue", widget: "list", types: [
               {label: "Markdown", name: "markdown", widget: "object", fields: [
                 {label: "Markdown", name: "markdown", widget: "markdown"}

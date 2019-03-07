@@ -10,9 +10,9 @@ import styled from "styled-components";
 import SectionContact from "../components/pages/home/section-contact";
 import SectionTypedHero from "../components/organisms/sections/section-typed-hero";
 import SectionBlogs from "../components/pages/home/section-blogs";
-import SectionType from "../components/organisms/sections/section-type"
 import SectionMarkdown from "../components/organisms/sections/section-markdown"
 import SectionEntityList from "../components/organisms/sections/section-entitylist"
+import Section from "../components/organisms/sections/section"
 
 export const PageTemplate = ({ title, content }) => {
 
@@ -22,25 +22,10 @@ export const PageTemplate = ({ title, content }) => {
     <main id="main" className="main">
       <h1>{title}</h1>
       {content.map(( section, index ) => (
-        <section id={section.sectionid} key={index}>
-          <h2>{section.sectiontitle}</h2>
-          {section.sectionvalue.map(( sectionvalue, index ) => (
-            <div className="content" key={index}>
-              {(() => {
-                  switch(sectionvalue.type) {
-                    case 'markdown':
-                    return <SectionMarkdown
-                    object={sectionvalue}
-                    ></SectionMarkdown>;
-                    case 'entitylist':
-                    return <SectionEntityList
-                    object={sectionvalue}
-                    ></SectionEntityList>;
-                  }
-              })()}
-            </div>
-          ))}
-        </section>
+        <Section
+        section={section}
+        >
+        </Section>
       ))}
     </main>
   );
@@ -82,6 +67,7 @@ export const PageQuery = graphql`
         content {
           sectiontitle
           sectionid
+          backgroundimage
           sectionvalue {
             limit
             entitytype
