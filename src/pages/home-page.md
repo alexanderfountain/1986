@@ -2,11 +2,12 @@
 title: Home Page
 templateKey: page
 content:
-  - backgroundimage: /assets/front-page-1.jpg
+  - backgroundimage: /assets/undhero.jpg
+    pagetitle: true
     sectionid: hero
     sectiontitle: My Hero Section
     sectionvalue:
-      - markdown: My simple hero section markdown
+      - markdown: "Call Center Outsourcing.\n\nREDEFINED.\n\n* Elevate Customer Experience\n* \rIncrease Social Responsibility\n* \rImprove Lifetime Customer Value\r\n* 100% USA Based Agents\n\n[LEARN MORE](#)"
         type: markdown
     type: section
   - backgroundcolor: '#C3FCF2'
