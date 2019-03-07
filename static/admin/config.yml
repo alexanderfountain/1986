@@ -43,6 +43,8 @@ collections:
           {label: "Section", name: "section", widget: "object", fields: [
             {label: "Section Title", name: "sectiontitle", widget: "string"},
             {label: "Section ID", name: "sectionid", widget: "string"},
+            {label: "Page H1 Title", name: "pagetitle", widget: "boolean", default: false},
+            {label: "Default Text Color", name: "textcolor", widget: "string"},
             {label: "Background Image", name: "backgroundimage", widget: "image"},
             {label: "Background Color", name: "backgroundcolor", widget: "string"},
             {label: "Section Value", name: "sectionvalue", widget: "list", types: [

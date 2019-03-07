@@ -20,7 +20,6 @@ export const PageTemplate = ({ title, content }) => {
 
   return (
     <main id="main" className="main">
-      <h1>{title}</h1>
       {content.map(( section, index ) => (
         <Section
         section={section}
@@ -48,9 +47,9 @@ const Page = ({ data }) => {
   );
 };
 
-// Page.propTypes = {
-//   data: PropTypes.object.isRequired
-// };
+Page.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default Page;
 
@@ -68,9 +67,9 @@ export const PageQuery = graphql`
           sectiontitle
           sectionid
           backgroundimage
+          backgroundcolor
+          textcolor
           sectionvalue {
-            limit
-            entitytype
             type
           }
         }

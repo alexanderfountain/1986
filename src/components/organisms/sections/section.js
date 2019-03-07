@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Container from "../../layout/container";
 import SectionType from "../sections/section-type"
 
-const SectionHeroStyle = styled.section`
+const SectionStyle = styled.section`
   padding-top: 150px;
   padding-bottom: 50px;
   background-size: cover;
@@ -11,9 +11,12 @@ const SectionHeroStyle = styled.section`
   background-position: center;
   background-repeat: no-repeat;
   min-height: 400px;
-  h3{
+  background-image: url(${props => props.backgroundimage});
+  background-color: url(${props => props.backgroundcolor});
+  color: ${props => props.color};
+  h1 ,h2, h3, h4, h5, h6{
     margin: 0px;
-    color: #232525;
+    color: ${props => props.color};
   }
   .subheading{
     font-size: 28px;
@@ -21,23 +24,22 @@ const SectionHeroStyle = styled.section`
   }
 `;
 
-
 const Section = ({section}) => {
   return(
-    <SectionHeroStyle id={section.sectionid} style={{backgroundImage: `url(${section.backgroundimage})`,}}>
+      <SectionStyle id={section.sectionid}
+      backgroundimage={section.backgroundimage}
+      backgroundcolor={section.backgroundcolor}
+      color={section.textcolor}
+      >
       <h2>{section.sectiontitle}</h2>
       {section.sectionvalue.map(( sectionvalue, index ) => (
-
         <SectionType 
           key={index}
           object={sectionvalue}
           >
         </SectionType>
-
       ))}
-    </SectionHeroStyle>
+    </SectionStyle>
   )
 }
-
-
 export default Section
