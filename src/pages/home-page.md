@@ -9,7 +9,8 @@ content:
       - markdown: My simple hero section markdown
         type: markdown
     type: section
-  - sectionid: recentposts
+  - backgroundcolor: '#C3FCF2'
+    sectionid: recentposts
     sectiontitle: Recent Blog Posts
     sectionvalue:
       - markdown: My simple markdown in same section
