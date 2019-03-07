@@ -7,8 +7,25 @@ content:
     sectionid: hero
     sectiontitle: ''
     sectionvalue:
-      - markdown: "Call Center Outsourcing.\n\nREDEFINED.\n\n* Elevate Customer Experience\n* \rIncrease Social Responsibility\n* \rImprove Lifetime Customer Value\r\n* 100% USA Based Agents\n\n[LEARN MORE](#)"
+      - markdown: |-
+          Call Center Outsourcing.
+
+          REDEFINED.
+
+          * Elevate Customer Experience
+          * 
+
+          Increase Social Responsibility
+
+          * 
+
+          Improve Lifetime Customer Value
+
+          * 100% USA Based Agents
+
+          [LEARN MORE](#)
         type: markdown
+    textcolor: '#ffffff'
     type: section
   - backgroundcolor: '#ffffff'
     sectionid: freequote
