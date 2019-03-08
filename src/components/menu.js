@@ -1,6 +1,7 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import * as variable from './variables.js'
 import Mobilemenu from './mobilemenu'
@@ -8,6 +9,9 @@ const Nav = styled.nav`
   ul{
     margin:0px;
     padding:0px;
+    list-style:none;
+    display:flex;
+    justify-content:flex-end;
   }
   li{
     margin-left:25px;
@@ -38,21 +42,32 @@ const Nav = styled.nav`
 
 const Menu = () => (
 
-  <div>
+  <StaticQuery
+  query={graphql`
+    query MenuQuery {
+      site {
+        siteMetadata {
+          menuLinks{
+            name
+            link
+          }
+        }
+      }
+    }
+  `}
+  render={data => (
+    <>
     <Nav>
-    <ul style={{
-      listStyle:'none',
-      display:'flex',
-      justifyContent:'flex-end',
-    }}>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/blog">Blog</Link></li>
-      <li><Link to="/contact">Contact</Link></li>
+    <ul>
+      {data.site.siteMetadata.menuLinks.map((menuitem, index) =>(
+        <li key={index}><Link to={menuitem.link}>{menuitem.name}</Link></li>
+      ))}
     </ul>
     </Nav>
     <Mobilemenu />
-  </div>
-    
+  </>
+  )}
+  />
 )
 
 
