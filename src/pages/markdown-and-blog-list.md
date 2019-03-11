@@ -2,7 +2,8 @@
 title: Markdown and Blog list
 templateKey: page
 content:
-  - sectionid: markdown
+  - backgroundimage: /assets/front-page-1.jpg
+    sectionid: markdown
     sectiontitle: Markdown
     sectionvalue:
       - markdown: |-
@@ -14,10 +15,14 @@ content:
           * list 2
           * list 3
         type: markdown
+    textcolor: ''
     type: section
-  - sectiontitle: Blog List Section
+  - backgroundcolor: '#000000'
+    sectionid: bloglist
+    sectiontitle: Blog List Section
     sectionvalue:
       - type: bloglist
+    textcolor: '#ffffff'
     type: section
 ---
 
