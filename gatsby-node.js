@@ -64,5 +64,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
           .toString();
       }
     }
+    if(node.frontmatter){
+      if(node.frontmatter.content.sectionvalue.markdown){
+        const markdown = node.frontmatter.content.sectionvalue.markdown
+        node.frontmatter.content.sectionvalue.markdown = remark()
+          .use(remarkHTML)
+          .processSync(markdown)
+          .toString();
+      }
+    }
   }
 }

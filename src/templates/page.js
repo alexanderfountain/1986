@@ -60,8 +60,6 @@ export const PageQuery = graphql`
           sectionvalue{
             type
             markdown
-            entitytype
-            limit
           }
         }
       }

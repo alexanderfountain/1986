@@ -31,6 +31,7 @@ const Section = ({section}) => {
       backgroundcolor={section.backgroundcolor}
       color={section.textcolor}
       >
+      <Container>
       <h2>{section.sectiontitle}</h2>
       {section.sectionvalue.map(( sectionvalue, index ) => (
         <SectionType 
@@ -39,6 +40,7 @@ const Section = ({section}) => {
           >
         </SectionType>
       ))}
+      </Container>
     </SectionStyle>
   )
 }

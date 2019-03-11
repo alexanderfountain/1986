@@ -35,34 +35,36 @@ flex-basis:calc(50% - 20px);
 }
 `
 
-const BlogTeaser = ({}) => (
+const BlogTeaser = ({post}) => {
 
+return(
 <BlogTeaserContainer>
   <BlogTeaserLeft>
-    tester
-  {/* <div className="who">
-  <span className="blog-date">{post.frontmatter.date} / </span> 
-  <span className="blog-teaser-author">{post.frontmatter.author}</span>
+    {console.log(post.node)}
+
+  <div className="who">
+  <span className="blog-date">{post.node.frontmatter.date} / </span> 
+  <span className="blog-teaser-author">{post.node.frontmatter.author}</span>
   </div>
   <h2>
-  <Link className="has-text-primary" to={post.fields.slug}>
-    {post.frontmatter.title}
+  <Link className="has-text-primary" to={post.node.fields.slug}>
+    {post.node.frontmatter.title}
   </Link>
-  </h2> */}
-  {/* <div className="teaser-body">
-  {post.frontmatter.description}
-  </div> */}
-  {/* <Link className="btn blog-btn" to={post.fields.slug}>
+  </h2>
+  <div className="teaser-body">
+  {post.node.frontmatter.description}
+  </div>
+  <Link className="btn blog-btn" to={post.node.fields.slug}>
     Read Full Article
-  </Link> */}
+  </Link>
   </BlogTeaserLeft>
   <BlogTeaserRight>
-  {/* <div className="blog-teaser-image">
-    <img src={post.frontmatter.image} />
-    </div> */}
+  <div className="blog-teaser-image">
+    <img src={post.node.frontmatter.image} />
+    </div>
   </BlogTeaserRight>
 </BlogTeaserContainer>
-
 )
+  }
 
 export default BlogTeaser

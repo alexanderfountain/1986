@@ -11,7 +11,6 @@ const SectionMarkdownStyle = styled.section`
 const SectionMarkdown = ({object}) => (
 
 <SectionMarkdownStyle>
-{ console.log('object', object.markdown)}
 <Container>
   <div dangerouslySetInnerHTML={{ __html: object.markdown }} />
   NOT WORKING DANGEROUSLY
