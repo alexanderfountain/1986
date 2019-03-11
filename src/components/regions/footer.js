@@ -78,7 +78,7 @@ const Footer = () => (
       </Leftfooter>
       <Rightfooter>
       <h4>ABOUT US</h4>
-      <p>digett.com is a small web development / design / marketing firm based in America! We're real humans ready to chat face to face.</p>
+      <p>1986.io is a small web development / design / marketing firm based in America! We're real humans ready to chat face to face.</p>
       </Rightfooter>
     </Container>
   </footer>

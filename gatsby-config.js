@@ -4,7 +4,7 @@ module.exports = {
     description: `Screaming fast sites.`,
     siteUrl: `https://1986.io`,
     author: `@alexanderfountain`,
-    logo: `/assets/digett-logo.png`,
+    logo: `/assets/logo_no_comp.png`,
     menuLinks:[
       {
          name:'home',
