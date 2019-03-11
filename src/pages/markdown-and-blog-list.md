@@ -17,12 +17,12 @@ content:
         type: markdown
     textcolor: ''
     type: section
-  - backgroundcolor: '#000000'
+  - backgroundcolor: '#9fc6f2'
     sectionid: bloglist
     sectiontitle: Blog List Section
     sectionvalue:
       - type: bloglist
-    textcolor: '#ffffff'
+    textcolor: '#33393f'
     type: section
 ---
 
