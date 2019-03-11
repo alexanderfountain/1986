@@ -1,5 +1,5 @@
 ---
-title: Markdown and Blog list
+title: Home Page
 templateKey: page
 content:
   - backgroundimage: /assets/front-page-1.jpg
