@@ -4,7 +4,7 @@ templateKey: page
 content:
   - backgroundimage: /assets/front-page-1.jpg
     sectionid: markdown
-    sectiontitle: Markdown
+    sectiontitle: My First Section Title
     sectionvalue:
       - markdown: |-
           This is a nice markdown.
