@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 import Helmet from "react-helmet";
 import { Link } from "gatsby";
 import Container from "../components/layout/container";

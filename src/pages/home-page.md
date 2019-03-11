@@ -7,7 +7,7 @@ content:
     sectionid: hero
     sectiontitle: ''
     sectionvalue:
-      - markdown: |-
+      - sectionvaluevalue: |-
           Call Center Outsourcing.
 
           REDEFINED.
@@ -31,7 +31,7 @@ content:
     sectionid: freequote
     sectiontitle: ''
     sectionvalue:
-      - markdown: My simple markdown in same section
+      - sectionvaluevalue: My simple markdown in same section
         type: markdown
     type: section
 ---

@@ -1,7 +1,6 @@
-import { Link } from 'gatsby'
 import React from 'react'
-import Container from '../components/layout/container'
-import * as variable from './variables.js'
+import Container from '../../components/layout/container'
+import * as variable from '../variables.js'
 import styled from 'styled-components'
 const Leftfooter = styled.div`
 flex-basis:30%;

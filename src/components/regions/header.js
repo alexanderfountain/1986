@@ -1,10 +1,10 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Container from '../components/layout/container'
-import Menu from './menu'
+import Container from '../layout/container'
+import Menu from '../menu'
 import styled from "styled-components"
-import Logo from '../images/logo_no_comp.png'
+import Image from "../image"
 
 const HeaderStyle = styled.header`
   background-color:rgba(255, 255, 255, 0.9);
@@ -12,41 +12,38 @@ const HeaderStyle = styled.header`
   position: fixed;
   top: 0px;
   width: 100%;
-  zIndex: 999;
+  z-index: 999;
   box-shadow: 0px 1px 2px #ccc;
-  .header-menu{
+  .header-menu-logo{
     display:flex;
     justify-content: space-between;
     align-items: center;
   }
   .logo{
     flex-basis:150px;
+    border-bottom:none;
+    img{
+      width:100%;
+      height:auto;
+      display:flex;
+      align-items:center;
+    }
+  }
+  nav{
+    flex-basis:calc(60% - 200px);
+    display:flex;
+    justify-content:flex-end;
   }
 `;
 
-const Header = ({ siteTitle }) => (
+const Header = ({ logo }) => (
   <HeaderStyle>
-      <Container>
-
-      <div className="header-menu">
-      <Link className="logo"to="/" style={{borderBottom:'none',}}><img src={Logo} alt="1986 logo" style={{
-        width:'100%',
-        height:'auto',
-        display:'flex',
-        alignItems:'center',
-      }} /></Link>
-      <div style={{
-        flexBasis:'calc(60% - 200px)',
-        display:'flex',
-        justifyContent:'flex-end',
-      }}>
+      <Container className="header-menu-logo">
+      <Link className="logo"to="/"><img src={logo} alt="logo" /></Link>
       <Menu>
       </Menu>
-      </div>
-      </div>
       </Container>
   </HeaderStyle>
-    
 )
 
 Header.propTypes = {

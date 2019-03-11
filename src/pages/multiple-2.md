@@ -10,7 +10,14 @@ content:
     type: section
   - sectiontitle: Markdown Section
     sectionvalue:
-      - markdown: The markdown here.
+      - markdown: |-
+          This is my markdown text
+
+          **My bold text**
+
+          * **List 1**
+          * **List 2**
+          * **List 3**
         type: markdown
     type: section
 ---

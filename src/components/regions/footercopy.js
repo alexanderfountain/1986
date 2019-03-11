@@ -1,5 +1,5 @@
 import React from 'react'
-import Container from '../components/layout/container'
+import Container from '../../components/layout/container'
 const Footercopy = () => (
   
  
