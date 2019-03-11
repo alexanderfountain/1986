@@ -36,12 +36,9 @@ flex-basis:calc(50% - 20px);
 `
 
 const BlogTeaser = ({post}) => {
-
 return(
 <BlogTeaserContainer>
   <BlogTeaserLeft>
-    {console.log(post.node)}
-
   <div className="who">
   <span className="blog-date">{post.node.frontmatter.date} / </span> 
   <span className="blog-teaser-author">{post.node.frontmatter.author}</span>

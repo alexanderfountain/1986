@@ -12,7 +12,7 @@ const SectionStyle = styled.section`
   background-repeat: no-repeat;
   min-height: 400px;
   background-image: url(${props => props.backgroundimage});
-  background-color: url(${props => props.backgroundcolor});
+  background-color: ${props => props.backgroundcolor};
   color: ${props => props.color};
   h1 ,h2, h3, h4, h5, h6{
     margin: 0px;

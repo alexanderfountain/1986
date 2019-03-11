@@ -7,7 +7,7 @@ import Video from '../videos/meeting.mp4'
 import Container from '../components/layout/container'
 import * as variable from '../components/variables'
 import styled from 'styled-components'
-
+import BlogTeaser from "../components/entity/blog/blog-teaser"
 const BlogTeaserContainer = styled.div`
 display:flex;
 flex-wrap:wrap;
@@ -16,18 +16,6 @@ padding:50px 0px;
 border-bottom: thin solid #eee;
 @media (max-width: ${variable.mobileWidth}) {
   flex-direction: column-reverse;
-}
-`
-const BlogTeaserLeft = styled.div`
-flex-basis:calc(50% - 20px);
-@media (max-width: ${variable.mobileWidth}) {
-  flex-basis:calc(100%);
-}
-`
-const BlogTeaserRight = styled.div`
-flex-basis:calc(50% - 20px);
-@media (max-width: ${variable.mobileWidth}) {
-  flex-basis:calc(100%);
 }
 `
 export default class BlogPage extends React.Component {
@@ -72,38 +60,14 @@ export default class BlogPage extends React.Component {
             </div>
             </div>
           <Container className="container blog-index">
-
             {posts
-              .map(({ node: post }) => (
-                <BlogTeaserContainer
-                  className="content"
-                  key={post.id}
+              .map((post) => (
+                <BlogTeaser
+                key={post.node.id}
+                post={post}
                 >
-                    <BlogTeaserLeft>
-                    <div className="who">
-                    <span className="blog-date">{post.frontmatter.date} / </span> 
-                    <span className="blog-teaser-author">{post.frontmatter.author}</span>
-                    </div>
-                    <h2 style={{marginTop:'5px'}}>
-                    <Link className="has-text-primary" to={post.fields.slug} style={{borderBottom:'0px'}}>
-                      {post.frontmatter.title}
-                    </Link>
-                    </h2>
-                    <div className="teaser-body">
-                    {post.frontmatter.description}
-                    </div>
-                    <Link className="btn blog-btn" to={post.fields.slug}>
-                      Read Full Article
-                    </Link>
-                    </BlogTeaserLeft>
-                    <BlogTeaserRight>
-                    <div className="blog-teaser-image" style={{
-                      textAlign:'center',
-                      }}>
-                      <img src={post.frontmatter.image} />
-                      </div>
-                    </BlogTeaserRight>
-                  </BlogTeaserContainer>
+                </BlogTeaser>
+                
               ))}
           </Container>
         </section>

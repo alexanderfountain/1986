@@ -56,20 +56,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
     if(node.frontmatter){
-      if(node.frontmatter.contact){
-        const markdown = node.frontmatter.contact.contactleft
-        node.frontmatter.contact.contactleft = remark()
-          .use(remarkHTML)
-          .processSync(markdown)
-          .toString();
-      }
-    }
-    if(node.frontmatter){
       if(node.frontmatter.content.sectionvalue.markdown){
-        const markdown = node.frontmatter.content.sectionvalue.markdown
+        const markdown2 = node.frontmatter.content.sectionvalue.markdown
         node.frontmatter.content.sectionvalue.markdown = remark()
           .use(remarkHTML)
-          .processSync(markdown)
+          .processSync(markdown2)
           .toString();
       }
     }
