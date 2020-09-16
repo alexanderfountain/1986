@@ -1,21 +1,21 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
-const linkResolver = require("./src/utils/linkResolver")
+});
+const linkResolver = require("./src/utils/linkResolver");
 
 module.exports = {
   siteMetadata: {
-    title: `Prescriptive Solutions`,
-    description: `Prescriptive Data Solutions helps our enterprise customers connect, secure, transform and scale through information technology consulting, solutions, integration, and managed services.`,
-    author: `Digett`,
-    siteUrl: `https://www.prescriptive.solutions`,
+    title: `1986`,
+    description: `The original color changing masks.`,
+    author: `Alexander FOuntain`,
+    siteUrl: `https://1986.io`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-stripe`,
       options: {
-        objects: ['Price'],
+        objects: ["Price"],
         secretKey: process.env.STRIPE_SECRET_KEY,
         downloadFiles: false,
       },
@@ -23,8 +23,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://www.prescriptive.solutions",
-        sitemap: "https://www.prescriptive.solutions/sitemap.xml",
+        host: "https://1986.io",
+        sitemap: "https://1986.io/sitemap.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
@@ -40,15 +40,15 @@ module.exports = {
       options: {
         shouldDownloadImage: ({ node, key, value }) => {
           // Return true to download the image or false to skip.
-          return true
+          return true;
         },
-        linkResolver: ({ node, key, value }) => doc => {
+        linkResolver: ({ node, key, value }) => (doc) => {
           // Your link resolver
           if (doc.type === "pa") {
-            return "/" + doc.uid
+            return "/" + doc.uid;
           }
           // Homepage route fallback
-          return "/"
+          return "/";
         },
         // PrismJS highlighting for labels and slices
         repositoryName: `1986`,
@@ -141,7 +141,7 @@ module.exports = {
           `lora\:300,400,400i,700`,
           `Permanent Marker\:400`,
         ],
-        display: 'swap'
+        display: "swap",
       },
     },
     {
@@ -167,50 +167,21 @@ module.exports = {
                 uid
               }
             }
-            allPrismicBlogPost {
-              nodes {
-                uid
-              }
-            }
-            allPrismicJob {
-              nodes {
-                uid
-              }
-            }
         }`,
         resolveSiteUrl: ({ site, allSitePage }) => {
           //Alternativly, you may also pass in an environment variable (or any location) at the beginning of your `gatsby-config.js`.
-          return site.siteMetadata.siteUrl
+          return site.siteMetadata.siteUrl;
         },
-        serialize: ({
-          site,
-          allPrismicPa,
-          allPrismicBlogPost,
-          allPrismicJob,
-        }) => {
-          let pages = []
-          allPrismicPa.nodes.map(edge => {
+        serialize: ({ site, allPrismicPa }) => {
+          let pages = [];
+          allPrismicPa.nodes.map((edge) => {
             pages.push({
               url: `${site.siteMetadata.siteUrl}/${edge.uid}`,
               changefreq: `daily`,
               priority: 0.7,
-            })
-          })
-          allPrismicBlogPost.nodes.map(edge => {
-            pages.push({
-              url: `${site.siteMetadata.siteUrl}/insights/${edge.uid}`,
-              changefreq: `daily`,
-              priority: 0.7,
-            })
-          })
-          allPrismicJob.nodes.map(edge => {
-            pages.push({
-              url: `${site.siteMetadata.siteUrl}/job-opportunity/${edge.uid}`,
-              changefreq: `daily`,
-              priority: 0.7,
-            })
-          })
-          return pages
+            });
+          });
+          return pages;
         },
       },
     },
@@ -223,4 +194,4 @@ module.exports = {
     `gatsby-plugin-offline`,
     "gatsby-plugin-netlify",
   ],
-}
+};
