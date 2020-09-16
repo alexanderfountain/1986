@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  // transition: 0.3s;
+  color: $darkGray;
+}
+body {
+  margin: 0px;
+  font-family: 'lora', serif;
+  font-weight: 400;
+}
+h1{
+  font-family:'Permanent Marker', Lato;
+  font-size:42px;
+}
+h2, h3, h4, h5, h6{
+  letter-spacing: -3px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #232525;
+}
+h2{
+  font-size:32px;
+  line-height:36px;
+}
+h3{
+  font-size:28px;
+  line-height:32px;
+}
+h4{
+  font-size:24px;
+  line-height:28px;
+}
+h5{
+  font-size:22px;
+  line-height:26px;
+}
+h6{
+  font-size:20px;
+  line-height:24px;
+}

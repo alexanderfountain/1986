@@ -1,68 +1,59 @@
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
-const remark = require('remark');
-const remarkHTML = require('remark-html');
-exports.createPages = ({ actions, graphql }) => {
+const path = require("path")
+const { TRUE } = require("node-sass")
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
-  return graphql(`
+  const pages = await graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              templateKey
+      page: allPrismicPa {
+        nodes {
+          uid
+          data {
+            webinar
+          }
+        }
+      }
+      product: allPrismicProduct {
+        nodes {
+          uid
+          data {
+            sku {
+              text
             }
           }
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()))
-      return Promise.reject(result.errors)
-    }
-
-    const posts = result.data.allMarkdownRemark.edges
-
-    posts.forEach(edge => {
-      const id = edge.node.id
-      createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
-        context: {
-          id,
-        },
-      })
+  `)
+  const pageTemplateProduct = path.resolve("src/templates/product.js")
+  pages.data.product.nodes.forEach(node => {
+    createPage({
+      path: `/${node.uid}`,
+      component: pageTemplateProduct,
+      context: {
+        uid: node.uid,
+        sku: node.data.sku[0].text,
+      },
     })
   })
-}
-
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-  const nodess = node.frontmatter
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-    if(node.frontmatter){
-      if(node.frontmatter.content.sectionvalue.markdown){
-        const markdown2 = node.frontmatter.content.sectionvalue.markdown
-        node.frontmatter.content.sectionvalue.markdown = remark()
-          .use(remarkHTML)
-          .processSync(markdown2)
-          .toString();
-      }
+  const pageTemplate = path.resolve("src/templates/page.js")
+  pages.data.page.nodes.forEach(node => {
+    if (node.uid == "home") {
+      createPage({
+        path: `/`,
+        component: pageTemplate,
+        context: {
+          uid: node.uid,
+        },
+      })
     }
-  }
+      else {
+      createPage({
+        path: `/${node.uid}`,
+        component: pageTemplate,
+        context: {
+          uid: node.uid,
+        },
+      })
+    }
+  })
 }

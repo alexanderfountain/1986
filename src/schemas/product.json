@@ -1,0 +1,17 @@
+{
+  "Main": {
+    "sku": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Sku"
+      }
+    },
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    }
+  }
+}
