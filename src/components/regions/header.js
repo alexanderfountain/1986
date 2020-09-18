@@ -1,32 +1,32 @@
-import PropTypes, { nominalTypeHack } from "prop-types"
-import React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
-import Container from "../container"
-import BackgroundImage from "gatsby-background-image"
-import { withStyles, makeStyles } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import Tooltip from "@material-ui/core/Tooltip"
-import Fade from "@material-ui/core/Fade"
-import Collapse from "@material-ui/core/Collapse"
-import { StaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
-import * as variable from "../variables"
-import MobileMenu from "../mobileMenu"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTwitter } from "@fortawesome/free-brands-svg-icons"
-import { withPreview } from "gatsby-source-prismic-graphql"
+import PropTypes, { nominalTypeHack } from "prop-types";
+import React from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import Container from "../container";
+import BackgroundImage from "gatsby-background-image";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+import Fade from "@material-ui/core/Fade";
+import Collapse from "@material-ui/core/Collapse";
+import { StaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
+import * as variable from "../variables";
+import MobileMenu from "../mobileMenu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { withPreview } from "gatsby-source-prismic-graphql";
 
-const HtmlTooltip = withStyles(theme => ({
+const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: variable.medLightGray,
     padding: "10px 20px",
     fontSize: theme.typography.pxToRem(16),
     border: "1px solid #dadde9",
   },
-}))(Tooltip)
+}))(Tooltip);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   button: {
     fontSize: 18,
     color: variable.medLightGray,
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 10,
     display: "block",
   },
-}))
+}));
 
 const HeaderStyle = styled.header`
   background-color: rgba(255, 255, 255, 1);
@@ -75,7 +75,6 @@ const HeaderStyle = styled.header`
           color: ${variable.darkGray};
           font-weight: 600;
           transition: all 0.2s ease 0s;
-          font-family: Permanent Marker, sans-serif;
           text-transform: uppercase;
           font-size: 22px;
           letter-spacing: 0.5px;
@@ -90,10 +89,10 @@ const HeaderStyle = styled.header`
       }
     }
   }
-`
+`;
 const activeStyle = {
   color: variable.pink,
-}
+};
 
 function menuRender(menuitem) {
   if (
@@ -136,14 +135,14 @@ function menuRender(menuitem) {
           {menuitem.primary.label.text}
         </Link>
       </HtmlTooltip>
-    )
+    );
   } else {
     if (menuitem.primary.link.url != "") {
       return (
         <Link activeStyle={activeStyle} to={menuitem.primary.link.url}>
           {menuitem.primary.label.text}
         </Link>
-      )
+      );
     }
     if (menuitem.primary.relative_link) {
       return (
@@ -153,7 +152,7 @@ function menuRender(menuitem) {
         >
           {menuitem.primary.label.text}
         </Link>
-      )
+      );
     }
   }
 }
@@ -208,19 +207,19 @@ const query2 = graphql`
       }
     }
   }
-`
+`;
 
 export const Header = () => (
   <StaticQuery
     query={query2}
-    render={withPreview(data => {
-      const nav = data.allPrismicSiteInformation.nodes[0].data.nav
+    render={withPreview((data) => {
+      const nav = data.allPrismicSiteInformation.nodes[0].data.nav;
       const logo =
         data.allPrismicSiteInformation.nodes[0].data.logo.localFile
-          .childImageSharp.fluid
-      var twitter = null
+          .childImageSharp.fluid;
+      var twitter = null;
       if (data.allPrismicSiteInformation.nodes[0].data.twitter) {
-        var twitter = data.allPrismicSiteInformation.nodes[0].data.twitter.url
+        var twitter = data.allPrismicSiteInformation.nodes[0].data.twitter.url;
       }
       // const classes = useStyles()
       return (
@@ -250,9 +249,9 @@ export const Header = () => (
             </div>
           </Container>
         </HeaderStyle>
-      )
+      );
     }, query2)}
   />
-)
+);
 
-export default Header
+export default Header;

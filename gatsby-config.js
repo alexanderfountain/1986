@@ -136,9 +136,8 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `poppins\:300,400,400i,700`,
-          `sans serif\:300,400,400i,700`,
-          `lora\:300,400,400i,700`,
+          `chivo\:400,400i,700`,
+          `Abril Fatface\:700`,
           `Permanent Marker\:400`,
         ],
         display: "swap",

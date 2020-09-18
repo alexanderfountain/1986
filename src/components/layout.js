@@ -16,6 +16,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CartProvider } from "use-shopping-cart";
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import "../components/scss/layout/layout.scss";
+import { PopupboxManager, PopupboxContainer } from "react-popupbox";
+import "react-popupbox/dist/react-popupbox.css";
 
 const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 
@@ -42,6 +44,7 @@ const Layout = ({ children, slug }) => {
       >
         <HeaderCart />
         <Header />
+        <PopupboxContainer />
         <main>{children}</main>
         <Footer />
       </CartProvider>

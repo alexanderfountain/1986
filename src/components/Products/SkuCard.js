@@ -1,6 +1,8 @@
-import React from "react"
+import React from "react";
 
-import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
+import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
+
+import { PopupboxManager } from "react-popupbox";
 
 const cardStyles = {
   display: "flex",
@@ -13,7 +15,7 @@ const cardStyles = {
   backgroundColor: "#fff",
   borderRadius: "6px",
   maxWidth: "300px",
-}
+};
 const buttonStyles = {
   fontSize: "13px",
   textAlign: "center",
@@ -24,11 +26,39 @@ const buttonStyles = {
   backgroundColor: "rgb(255, 178, 56)",
   borderRadius: "6px",
   letterSpacing: "1.5px",
-}
+};
 
 const SkuCard = ({ sku }) => {
-  const { addItem } = useShoppingCart()
-  console.log(sku)
+  const { addItem } = useShoppingCart();
+  function addToCart(e, sku) {
+    addItem(sku);
+    const content = (
+      <div>
+        <div className="popclose-parent">
+          <div
+            className="popclose"
+            onClick={(e) => {
+              closePopupbox(e);
+            }}
+          >
+            Close
+          </div>
+          the content
+        </div>
+      </div>
+    );
+    PopupboxManager.open({
+      content,
+      fadeInSpeed: 10,
+      config: {},
+    });
+  }
+  function closePopupbox(e) {
+    PopupboxManager.close({
+      fadeInSpeed: 10,
+    });
+  }
+  console.log(sku);
   return (
     <div style={cardStyles}>
       <h4>{sku.name}</h4>
@@ -39,11 +69,16 @@ const SkuCard = ({ sku }) => {
           currency: sku.currency,
         })}
       </p>
-      <button style={buttonStyles} onClick={() => addItem(sku)}>
+      <button
+        style={buttonStyles}
+        onClick={(e) => {
+          addToCart(e, sku);
+        }}
+      >
         ADD TO CART
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default SkuCard
+export default SkuCard;

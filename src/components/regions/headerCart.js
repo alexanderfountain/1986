@@ -1,15 +1,15 @@
-import React, { useState } from "react"
-import { useShoppingCart } from "use-shopping-cart"
-import { Link } from "gatsby"
-import styled from "styled-components"
-import Container from "../container"
-import * as variable from "../variables"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import React, { useState } from "react";
+import { useShoppingCart } from "use-shopping-cart";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import Container from "../container";
+import * as variable from "../variables";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderCartStyle = styled.div`
   padding: 10px 0px;
-  background-color: ${variable.darkGray};
+  background-color: #222222;
   position: fixed;
   width: 100%;
   top: 0px;
@@ -30,8 +30,9 @@ const HeaderCartStyle = styled.div`
       list-style: none;
       a {
         color: white;
-        font-size: 18px;
+        font-size: 14px;
         text-decoration: none;
+        text-transform: uppercase;
         cursor: pointer;
         path {
           color: white;
@@ -42,16 +43,16 @@ const HeaderCartStyle = styled.div`
       }
     }
   }
-`
+`;
 
 export const HeaderCart = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const {
     formattedTotalPrice,
     redirectToCheckout,
     cartCount,
     clearCart,
-  } = useShoppingCart()
+  } = useShoppingCart();
   return (
     <HeaderCartStyle>
       <Container className="header-cart-container">
@@ -67,8 +68,8 @@ export const HeaderCart = () => {
               <a
                 disabled={loading}
                 onClick={() => {
-                  setLoading(true)
-                  redirectToCheckout()
+                  setLoading(true);
+                  redirectToCheckout();
                 }}
               >
                 {loading ? "LOADING..." : "CHECKOUT"}
@@ -78,7 +79,7 @@ export const HeaderCart = () => {
         </div>
       </Container>
     </HeaderCartStyle>
-  )
-}
+  );
+};
 
-export default HeaderCart
+export default HeaderCart;
