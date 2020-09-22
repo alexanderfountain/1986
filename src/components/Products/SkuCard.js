@@ -4,31 +4,44 @@ import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 
 import { PopupboxManager } from "react-popupbox";
 
-const cardStyles = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-around",
-  alignItems: "flex-start",
-  padding: "1rem",
-  marginBottom: "1rem",
-  boxShadow: "5px 5px 25px 0 rgba(46,61,73,.2)",
-  backgroundColor: "#fff",
-  borderRadius: "6px",
-  maxWidth: "300px",
-};
-const buttonStyles = {
-  fontSize: "13px",
-  textAlign: "center",
-  color: "#fff",
-  outline: "none",
-  padding: "12px",
-  boxShadow: "2px 5px 10px rgba(0,0,0,.1)",
-  backgroundColor: "rgb(255, 178, 56)",
-  borderRadius: "6px",
-  letterSpacing: "1.5px",
-};
+import styled from "styled-components";
 
-const SkuCard = ({ sku }) => {
+import Img from "gatsby-image";
+
+import CheckoutModal from "./CheckoutModal";
+
+const ProductSkuStyle = styled.div`
+  display: flex;
+  .product-left {
+    width: 50%;
+  }
+  .product-right {
+    width: 50%;
+  }
+  button {
+    color: rgb(255, 0, 108);
+    cursor: pointer;
+    font-family: Poppins, sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    padding: 21px 34px;
+    white-space: normal;
+    width: auto;
+    display: inline-block;
+    margin: 20px 0px 0px 0px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 4px solid rgb(255, 0, 108);
+    text-transform: uppercase;
+    background-color:transparent;
+    &:hover {
+      background-color: rgb(255, 0, 108);
+      color: white;
+    }
+`;
+
+const SkuCard = ({ sku, images }) => {
   const { addItem } = useShoppingCart();
   function addToCart(e, sku) {
     addItem(sku);
@@ -40,10 +53,8 @@ const SkuCard = ({ sku }) => {
             onClick={(e) => {
               closePopupbox(e);
             }}
-          >
-            Close
-          </div>
-          the content
+          ></div>
+          <CheckoutModal />
         </div>
       </div>
     );
@@ -58,26 +69,32 @@ const SkuCard = ({ sku }) => {
       fadeInSpeed: 10,
     });
   }
-  console.log(sku);
+  console.log(images);
   return (
-    <div style={cardStyles}>
-      <h4>{sku.name}</h4>
-      <p>
-        Price:{" "}
-        {formatCurrencyString({
-          value: parseInt(sku.price),
-          currency: sku.currency,
-        })}
-      </p>
-      <button
-        style={buttonStyles}
-        onClick={(e) => {
-          addToCart(e, sku);
-        }}
-      >
-        ADD TO CART
-      </button>
-    </div>
+    <ProductSkuStyle>
+      <div className="product-left">
+        {images.map((image, index) => (
+          <Img fluid={image.image.localFile.childImageSharp.fluid} />
+        ))}
+      </div>
+      <div className="product-right">
+        <h1>{sku.name}</h1>
+        <p>
+          Price:{" "}
+          {formatCurrencyString({
+            value: parseInt(sku.price),
+            currency: sku.currency,
+          })}
+        </p>
+        <button
+          onClick={(e) => {
+            addToCart(e, sku);
+          }}
+        >
+          ADD TO CART
+        </button>
+      </div>
+    </ProductSkuStyle>
   );
 };
 

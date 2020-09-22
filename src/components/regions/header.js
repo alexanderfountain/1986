@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderStyle = styled.header`
   background-color: rgba(255, 255, 255, 1);
-  padding: 10px 20px;
+  padding: 5px 20px;
   // position: fixed;
   top: 0px;
   width: 100%;
@@ -54,10 +54,10 @@ const HeaderStyle = styled.header`
     align-items: center;
     .logo {
       height: auto;
-      width: 150px;
+      width: 125px;
     }
     .main-menu {
-      flex-basis: calc(60% - 200px);
+      flex-basis: calc(60% - 150px);
       display: flex;
       justify-content: flex-end;
       margin: 0px;
@@ -66,6 +66,9 @@ const HeaderStyle = styled.header`
       display: flex;
       -webkit-box-pack: end;
       justify-content: flex-end;
+      @media (max-width: ${variable.tabletWidth}) {
+        display: none;
+      }
       li {
         list-style: none;
         margin-left: 25px;
@@ -73,17 +76,16 @@ const HeaderStyle = styled.header`
         text-decoration: none;
         a {
           color: ${variable.darkGray};
-          font-weight: 600;
+          font-weight: 400;
           transition: all 0.2s ease 0s;
           text-transform: uppercase;
-          font-size: 22px;
+          font-size: 18px;
           letter-spacing: 0.5px;
           -webkit-font-smoothing: antialiased;
           text-decoration: none;
           border-bottom: 0px;
           &:hover {
             color: rgb(255, 0, 108);
-            text-decoration: line-through;
           }
         }
       }

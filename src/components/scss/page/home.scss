@@ -1,5 +1,5 @@
 #slice-id-home-hero {
-  .video-container{
+  .video-container {
     // background-color: rgba(0, 145, 205, 0.6);
     // background-image: -moz-linear-gradient(left, rgba(0, 145, 205, 0.6) 0%, rgba(160, 206, 78, 0) 100%);
     // background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 145, 205, 0)), color-stop(100%, rgba(160, 206, 78, 0.6)));
@@ -8,10 +8,27 @@
     // background: -ms-linear-gradient(left, rgba(0, 145, 205, 0.6) 0%, rgba(160, 206, 78, 0) 100%);
     // background: linear-gradient(to right, rgba(255, 255, 255, 0.6) 50%, rgba(160, 206, 78, 0) 80%);
     // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='$to',GradientType=1);
-    background-color:rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
+    @include mobile() {
+      video {
+        object-position: 70%;
+      }
+      .video-content {
+        text-align: left;
+        max-width: 260px;
+      }
+      h2 {
+        text-align: left;
+        font-size: 30px;
+        line-height: 32px;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
   }
   section {
-    min-height: 500px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -19,19 +36,19 @@
     &:before {
       opacity: 0.6;
     }
-    .video-content {
-      margin-top: 100px;
-    }
-    h2{
-      font-family:'Permanent Marker', Lato;
-      font-size:52px;
-      color:white;
+    h2 {
+      color: white;
+      font-family: "Abril Fatface", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 45px;
+      line-height: 50px;
+      margin: 0px;
     }
     p {
-      font-size: 42px;
-      font-weight: bold;
+      font-size: 28px;
       margin: 5px 0px;
-      color:white;
+      color: white;
     }
     a {
       color: rgb(255, 0, 108);
@@ -43,7 +60,7 @@
       white-space: normal;
       width: auto;
       display: inline-block;
-      margin: 40px 0px;
+      margin: 20px 0px 0px 0px;
       text-decoration: none;
       font-weight: bold;
       border-radius: 10px;
@@ -52,19 +69,18 @@
       &:hover {
         background-color: rgb(255, 0, 108);
         color: white;
-        text-decoration: line-through;
       }
     }
   }
 }
 
-#slice-id-the-masks{
-  section{
-    &:nth-child(1){
-      background-color:#E197A2;
+#slice-id-the-masks {
+  section {
+    &:nth-child(1) {
+      background-color: #e197a2;
     }
-    &:nth-child(2){
-      background-color:#F7F5DD;
+    &:nth-child(2) {
+      background-color: #f7f5dd;
     }
   }
 }

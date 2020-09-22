@@ -44,6 +44,9 @@ module.exports = {
         },
         linkResolver: ({ node, key, value }) => (doc) => {
           // Your link resolver
+          if (doc.type === "product") {
+            return "/" + doc.uid;
+          }
           if (doc.type === "pa") {
             return "/" + doc.uid;
           }
@@ -55,7 +58,7 @@ module.exports = {
         accessToken: `${process.env.API_KEY}`,
         schemas: {
           pa: require("./src/schemas/page.json"),
-          blog_post: require("./src/schemas/product.json"),
+          product: require("./src/schemas/product.json"),
           site_information: require("./src/schemas/site_information.json"),
           blocks: require("./src/schemas/blocks.json"),
           block: require("./src/schemas/block.json"),

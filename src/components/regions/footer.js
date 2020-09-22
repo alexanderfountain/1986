@@ -1,12 +1,12 @@
-import React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
-import Container from "../container"
-import * as variable from "../variables"
+import React from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import Container from "../container";
+import * as variable from "../variables";
 
 const FooterStyle = styled.footer`
   padding: 24px 0px;
-  background-color: ${variable.green};
+  background-color: ${variable.darkGray};
   text-align: center;
   color: white;
   div {
@@ -14,7 +14,7 @@ const FooterStyle = styled.footer`
     font-weight: bold;
     font-size: 22px;
   }
-`
+`;
 
 export const Footer = () => {
   return (
@@ -23,7 +23,7 @@ export const Footer = () => {
         &copy; {new Date().getFullYear()} 1986.io
       </Container>
     </FooterStyle>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

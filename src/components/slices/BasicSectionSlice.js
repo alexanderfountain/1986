@@ -1,19 +1,19 @@
-import styled from "styled-components"
-import React from "react"
-import BackgroundImage from "gatsby-background-image"
-import Container from "../container"
-import { RichText, Date } from "prismic-reactjs"
-import { Link } from "gatsby"
+import styled from "styled-components";
+import React from "react";
+import BackgroundImage from "gatsby-background-image";
+import Container from "../container";
+import { RichText, Date } from "prismic-reactjs";
+import { Link } from "gatsby";
 
 // import { RichText } from "prismic-dom"
-import YouTube from "react-youtube"
-import ResponsiveEmbed from "react-responsive-embed"
-import "../scss/block/defaultBlogCta.scss"
-import linkResolver from "../../utils/linkResolver"
-import BasicSectionSliceInner from "../slices/BasicSectionSlice"
-import LeftRightSlice from "../slices/LeftRightSlice"
-import * as variable from "../variables"
-import prismicHtmlSerializer from "../../gatsby/htmlSerializer"
+import YouTube from "react-youtube";
+import ResponsiveEmbed from "react-responsive-embed";
+import "../scss/block/defaultBlogCta.scss";
+import linkResolver from "../../utils/linkResolver";
+import BasicSectionSliceInner from "../slices/BasicSectionSlice";
+import LeftRightSlice from "../slices/LeftRightSlice";
+import * as variable from "../variables";
+import prismicHtmlSerializer from "../../gatsby/htmlSerializer";
 
 // const linkResolver = require("../../utils/linkResolver")
 
@@ -24,8 +24,6 @@ const BasicStyle = styled.div`
       height: 100%;
       position: relative;
       overflow: hidden;
-      min-height: 500px;
-
       video {
         position: absolute;
         top: 0;
@@ -125,21 +123,21 @@ const BasicStyle = styled.div`
       }
     }
   }
-`
+`;
 
 const myCustomLink = (type, element, content, children, index) => (
   <Link key={element.data.id} to={linkResolver(element.data)}>
     {console.log(children)}
     <a>{content}</a>
   </Link>
-)
+);
 // Sort and display the different slice options
 const PostSlices = ({ slices }) => {
   return slices.map((slice, index) => {
-    var sliceID = ""
+    var sliceID = "";
     if (slice.primary) {
       if (slice.primary.slice_id != undefined) {
-        var sliceID = slice.primary.slice_id.text
+        var sliceID = slice.primary.slice_id.text;
       }
     }
 
@@ -154,7 +152,7 @@ const PostSlices = ({ slices }) => {
             >
               {<BasicSectionSliceInner slice={slice} />}
             </div>
-          )
+          );
 
         case "left_right_section":
           return (
@@ -165,15 +163,15 @@ const PostSlices = ({ slices }) => {
             >
               {<LeftRightSlice slice={slice} />}
             </div>
-          )
+          );
 
         default:
-          return
+          return;
       }
-    })()
-    return res
-  })
-}
+    })();
+    return res;
+  });
+};
 
 export const BasicSectionSlice = ({ slice }) => {
   const videoOptions = {
@@ -183,59 +181,58 @@ export const BasicSectionSlice = ({ slice }) => {
       rel: 0,
       showinfo: 0,
     },
-  }
-  var font_color = null
-  var fluid = null
-  var bg_color = null
-  var h1_title = false
-  var bg_video = null
-  var video_id = null
-  var bg_video_image = false
-  var sidebar = null
-  var sidebarClass = ""
+  };
+  var font_color = null;
+  var fluid = null;
+  var bg_color = null;
+  var h1_title = false;
+  var bg_video = null;
+  var video_id = null;
+  var bg_video_image = false;
+  var sidebar = null;
+  var sidebarClass = "";
   if (slice.items != null) {
     if (slice.items[0].sidebar_block_reference.document != null) {
-      sidebar = slice.items[0].sidebar_block_reference.document.data.body
-      sidebarClass = "sidebar-active"
+      sidebar = slice.items[0].sidebar_block_reference.document.data.body;
+      sidebarClass = "sidebar-active";
     }
   }
   if (slice.primary.background_image.localFile != null) {
-    fluid = slice.primary.background_image.localFile.childImageSharp.fluid
+    fluid = slice.primary.background_image.localFile.childImageSharp.fluid;
   }
   if (slice.primary.background_video != null) {
-    bg_video = slice.primary.background_video.url
+    bg_video = slice.primary.background_video.url;
   }
   if (slice.primary.youtube_background.embed_url != null) {
-    var video_id = slice.primary.youtube_background.embed_url.split("v=")[1]
-    var ampersandPosition = video_id.indexOf("&")
+    var video_id = slice.primary.youtube_background.embed_url.split("v=")[1];
+    var ampersandPosition = video_id.indexOf("&");
     if (ampersandPosition != -1) {
-      video_id = video_id.substring(0, ampersandPosition)
+      video_id = video_id.substring(0, ampersandPosition);
     }
   }
   if (
-    slice.primary.background_video.url == '' &&
+    slice.primary.background_video.url == "" &&
     slice.primary.background_image.localFile == null &&
     slice.primary.youtube_background.embed_url == null
   ) {
-    bg_video_image = true
-    console.log(bg_video_image)
+    bg_video_image = true;
+    console.log(bg_video_image);
   }
   if (slice.primary.background_color != null) {
-    bg_color = slice.primary.background_color
+    bg_color = slice.primary.background_color;
   }
   if (slice.primary.font_color != null) {
-    font_color = slice.primary.font_color
+    font_color = slice.primary.font_color;
   }
   // if (slice.primary.h1_title != null) {
   //   h1_title = slice.primary.h1_title
   // }
-  var theh1Title = null
-  var theh2Title = null
-  if(slice.primary.section_title && slice.primary.h1_title == true){
-    var theh1Title = slice.primary.section_title.text
-  }
-  else if(slice.primary.section_title && slice.primary.h1_title == false){
-    var theh2Title = slice.primary.section_title.text
+  var theh1Title = null;
+  var theh2Title = null;
+  if (slice.primary.section_title && slice.primary.h1_title == true) {
+    var theh1Title = slice.primary.section_title.text;
+  } else if (slice.primary.section_title && slice.primary.h1_title == false) {
+    var theh2Title = slice.primary.section_title.text;
   }
   // const content = slice.primary.content.raw.map(function(slice, index) {
   //   if (slice.type === "heading1") {
@@ -255,8 +252,8 @@ export const BasicSectionSlice = ({ slice }) => {
             className="basic-slice-container"
             style={{ color: font_color }}
           >
-              {theh1Title && <h1>{theh1Title}</h1>}
-              {theh2Title && <h2>{theh2Title}</h2>}
+            {theh1Title && <h1>{theh1Title}</h1>}
+            {theh2Title && <h2>{theh2Title}</h2>}
             <div className="section-content">
               <RichText
                 render={slice.primary.content.raw}
@@ -288,11 +285,11 @@ export const BasicSectionSlice = ({ slice }) => {
             <Container>
               <section>
                 <div class="video-content">
-                <RichText
-                render={slice.primary.content.raw}
-                linkResolver={linkResolver}
-                htmlSerializer={prismicHtmlSerializer}
-              />
+                  <RichText
+                    render={slice.primary.content.raw}
+                    linkResolver={linkResolver}
+                    htmlSerializer={prismicHtmlSerializer}
+                  />
                 </div>
               </section>
             </Container>
@@ -315,7 +312,7 @@ export const BasicSectionSlice = ({ slice }) => {
         <div style={{ backgroundColor: bg_color }}>
           <Container className="basic-slice-container">
             <section className={sidebarClass}>
-            {theh1Title && <h1>{theh1Title}</h1>}
+              {theh1Title && <h1>{theh1Title}</h1>}
               {theh2Title && <h2>{theh2Title}</h2>}
               {slice.primary.content && (
                 <div className="section-content">
@@ -336,7 +333,7 @@ export const BasicSectionSlice = ({ slice }) => {
         </div>
       )}
     </BasicStyle>
-  )
-}
+  );
+};
 
-export default BasicSectionSlice
+export default BasicSectionSlice;
