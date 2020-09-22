@@ -73,9 +73,11 @@ const SkuCard = ({ sku, images }) => {
   return (
     <ProductSkuStyle>
       <div className="product-left">
-        {images.map((image, index) => (
+      {images && 
+        images.map((image, index) => (
           <Img fluid={image.image.localFile.childImageSharp.fluid} />
-        ))}
+        ))
+        }
       </div>
       <div className="product-right">
         <h1>{sku.name}</h1>
