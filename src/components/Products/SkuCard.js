@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import Img from "gatsby-image";
 
-import CheckoutModal from "./CheckoutModal";
+import CheckoutModal from "./checkoutModal";
 
 const ProductSkuStyle = styled.div`
   display: flex;
