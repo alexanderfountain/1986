@@ -39,11 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderStyle = styled.header`
   background-color: rgba(255, 255, 255, 1);
-  padding: 5px 20px;
+  padding: 8px 20px;
   // position: fixed;
   top: 0px;
   width: 100%;
-  margin-top: 45px;
+  margin-top: 39px;
   box-shadow: rgb(204, 204, 204) 0px 1px 2px;
   z-index: 10;
   .header-inner {

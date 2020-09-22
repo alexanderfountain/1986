@@ -4,9 +4,10 @@ import styled from "styled-components";
 import Container from "../container";
 import * as variable from "../variables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useShoppingCart } from "use-shopping-cart";
 import { PopupboxManager } from "react-popupbox";
+import Img from "gatsby-image";
 
 const CheckoutModalStyle = styled.div`
   .just-added-container {
@@ -17,6 +18,23 @@ const CheckoutModalStyle = styled.div`
     }
     .just-added-right {
       width: 70%;
+      svg{
+        font-size: 28px;
+        margin-right:5px;
+      }
+      path{
+        color:${variable.blue};
+      }
+      .checkout-continue{
+        display:flex;
+        margin-top:20px;
+        a{
+          color:${variable.pink};
+        }
+        .modal-or{
+          margin:0px 10px;
+        }
+      }
     }
     .just-added-top {
       display: flex;
@@ -31,7 +49,8 @@ const CheckoutModalStyle = styled.div`
   }
 `;
 
-export const CheckoutModal = () => {
+export const CheckoutModal = (sku) => {
+  console.log(sku)
   const [loading, setLoading] = useState(false);
   function closePopupbox(e) {
     PopupboxManager.close({
@@ -47,10 +66,15 @@ export const CheckoutModal = () => {
   return (
     <CheckoutModalStyle>
       <div className="just-added-container">
-        <div className="just-added-left"></div>
+        <div className="just-added-left">
+        <Img fluid={sku.images[0].image.localFile.childImageSharp.fluid} />
+        {console.log(sku.images)}
+        </div>
         <div className="just-added-right">
           <div className="just-added-top">
-            <div className="just-added">JUST ADDED</div>
+            <div className="just-added">
+            <FontAwesomeIcon icon={faCheck} />
+            JUST ADDED: {sku.sku.name}</div>
             <Link to="/cart">View Cart</Link>
           </div>
           <div className="checkout-continue">
@@ -63,7 +87,7 @@ export const CheckoutModal = () => {
             >
               {loading ? "LOADING..." : "CHECKOUT"}
             </a>
-            OR
+            <div className="modal-or">OR</div>
             <div
               className="popclose"
               onClick={(e) => {

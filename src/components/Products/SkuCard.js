@@ -43,7 +43,7 @@ const ProductSkuStyle = styled.div`
 
 const SkuCard = ({ sku, images }) => {
   const { addItem } = useShoppingCart();
-  function addToCart(e, sku) {
+  function addToCart(e, sku, images) {
     addItem(sku);
     const content = (
       <div>
@@ -54,7 +54,10 @@ const SkuCard = ({ sku, images }) => {
               closePopupbox(e);
             }}
           ></div>
-          <CheckoutModal />
+          <CheckoutModal
+            sku={sku}
+            images={images}
+           />
         </div>
       </div>
     );
@@ -90,7 +93,7 @@ const SkuCard = ({ sku, images }) => {
         </p>
         <button
           onClick={(e) => {
-            addToCart(e, sku);
+            addToCart(e, sku, images);
           }}
         >
           ADD TO CART

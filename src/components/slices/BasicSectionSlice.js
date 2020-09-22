@@ -273,15 +273,18 @@ export const BasicSectionSlice = ({ slice }) => {
       {bg_video && (
         <div class="video-container-outer">
           <div class="video-container">
-            <video
-              autoplay="autoplay"
-              loop="true"
-              muted="true"
-              playsinline="true"
-              preload="auto"
-              src={bg_video}
-              type="video/mp4"
-            ></video>
+
+              <div dangerouslySetInnerHTML={{ __html: `
+    <video
+      muted
+      loop
+      autoplay="autoplay"
+      playsinline="true"
+      src="${bg_video}"
+      type="video/mp4"
+    />
+  ` }}
+  />
             <Container>
               <section>
                 <div class="video-content">
