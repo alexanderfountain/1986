@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 
@@ -9,6 +9,21 @@ import styled from "styled-components";
 import Img from "gatsby-image";
 
 import CheckoutModal from "./checkoutModal";
+
+import Select from "react-select";
+
+const optionsQuantity = [
+  { value: 1, label: "1" },
+  { value: 2, label: "2" },
+  { value: 3, label: "3" },
+  { value: 4, label: "4" },
+  { value: 5, label: "5" },
+  { value: 6, label: "6" },
+  { value: 7, label: "7" },
+  { value: 8, label: "8" },
+  { value: 9, label: "9" },
+  { value: 10, label: "10" },
+];
 
 const ProductSkuStyle = styled.div`
   display: flex;
@@ -42,9 +57,10 @@ const ProductSkuStyle = styled.div`
 `;
 
 const SkuCard = ({ sku, images }) => {
+  const [selectedOption, setSelectedOption] = useState(optionsQuantity[0]);
   const { addItem } = useShoppingCart();
-  function addToCart(e, sku, images) {
-    addItem(sku);
+  function addToCart(e, sku, images, quantity) {
+    addItem(sku, quantity);
     const content = (
       <div>
         <div className="popclose-parent">
@@ -54,10 +70,7 @@ const SkuCard = ({ sku, images }) => {
               closePopupbox(e);
             }}
           ></div>
-          <CheckoutModal
-            sku={sku}
-            images={images}
-           />
+          <CheckoutModal sku={sku} images={images} quantity={quantity} />
         </div>
       </div>
     );
@@ -72,15 +85,13 @@ const SkuCard = ({ sku, images }) => {
       fadeInSpeed: 10,
     });
   }
-  console.log(images);
   return (
     <ProductSkuStyle>
       <div className="product-left">
-      {images && 
-        images.map((image, index) => (
-          <Img fluid={image.image.localFile.childImageSharp.fluid} />
-        ))
-        }
+        {images &&
+          images.map((image, index) => (
+            <Img fluid={image.image.localFile.childImageSharp.fluid} />
+          ))}
       </div>
       <div className="product-right">
         <h1>{sku.name}</h1>
@@ -91,9 +102,16 @@ const SkuCard = ({ sku, images }) => {
             currency: sku.currency,
           })}
         </p>
+        <label>Quantity</label>
+        <Select
+          options={optionsQuantity}
+          defaultValue={selectedOption}
+          onChange={setSelectedOption}
+          isSearchable={false}
+        />
         <button
           onClick={(e) => {
-            addToCart(e, sku, images);
+            addToCart(e, sku, images, selectedOption.value);
           }}
         >
           ADD TO CART

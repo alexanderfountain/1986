@@ -1,10 +1,10 @@
-import React from "react"
-import { slide as Menu } from "react-burger-menu"
-import { Link } from "gatsby"
-import { StaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
-import * as variable from "../components/variables"
-import Container from "../components/container"
+import React from "react";
+import { slide as Menu } from "react-burger-menu";
+import { Link } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
+import * as variable from "./variables";
+import Container from "./container";
 
 const MobileContainer = styled.div`
   display: none;
@@ -84,41 +84,44 @@ const MobileContainer = styled.div`
   @media (max-width: ${variable.tabletWidth}) {
     display: block;
   }
-`
+`;
 const activeStyle = {
   color: variable.red,
-}
+};
 const SubMenuReturn = ({ submenuitem, index }) => {
-  if (submenuitem.sub_nav_link_label.text != "Dummy" && submenuitem.id != 'undefined') {
+  if (
+    submenuitem.sub_nav_link_label.text != "Dummy" &&
+    submenuitem.id != "undefined"
+  ) {
     return (
       <li key={submenuitem.id}>
         <Link activeStyle={activeStyle} to={submenuitem.sub_nav_link.url}>
           {submenuitem.sub_nav_link_label.text}
         </Link>
       </li>
-    )
+    );
   } else {
-    return ""
+    return "";
   }
-}
+};
 class Mobilemenu extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       menuOpen: false,
-    }
+    };
   }
 
   handleStateChange(state) {
-    this.setState({ menuOpen: state.isOpen })
+    this.setState({ menuOpen: state.isOpen });
   }
 
   closeMenu() {
-    this.setState({ menuOpen: false })
+    this.setState({ menuOpen: false });
   }
 
   toggleMenu() {
-    this.setState(state => ({ menuOpen: !state.menuOpen }))
+    this.setState((state) => ({ menuOpen: !state.menuOpen }));
   }
 
   render() {
@@ -172,7 +175,7 @@ class Mobilemenu extends React.Component {
             }
           }
         `}
-        render={data => (
+        render={(data) => (
           <>
             <MobileContainer>
               <Menu
@@ -180,7 +183,7 @@ class Mobilemenu extends React.Component {
                 noOverlay
                 isOpen={this.state.menuOpen}
                 width={240}
-                onStateChange={state => this.handleStateChange(state)}
+                onStateChange={(state) => this.handleStateChange(state)}
               >
                 <div className="menu-container">
                   <ul>
@@ -225,10 +228,10 @@ class Mobilemenu extends React.Component {
                                 if (submenuitem.id) {
                                   return (
                                     <SubMenuReturn
-                                    submenuitem={submenuitem}
-                                    index={index}
-                                  />  
-                                  )
+                                      submenuitem={submenuitem}
+                                      index={index}
+                                    />
+                                  );
                                 }
                               })}
                             </ul>
@@ -243,8 +246,8 @@ class Mobilemenu extends React.Component {
           </>
         )}
       />
-    )
+    );
   }
 }
 
-export default Mobilemenu
+export default Mobilemenu;

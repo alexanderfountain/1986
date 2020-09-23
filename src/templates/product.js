@@ -35,7 +35,6 @@ const Product = ({ data }) => {
   const product = data.prices;
   const productGatsby = data.product;
   const site = data.site;
-  console.log(productGatsby.data.images);
   const newSku = {
     sku: product.id,
     name: product.product.name,

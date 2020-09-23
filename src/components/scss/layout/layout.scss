@@ -46,6 +46,26 @@ h6 {
   line-height: 24px;
 }
 .popupbox-wrapper {
-  width: 80%;
-  max-width: 600px;
+  width: 70%;
+  max-width: 650px !important;
+}
+.the-button {
+  color: rgb(255, 0, 108);
+  cursor: pointer;
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  padding: 15px 20px;
+  white-space: normal;
+  width: auto;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 4px solid rgb(255, 0, 108);
+  text-transform: uppercase;
+  &:hover {
+    background-color: rgb(255, 0, 108);
+    color: white !important;
+  }
 }
