@@ -56,34 +56,25 @@ const Product = ({ data }) => {
 
     try {
       await addItemsToCart(items);
-      alert("Successfully added that item to your cart!");
+      // alert("Successfully added that item to your cart!");
     } catch {
       alert("There was a problem adding that item to your cart.");
     }
   }
   return (
-    <div>
-      <h1>tester</h1>
-      <p>There are currently {cartCount} items in your cart.</p>
-      <button onClick={addToCart}>Add items to your cart</button>
-    </div>
-    // <Layout slug={productGatsby.uid}>
-    //   <ProductStyle>
-    //     <Container>
-    //       <div className="breadcrumb">
-    //         <a href="/">Home</a> <div className="bread-carrot">></div>
-    //         <div className="bread-name">{product.product.name}</div>
-    //       </div>
-    //       <div className="product-container">
-    //         <SkuCard
-    //           key={product.id}
-    //           sku={newSku}
-    //           images={productGatsby.data.images}
-    //         />
-    //       </div>
-    //     </Container>
-    //   </ProductStyle>
-    // </Layout>
+    <Layout slug={data.product.shopifyId}>
+      <ProductStyle>
+        <Container>
+          <div className="breadcrumb">
+            <a href="/">Home</a> <div className="bread-carrot"></div>
+          </div>
+          <div className="product-container">
+            <p>There are currently {cartCount} items in your cart.</p>
+            <button onClick={addToCart}>Add items to your cart</button>
+          </div>
+        </Container>
+      </ProductStyle>
+    </Layout>
   );
 };
 export default Product;
