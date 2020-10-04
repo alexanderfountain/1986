@@ -5,6 +5,7 @@ import * as variable from "../components/variables";
 import styled from "styled-components";
 import Container from "../components/container";
 import SkuCard from "../components/Products/SkuCard";
+import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
 
 const ProductStyle = styled.div`
   .breadcrumb {
@@ -32,66 +33,73 @@ const ProductStyle = styled.div`
 const Product = ({ data }) => {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
-  const product = data.prices;
-  const productGatsby = data.product;
-  const site = data.site;
-  const newSku = {
-    sku: product.id,
-    name: product.product.name,
-    price: product.unit_amount,
-    currency: product.currency,
-  };
+  // const product = data.prices;
+  // const productGatsby = data.product;
+  // const site = data.site;
+  // const newSku = {
+  //   sku: product.id,
+  //   name: product.product.name,
+  //   price: product.unit_amount,
+  //   currency: product.currency,
+  // };
+  console.log(data);
+  const cartCount = useCartCount();
+  const addItemsToCart = useAddItemsToCart();
+
+  async function addToCart() {
+    const items = [
+      {
+        variantId: data.product.variants[0].shopifyId,
+        quantity: 1,
+      },
+    ];
+
+    try {
+      await addItemsToCart(items);
+      alert("Successfully added that item to your cart!");
+    } catch {
+      alert("There was a problem adding that item to your cart.");
+    }
+  }
   return (
-    <Layout slug={productGatsby.uid}>
-      <ProductStyle>
-        <Container>
-          <div className="breadcrumb">
-            <a href="/">Home</a> <div className="bread-carrot">></div>
-            <div className="bread-name">{product.product.name}</div>
-          </div>
-          <div className="product-container">
-            <SkuCard
-              key={product.id}
-              sku={newSku}
-              images={productGatsby.data.images}
-            />
-          </div>
-        </Container>
-      </ProductStyle>
-    </Layout>
+    <div>
+      <h1>tester</h1>
+      <p>There are currently {cartCount} items in your cart.</p>
+      <button onClick={addToCart}>Add items to your cart</button>
+    </div>
+    // <Layout slug={productGatsby.uid}>
+    //   <ProductStyle>
+    //     <Container>
+    //       <div className="breadcrumb">
+    //         <a href="/">Home</a> <div className="bread-carrot">></div>
+    //         <div className="bread-name">{product.product.name}</div>
+    //       </div>
+    //       <div className="product-container">
+    //         <SkuCard
+    //           key={product.id}
+    //           sku={newSku}
+    //           images={productGatsby.data.images}
+    //         />
+    //       </div>
+    //     </Container>
+    //   </ProductStyle>
+    // </Layout>
   );
 };
 export default Product;
 
 export const productQuery = graphql`
-  query ProductBySlug($uid: String!, $sku: String!) {
-    product: prismicProduct(uid: { eq: $uid }) {
-      uid
-      data {
-        sku {
-          text
+  query ProductBySlug($shopifyId: String!) {
+    product: shopifyProduct(shopifyId: { eq: $shopifyId }) {
+      variants {
+        priceV2 {
+          amount
         }
-        images {
-          image {
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
-              }
-            }
-          }
-        }
+        shopifyId
+        id
       }
-    }
-    prices: stripePrice(id: { eq: $sku }) {
-      id
-      product {
-        name
-        type
-      }
-      currency
-      unit_amount
+      title
+      shopifyId
     }
     site: allPrismicSiteInformation {
       nodes {

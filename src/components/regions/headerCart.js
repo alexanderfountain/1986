@@ -6,6 +6,7 @@ import Container from "../container";
 import * as variable from "../variables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { useCartCount } from "gatsby-theme-shopify-manager";
 
 const HeaderCartStyle = styled.div`
   padding: 10px 0px;
@@ -46,13 +47,7 @@ const HeaderCartStyle = styled.div`
 `;
 
 export const HeaderCart = () => {
-  const [loading, setLoading] = useState(false);
-  const {
-    formattedTotalPrice,
-    redirectToCheckout,
-    cartCount,
-    clearCart,
-  } = useShoppingCart();
+  const cartCount = useCartCount();
   return (
     <HeaderCartStyle>
       <Container className="header-cart-container">
@@ -65,7 +60,7 @@ export const HeaderCart = () => {
               </Link>
             </li>
             <li>
-              <a
+              {/* <a
                 disabled={loading}
                 onClick={() => {
                   setLoading(true);
@@ -73,7 +68,7 @@ export const HeaderCart = () => {
                 }}
               >
                 {loading ? "LOADING..." : "CHECKOUT"}
-              </a>
+              </a> */}
             </li>
           </ul>
         </div>

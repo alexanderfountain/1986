@@ -76,6 +76,13 @@ module.exports = {
         includePaths: ["src/components/scss"],
       },
     },
+    {
+      resolve: `gatsby-theme-shopify-manager`,
+      options: {
+        shopName: "19-86",
+        accessToken: "ea3f72385a09fa80335785e41a2d8993",
+      },
+    },
     `gatsby-plugin-netlify-headers`,
     {
       resolve: `gatsby-plugin-manifest`,
