@@ -8,6 +8,8 @@ import SkuCard from "../components/Products/SkuCard";
 import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
+import Img from "gatsby-image";
+
 const images = [
   {
     original: 'https://picsum.photos/id/1018/1000/600/',
@@ -46,7 +48,8 @@ const ProductStyle = styled.div`
     }
   }
 `;
-const Product = ({ data }) => {
+
+class Product extends React.Component {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
   // const product = data.prices;
@@ -58,27 +61,56 @@ const Product = ({ data }) => {
   //   price: product.unit_amount,
   //   currency: product.currency,
   // };
-  console.log(data);
-  const cartCount = useCartCount();
-  const addItemsToCart = useAddItemsToCart();
 
-  async function addToCart() {
-    const items = [
-      {
-        variantId: data.product.variants[0].shopifyId,
-        quantity: 1,
-      },
-    ];
+  constructor(props) {
+    console.log(props)
 
-    try {
-      await addItemsToCart(items);
-      // alert("Successfully added that item to your cart!");
-    } catch {
-      alert("There was a problem adding that item to your cart.");
-    }
+    super(props);
+      this.state = {
+        galleryItems: this.galleryItems(),
+        currentIndex: 0,
+        variant: props.data.product.variants[0].shopifyId,
+        variantImages: props.data.product.variants[0].title
+      }
   }
+  items = this.props.data.product.images
+  galleryItems() {
+    return this.items.map((i) => <h2 key={i}> {i}</h2>)
+  }
+  // console.log(data);
+ 
+
+  thumbItem = (item, i) => <span onClick={() => this.slideTo(i)}><Img fixed={item.localFile.childImageSharp.fixed} /> </span>
+
+  slideTo = (i) => this.setState({ currentIndex: i })
+
+  onSlideChanged = (e) => this.setState({ currentIndex: e.item })
+
+
+  render(){
+
+    const { galleryItems, currentIndex } = this.state
+
+    // const cartCount = useCartCount();
+    // const addItemsToCart = useAddItemsToCart();
+    // async function addToCart() {
+    //   const items = [
+    //     {
+    //       variantId: this.state.variant,
+    //       quantity: 1,
+    //     },
+    //   ];
+  
+    //   try {
+    //     await addItemsToCart(items);
+    //     // alert("Successfully added that item to your cart!");
+    //   } catch {
+    //     alert("There was a problem adding that item to your cart.");
+    //   }
+    // }
   return (
-    <Layout slug={data.product.shopifyId}>
+    // <h2>test</h2>
+    <Layout slug={this.props.data.product.shopifyId}>
       <ProductStyle>
         <Container>
           <div className="breadcrumb">
@@ -86,15 +118,30 @@ const Product = ({ data }) => {
           </div>
           <div className="product-container">
             <div className="product-left">
-            <AliceCarousel mouseTrackingEnabled>
-      <img src="https://picsum.photos/id/1018/1000/600/" className="yours-custom-class" />
-      <img src="https://picsum.photos/id/1015/1000/600/" className="yours-custom-class" />
-    </AliceCarousel>
+            <AliceCarousel 
+            items={galleryItems}
+            slideToIndex={currentIndex}
+            onSlideChanged={this.onSlideChanged}>
+            {this.props.data.product.images.map((image, index) => (
+              <Img fluid={image.localFile.childImageSharp.fluid} />
+            ))}
+           </AliceCarousel>
+           {console.log(this.items)}
+           {/* {this.items.map(console.log(this))} */}
+           <ul>{this.items.map(this.thumbItem)}</ul>
+
+           {/* <nav>   
+           {data.product.images.map((image, index) => (
+              <Img fluid={image.localFile.childImageSharp.fluid} />
+            ))}
+                       </nav> */}
+    {/* <nav>{this.items.map(this.thumbItem)}</nav> */}
+
 
             </div>           
             <div className="product-right">
-            <p>There are currently {cartCount} items in your cart.</p>
-            <button onClick={addToCart}>Add items to your cart</button>
+            {/* <p>There are currently {cartCount} items in your cart.</p> */}
+            {/* <button onClick={addToCart}>Add items to your cart</button> */}
               </div>
 
           </div>
@@ -103,6 +150,7 @@ const Product = ({ data }) => {
     </Layout>
   );
 };
+}
 export default Product;
 
 export const productQuery = graphql`
@@ -125,6 +173,7 @@ export const productQuery = graphql`
         }
         shopifyId
         id
+        title
       }
       title
       shopifyId
@@ -132,8 +181,11 @@ export const productQuery = graphql`
         altText
         localFile {
           childImageSharp {
-            fluid(maxWidth: 1920) {
+            fluid(maxWidth: 800) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+            fixed(width: 100, height: 100) {
+              ...GatsbyImageSharpFixed_withWebp_tracedSVG
             }
           }
         }
