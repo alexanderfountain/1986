@@ -33,6 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const pageTemplateProduct = path.resolve("src/templates/product.js");
   pages.data.shopify.nodes.forEach((node) => {
     const path = string_to_slug(node.title);
+    console.log(node.shopifyId)
     createPage({
       path: `/${path}`,
       component: pageTemplateProduct,

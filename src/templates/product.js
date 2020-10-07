@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import * as variable from "../components/variables";
@@ -9,21 +9,7 @@ import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import Img from "gatsby-image";
-
-const images = [
-  {
-    original: 'https://picsum.photos/id/1018/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1018/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1015/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1015/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1019/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1019/250/150/',
-  },
-];
+import AddToCart from "../components/AddToCart"
 
 const ProductStyle = styled.div`
   .breadcrumb {
@@ -126,7 +112,7 @@ class Product extends React.Component {
               <Img fluid={image.localFile.childImageSharp.fluid} />
             ))}
            </AliceCarousel>
-           {console.log(this.items)}
+           {console.log(this)}
            {/* {this.items.map(console.log(this))} */}
            <ul>{this.items.map(this.thumbItem)}</ul>
 
@@ -142,6 +128,7 @@ class Product extends React.Component {
             <div className="product-right">
             {/* <p>There are currently {cartCount} items in your cart.</p> */}
             {/* <button onClick={addToCart}>Add items to your cart</button> */}
+            <AddToCart state={this.state} />
               </div>
 
           </div>
