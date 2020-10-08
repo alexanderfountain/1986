@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import * as variable from "../components/variables";
@@ -6,10 +6,13 @@ import styled from "styled-components";
 import Container from "../components/container";
 import SkuCard from "../components/Products/SkuCard";
 import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
-import AliceCarousel from 'react-alice-carousel'
-import 'react-alice-carousel/lib/alice-carousel.css'
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 import Img from "gatsby-image";
-import AddToCart from "../components/AddToCart"
+import AddToCart from "../components/AddToCart";
+import CheckoutLink from "../components/CheckoutLink";
+import ReactImageZoom from "react-image-zoom";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 
 const ProductStyle = styled.div`
   .breadcrumb {
@@ -33,6 +36,16 @@ const ProductStyle = styled.div`
       font-style: italic;
     }
   }
+  .product-container {
+    display: flex;
+    justify-content: space-between;
+    .product-left {
+      width: calc(50% - 20px);
+    }
+    .product-right {
+      width: calc(50% - 20px);
+    }
+  }
 `;
 
 class Product extends React.Component {
@@ -49,33 +62,44 @@ class Product extends React.Component {
   // };
 
   constructor(props) {
-    console.log(props)
+    console.log(props);
 
     super(props);
-      this.state = {
-        galleryItems: this.galleryItems(),
-        currentIndex: 0,
-        variant: props.data.product.variants[0].shopifyId,
-        variantImages: props.data.product.variants[0].title
-      }
+    this.state = {
+      galleryItems: this.galleryItems(),
+      currentIndex: 0,
+      variant: props.data.product.variants[0].shopifyId,
+      variantImages: props.data.product.variants[0].title,
+    };
   }
-  items = this.props.data.product.images
+  items = this.props.data.product.images;
   galleryItems() {
-    return this.items.map((i) => <h2 key={i}> {i}</h2>)
+    return this.items.map((i) => <h2 key={i}> {i}</h2>);
   }
   // console.log(data);
- 
 
-  thumbItem = (item, i) => <span onClick={() => this.slideTo(i)}><Img fixed={item.localFile.childImageSharp.fixed} /> </span>
+  thumbItem = (item, i) => (
+    <span onClick={() => this.slideTo(i)}>
+      <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
+    </span>
+  );
 
-  slideTo = (i) => this.setState({ currentIndex: i })
+  variantImages = (image) => {
+    console.log(image.altText);
+    if (image.altText == "Blue Green") {
+      return <Img fluid={image.localFile.childImageSharp.fluid} />;
+    } else {
+      return null;
+    }
+  };
 
-  onSlideChanged = (e) => this.setState({ currentIndex: e.item })
+  slideTo = (i) => this.setState({ currentIndex: i });
 
+  onSlideChanged = (e) => this.setState({ currentIndex: e.item });
 
-  render(){
-
-    const { galleryItems, currentIndex } = this.state
+  render() {
+    const { galleryItems, currentIndex } = this.state;
+    const product = this.props.data.product;
 
     // const cartCount = useCartCount();
     // const addItemsToCart = useAddItemsToCart();
@@ -86,7 +110,7 @@ class Product extends React.Component {
     //       quantity: 1,
     //     },
     //   ];
-  
+
     //   try {
     //     await addItemsToCart(items);
     //     // alert("Successfully added that item to your cart!");
@@ -94,49 +118,60 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-  return (
-    // <h2>test</h2>
-    <Layout slug={this.props.data.product.shopifyId}>
-      <ProductStyle>
-        <Container>
-          <div className="breadcrumb">
-            <a href="/">Home</a> <div className="bread-carrot"></div>
-          </div>
-          <div className="product-container">
-            <div className="product-left">
-            <AliceCarousel 
-            items={galleryItems}
-            slideToIndex={currentIndex}
-            onSlideChanged={this.onSlideChanged}>
-            {this.props.data.product.images.map((image, index) => (
-              <Img fluid={image.localFile.childImageSharp.fluid} />
-            ))}
-           </AliceCarousel>
-           {console.log(this)}
-           {/* {this.items.map(console.log(this))} */}
-           <ul>{this.items.map(this.thumbItem)}</ul>
+    return (
+      // <h2>test</h2>
+      <Layout slug={product.shopifyId}>
+        <ProductStyle>
+          <Container>
+            <div className="breadcrumb">
+              <a href="/">Home</a>
+              <div className="bread-carrot"> {product.title}</div>
+            </div>
+            <div className="product-container">
+              <div className="product-left">
+                <AliceCarousel
+                  items={galleryItems}
+                  slideToIndex={currentIndex}
+                  onSlideChanged={this.onSlideChanged}
+                  buttonsDisabled
+                  dotsDisabled
+                >
+                  {this.props.data.product.images.map(
+                    (image, index) =>
+                      // <VariantImages image={image}></VariantImages>
+                      this.variantImages(image)
+                    // <Img fluid={image.localFile.childImageSharp.fluid} />
+                  )}
+                </AliceCarousel>
+                {/* {this.items.map(console.log(this))} */}
+                <ul>{this.items.map(this.thumbItem)}</ul>
 
-           {/* <nav>   
+                {/* <nav>   
            {data.product.images.map((image, index) => (
               <Img fluid={image.localFile.childImageSharp.fluid} />
             ))}
                        </nav> */}
-    {/* <nav>{this.items.map(this.thumbItem)}</nav> */}
-
-
-            </div>           
-            <div className="product-right">
-            {/* <p>There are currently {cartCount} items in your cart.</p> */}
-            {/* <button onClick={addToCart}>Add items to your cart</button> */}
-            <AddToCart state={this.state} />
+                {/* <nav>{this.items.map(this.thumbItem)}</nav> */}
               </div>
-
-          </div>
-        </Container>
-      </ProductStyle>
-    </Layout>
-  );
-};
+              <div className="product-right">
+                <h1>{product.title}</h1>
+                <RadioGroup horizontal>
+                  <RadioButton value="blue-green">
+                    The Chameleon - Blue to Green
+                  </RadioButton>
+                  <RadioButton value="orange-yellow">
+                    The Endless Summer - Orange to Yellow
+                  </RadioButton>
+                </RadioGroup>
+                <AddToCart state={this.state} />
+                <CheckoutLink />
+              </div>
+            </div>
+          </Container>
+        </ProductStyle>
+      </Layout>
+    );
+  }
 }
 export default Product;
 
