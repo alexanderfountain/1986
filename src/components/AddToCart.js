@@ -2,7 +2,6 @@ import React from "react";
 import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
 
 function AddToCart(state) {
-  console.log(state.state.variant);
   const cartCount = useCartCount();
   const addItemsToCart = useAddItemsToCart();
   async function addToCart() {

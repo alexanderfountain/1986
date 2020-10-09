@@ -62,7 +62,6 @@ class Product extends React.Component {
   // };
 
   constructor(props) {
-    console.log(props);
 
     super(props);
     this.state = {
@@ -72,11 +71,16 @@ class Product extends React.Component {
       variantImages: props.data.product.variants[0].title,
     };
   }
+
   items = this.props.data.product.images;
+
+  componentDidUpdate() {
+    console.log(this.state)
+  }
+
   galleryItems() {
     return this.items.map((i) => <h2 key={i}> {i}</h2>);
   }
-  // console.log(data);
 
   thumbItem = (item, i) => (
     <span onClick={() => this.slideTo(i)}>
@@ -85,7 +89,6 @@ class Product extends React.Component {
   );
 
   variantImages = (image) => {
-    console.log(image.altText);
     if (image.altText == "Blue Green") {
       return <Img fluid={image.localFile.childImageSharp.fluid} />;
     } else {
@@ -96,6 +99,10 @@ class Product extends React.Component {
   slideTo = (i) => this.setState({ currentIndex: i });
 
   onSlideChanged = (e) => this.setState({ currentIndex: e.item });
+
+  variantChange = (variant) => {
+    this.setState({variant: variant.shopifyId})
+  }
 
   render() {
     const { galleryItems, currentIndex } = this.state;
@@ -143,7 +150,6 @@ class Product extends React.Component {
                     // <Img fluid={image.localFile.childImageSharp.fluid} />
                   )}
                 </AliceCarousel>
-                {/* {this.items.map(console.log(this))} */}
                 <ul>{this.items.map(this.thumbItem)}</ul>
 
                 {/* <nav>   
@@ -155,14 +161,14 @@ class Product extends React.Component {
               </div>
               <div className="product-right">
                 <h1>{product.title}</h1>
-                <RadioGroup horizontal>
-                  <RadioButton value="blue-green">
-                    The Chameleon - Blue to Green
-                  </RadioButton>
-                  <RadioButton value="orange-yellow">
-                    The Endless Summer - Orange to Yellow
-                  </RadioButton>
-                </RadioGroup>
+                {this.props.data.product.variants.map(
+                    (variant) =>
+                    <div onClick={e => {
+                      this.variantChange(variant)
+                    }}>
+                      {variant.title}
+                    </div>
+                  )}
                 <AddToCart state={this.state} />
                 <CheckoutLink />
               </div>
