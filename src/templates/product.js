@@ -82,11 +82,20 @@ class Product extends React.Component {
     return this.items.map((i) => <h2 key={i}> {i}</h2>);
   }
 
-  thumbItem = (item, i) => (
-    <span onClick={() => this.slideTo(i)}>
-      <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
-    </span>
-  );
+  thumbItem = (item, i) => {
+    var alt = this.state.variantImages
+    console.log(item)
+    console.log(alt)
+    if(alt == item.altText){
+      return(
+        <span onClick={() => this.slideTo(i)}>
+        {console.log(this)}
+    <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
+  </span>
+      )
+    }
+
+  };
 
   variantImages = (image) => {
     if (image.altText == "Blue Green") {
