@@ -65,7 +65,7 @@ class Product extends React.Component {
 
     super(props);
     this.state = {
-      galleryItems: this.galleryItems(),
+      // galleryItems: this.galleryItems(),
       currentIndex: 0,
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
@@ -75,21 +75,69 @@ class Product extends React.Component {
   items = this.props.data.product.images;
 
   componentDidUpdate() {
-    console.log(this.state)
   }
+  // {this.props.data.product.images.map(
+  //   (image, index) =>
+  //     // <VariantImages image={image}></VariantImages>
+  //     this.variantImages(image)
+  //   // <Img fluid={image.localFile.childImageSharp.fluid} />
+  // )}
+  // galleryItems = () => {
+  //   // var alt = this.state.variantImages
+    
+  //   // this.items.map((item, index) => {
+  //   //   if(alt == item.title){
+  //   //     return(
+  //   //       <h2 key={item}> {item}</h2>
+  //   //     )
+  //   //   }
+  //   // }   
+  //   // )
+  // }
+  galleryItems = () => {
+    
+    if(this.state !== undefined){
+      var alt = this.state.variantImages
+      console.log(alt)
+    return(
+        this.items.map((i) => (
+          // console.log(this)
 
-  galleryItems() {
-    return this.items.map((i) => <h2 key={i}> {i}</h2>);
+          // if(alt == i.altText){
+          
+            <Img fluid={i.localFile.childImageSharp.fluid}/>
+          
+          // }
+        )
+        )
+      )
+    }
+    else{
+      console.log(this)
+    }
+    // return this.items.map((i) => <Img fluid={i.localFile.childImageSharp.fluid}/>);
+  }
+  variantChange = (variant, i) => {
+    // this.setState({variant: variant.shopifyId})
+    // this.setState({variantImages: variant.title})
+    return(
+      <div onClick={() => this.variantClick(variant, i)}>
+    {variant.title}
+    </div>
+    )
+  }
+  variantClick = (variant, i) => {
+    this.setState({ currentIndex: i });
+    this.setState({variant: variant.shopifyId})
+    this.setState({variantImages: variant.title})
   }
 
   thumbItem = (item, i) => {
     var alt = this.state.variantImages
-    console.log(item)
-    console.log(alt)
+
     if(alt == item.altText){
       return(
         <span onClick={() => this.slideTo(i)}>
-        {console.log(this)}
     <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
   </span>
       )
@@ -97,21 +145,26 @@ class Product extends React.Component {
 
   };
 
-  variantImages = (image) => {
-    if (image.altText == "Blue Green") {
-      return <Img fluid={image.localFile.childImageSharp.fluid} />;
-    } else {
-      return null;
-    }
+  variantImages = (item, i) => {
+    // if (item.altText == this.state.variantImages) {
+
+    return(
+      <Img fluid={item.localFile.childImageSharp.fluid} />
+    )
+    // }
+    
+    // if (image.altText == this.state.variantImages) {
+    //   return <h3>{image.altText}</h3>;
+    // } else {
+    //   return null;
+    // }
   };
 
   slideTo = (i) => this.setState({ currentIndex: i });
 
   onSlideChanged = (e) => this.setState({ currentIndex: e.item });
 
-  variantChange = (variant) => {
-    this.setState({variant: variant.shopifyId})
-  }
+
 
   render() {
     const { galleryItems, currentIndex } = this.state;
@@ -146,19 +199,16 @@ class Product extends React.Component {
             <div className="product-container">
               <div className="product-left">
                 <AliceCarousel
-                  items={galleryItems}
+                  // items={galleryItems}
                   slideToIndex={currentIndex}
                   onSlideChanged={this.onSlideChanged}
                   buttonsDisabled
                   dotsDisabled
                 >
-                  {this.props.data.product.images.map(
-                    (image, index) =>
-                      // <VariantImages image={image}></VariantImages>
-                      this.variantImages(image)
-                    // <Img fluid={image.localFile.childImageSharp.fluid} />
-                  )}
+                    {this.items.map(this.variantImages)}
                 </AliceCarousel>
+                {/* {this.items.map(this.variantImages)} */}
+
                 <ul>{this.items.map(this.thumbItem)}</ul>
 
                 {/* <nav>   
@@ -170,14 +220,15 @@ class Product extends React.Component {
               </div>
               <div className="product-right">
                 <h1>{product.title}</h1>
-                {this.props.data.product.variants.map(
+                {this.props.data.product.variants.map(this.variantChange)}
+                {/* {this.props.data.product.variants.map(
                     (variant) =>
                     <div onClick={e => {
                       this.variantChange(variant)
                     }}>
                       {variant.title}
                     </div>
-                  )}
+                  )} */}
                 <AddToCart state={this.state} />
                 <CheckoutLink />
               </div>
