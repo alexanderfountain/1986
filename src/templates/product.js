@@ -6,14 +6,13 @@ import styled from "styled-components";
 import Container from "../components/container";
 import SkuCard from "../components/Products/SkuCard";
 import { useAddItemsToCart, useCartCount } from "gatsby-theme-shopify-manager";
-import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import Img from "gatsby-image";
 import AddToCart from "../components/AddToCart";
 import CheckoutLink from "../components/CheckoutLink";
 import ReactImageZoom from "react-image-zoom";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
-
+import AliceSlide from "../components/AliceSlide"
 const ProductStyle = styled.div`
   .breadcrumb {
     display: flex;
@@ -65,11 +64,12 @@ class Product extends React.Component {
 
     super(props);
     this.state = {
-      // galleryItems: this.galleryItems(),
+      galleryItems: props.data.product.images,
       currentIndex: 0,
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
     };
+    console.log(props.data)
   }
 
   items = this.props.data.product.images;
@@ -127,11 +127,20 @@ class Product extends React.Component {
     )
   }
   variantClick = (variant, i) => {
-    this.setState({ currentIndex: i });
     this.setState({variant: variant.shopifyId})
     this.setState({variantImages: variant.title})
-  }
-
+    var alt = variant.title
+    var newGalleryItems = []
+    console.log(alt)
+    this.items.map((image, i) => {
+      if (image.altText == alt) {
+        console.log(image)
+        newGalleryItems.push(image)
+      }
+    }
+    )
+    this.setState({galleryItems: newGalleryItems})
+ }
   thumbItem = (item, i) => {
     var alt = this.state.variantImages
 
@@ -146,12 +155,13 @@ class Product extends React.Component {
   };
 
   variantImages = (item, i) => {
-    // if (item.altText == this.state.variantImages) {
+    console.log(item)
+    if (item.altText == this.state.variantImages) {
 
     return(
       <Img fluid={item.localFile.childImageSharp.fluid} />
     )
-    // }
+    }
     
     // if (image.altText == this.state.variantImages) {
     //   return <h3>{image.altText}</h3>;
@@ -160,7 +170,10 @@ class Product extends React.Component {
     // }
   };
 
-  slideTo = (i) => this.setState({ currentIndex: i });
+  slideTo = (i) => {
+    this.setState({ currentIndex: i });
+    console.log(this)
+  }
 
   onSlideChanged = (e) => this.setState({ currentIndex: e.item });
 
@@ -198,16 +211,8 @@ class Product extends React.Component {
             </div>
             <div className="product-container">
               <div className="product-left">
-                <AliceCarousel
-                  // items={galleryItems}
-                  slideToIndex={currentIndex}
-                  onSlideChanged={this.onSlideChanged}
-                  buttonsDisabled
-                  dotsDisabled
-                >
-                    {this.items.map(this.variantImages)}
-                </AliceCarousel>
-                {/* {this.items.map(this.variantImages)} */}
+
+              <AliceSlide items={galleryItems} currentIndex={currentIndex} />
 
                 <ul>{this.items.map(this.thumbItem)}</ul>
 
