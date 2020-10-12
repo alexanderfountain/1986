@@ -14,6 +14,18 @@ import ReactImageZoom from "react-image-zoom";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
 import AliceSlide from "../components/AliceSlide"
 const ProductStyle = styled.div`
+.color-variant{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.color-blue{
+  background-color: ${variable.blue};
+}
+.color-orange{
+  background-color: orange;
+}
   .breadcrumb {
     display: flex;
     padding: 10px 0px;
@@ -69,7 +81,7 @@ class Product extends React.Component {
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
     };
-    console.log(props.data)
+    console.log(props)
   }
 
   items = this.props.data.product.images;
@@ -118,12 +130,8 @@ class Product extends React.Component {
     // return this.items.map((i) => <Img fluid={i.localFile.childImageSharp.fluid}/>);
   }
   variantChange = (variant, i) => {
-    // this.setState({variant: variant.shopifyId})
-    // this.setState({variantImages: variant.title})
     return(
-      <div onClick={() => this.variantClick(variant, i)}>
-    {variant.title}
-    </div>
+      <div className={"color-variant color-"+variant.title} onClick={() => this.variantClick(variant, i)}></div>
     )
   }
   variantClick = (variant, i) => {
