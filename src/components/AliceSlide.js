@@ -15,18 +15,18 @@ export const AliceSlide = (items, currentIndex) => {
   return (
     <AliceStyle>
       <Container className="alice-container">
-      {/* <AliceCarousel
+      <AliceCarousel
                   items={items.items}
                   slideToIndex={items.currentIndex}
                   // onSlideChanged={this.onSlideChanged}
                   buttonsDisabled
                   dotsDisabled
                 >
-            {items.items.map((image, index) => (
+                {items.items.map((image, index) => (
               <Img fluid={image.localFile.childImageSharp.fluid} />
             ))}
-                </AliceCarousel> */}
-                <Slide
+                </AliceCarousel>
+                {/* <Slide
                 infinite={false}
                 indicators={false}
                 arrows={false}
@@ -34,7 +34,7 @@ export const AliceSlide = (items, currentIndex) => {
                 {items.items.map((image, index) => (
               <Img fluid={image.localFile.childImageSharp.fluid} />
             ))}
-                </Slide>
+                </Slide> */}
       </Container>
     </AliceStyle>
   );

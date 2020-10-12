@@ -129,6 +129,7 @@ class Product extends React.Component {
   variantClick = (variant, i) => {
     this.setState({variant: variant.shopifyId})
     this.setState({variantImages: variant.title})
+    this.setState({ currentIndex: 0 });
     var alt = variant.title
     var newGalleryItems = []
     console.log(alt)
@@ -143,7 +144,7 @@ class Product extends React.Component {
  }
   thumbItem = (item, i) => {
     var alt = this.state.variantImages
-
+    console.log(i)
     if(alt == item.altText){
       return(
         <span onClick={() => this.slideTo(i)}>
@@ -155,7 +156,6 @@ class Product extends React.Component {
   };
 
   variantImages = (item, i) => {
-    console.log(item)
     if (item.altText == this.state.variantImages) {
 
     return(
@@ -172,7 +172,6 @@ class Product extends React.Component {
 
   slideTo = (i) => {
     this.setState({ currentIndex: i });
-    console.log(this)
   }
 
   onSlideChanged = (e) => this.setState({ currentIndex: e.item });
@@ -214,7 +213,7 @@ class Product extends React.Component {
 
               <AliceSlide items={galleryItems} currentIndex={currentIndex} />
 
-                <ul>{this.items.map(this.thumbItem)}</ul>
+                <ul>{galleryItems.map(this.thumbItem)}</ul>
 
                 {/* <nav>   
            {data.product.images.map((image, index) => (
