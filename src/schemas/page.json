@@ -20,13 +20,6 @@
         "label": "Remove Header"
       }
     },
-    "webinar": {
-      "type": "Boolean",
-      "config": {
-        "default_value": false,
-        "label": "Webinar"
-      }
-    },
     "body": {
       "type": "Slices",
       "fieldset": "Slice zone",
@@ -39,7 +32,8 @@
           "slideshow": [],
           "block_reference": [],
           "contact": [],
-          "hero": []
+          "hero": [],
+          "gallery": []
         },
         "choices": {
           "basic_section": {
@@ -124,7 +118,9 @@
                 "type": "Link",
                 "config": {
                   "select": "document",
-                  "customtypes": ["blocks"],
+                  "customtypes": [
+                    "blocks"
+                  ],
                   "label": "Sidebar Block Reference"
                 }
               }
@@ -229,6 +225,13 @@
                   "label": "Right Width"
                 }
               },
+              "left_background_video": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Left Background Video"
+                }
+              },
               "left_background_image": {
                 "type": "Image",
                 "config": {
@@ -256,7 +259,11 @@
                   "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
                   "allowTargetBlank": true,
                   "label": "Left Content",
-                  "labels": ["cta-button", "right-align", "center-align"]
+                  "labels": [
+                    "cta-button",
+                    "right-align",
+                    "center-align"
+                  ]
                 }
               },
               "right_background_image": {
@@ -287,13 +294,6 @@
                     "h2-light",
                     "h3-light"
                   ]
-                }
-              },
-              "right_content_above_form": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-                  "label": "Right Content Above Form"
                 }
               },
               "right_active_campaign_form_number": {
@@ -343,7 +343,12 @@
               "entity_type": {
                 "type": "Select",
                 "config": {
-                  "options": ["Blog Post", "Leadership", "Job", "Podcast"],
+                  "options": [
+                    "Blog Post",
+                    "Leadership",
+                    "Job",
+                    "Podcast"
+                  ],
                   "label": "Entity Type"
                 }
               },
@@ -460,7 +465,9 @@
                 "type": "Link",
                 "config": {
                   "select": "document",
-                  "customtypes": ["blocks"],
+                  "customtypes": [
+                    "blocks"
+                  ],
                   "label": "Block Reference"
                 }
               },
@@ -473,6 +480,24 @@
               }
             },
             "repeat": {}
+          },
+          "gallery": {
+            "type": "Slice",
+            "fieldset": "Gallery",
+            "description": "gallery",
+            "icon": "apps",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "gallery_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Gallery Image"
+                }
+              }
+            }
           }
         }
       }

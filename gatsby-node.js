@@ -7,9 +7,6 @@ exports.createPages = async ({ graphql, actions }) => {
       page: allPrismicPa {
         nodes {
           uid
-          data {
-            webinar
-          }
         }
       }
       product: allPrismicProduct {
@@ -30,10 +27,11 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+  console.log(pages.data.shopify);
   const pageTemplateProduct = path.resolve("src/templates/product.js");
   pages.data.shopify.nodes.forEach((node) => {
     const path = string_to_slug(node.title);
-    console.log(node.shopifyId)
+    console.log(node.shopifyId);
     createPage({
       path: `/${path}`,
       component: pageTemplateProduct,

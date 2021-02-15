@@ -1,35 +1,34 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import * as variable from "../components/variables"
-import styled from "styled-components"
-import Container from "../components/container"
-import "../components/scss/page/home.scss"
-import { Link, RichText, Date } from "prismic-reactjs"
-import SEO from "../components/seo"
-import Img from "gatsby-image"
-import Image from "../components/slices/ImageSlice"
-import Text from "../components/slices/TextSlice"
-import Quote from "../components/slices/QuoteSlice"
-import Video from "../components/slices/VideoSlice"
-import BasicSectionSlice from "../components/slices/BasicSectionSlice"
-import ColumnSectionSlice from "../components/slices/ColumnsSectionSlice"
-import LeftRightSlice from "../components/slices/LeftRightSlice"
-import HeroSlice from "../components/slices/HeroSlice"
-import BlockReferenceSlice from "../components/slices/BlockReferenceSlice"
-
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import * as variable from "../components/variables";
+import styled from "styled-components";
+import Container from "../components/container";
+import "../components/scss/page/home.scss";
+import { Link, RichText, Date } from "prismic-reactjs";
+import SEO from "../components/seo";
+import Img from "gatsby-image";
+import Image from "../components/slices/ImageSlice";
+import Text from "../components/slices/TextSlice";
+import Quote from "../components/slices/QuoteSlice";
+import Video from "../components/slices/VideoSlice";
+import BasicSectionSlice from "../components/slices/BasicSectionSlice";
+import ColumnSectionSlice from "../components/slices/ColumnsSectionSlice";
+import LeftRightSlice from "../components/slices/LeftRightSlice";
+import HeroSlice from "../components/slices/HeroSlice";
+import BlockReferenceSlice from "../components/slices/BlockReferenceSlice";
+import GallerySlice from "../components/slices/GallerySlice";
 // Sort and display the different slice options
 const PostSlices = ({ slices }) => {
   return slices.map((slice, index) => {
-    var sliceID = ""
+    var sliceID = "";
     if (slice.primary) {
       if (slice.primary.slice_id != undefined) {
-        var sliceID = slice.primary.slice_id.text
+        var sliceID = slice.primary.slice_id.text;
       }
     }
     const res = (() => {
       switch (slice.slice_type) {
-
         case "basic_section":
           return (
             <div
@@ -39,7 +38,18 @@ const PostSlices = ({ slices }) => {
             >
               {<BasicSectionSlice slice={slice} />}
             </div>
-          )
+          );
+
+        case "gallery":
+          return (
+            <div
+              id={"slice-id-" + sliceID}
+              key={index}
+              className="slice-wrapper slice-gallery"
+            >
+              {<GallerySlice slice={slice} />}
+            </div>
+          );
 
         case "hero":
           return (
@@ -50,7 +60,7 @@ const PostSlices = ({ slices }) => {
             >
               {<HeroSlice slice={slice} />}
             </div>
-          )
+          );
 
         case "block_reference":
           return (
@@ -61,7 +71,7 @@ const PostSlices = ({ slices }) => {
             >
               {<BlockReferenceSlice slice={slice} />}
             </div>
-          )
+          );
 
         case "columns_section":
           return (
@@ -72,7 +82,7 @@ const PostSlices = ({ slices }) => {
             >
               {<ColumnSectionSlice slice={slice} />}
             </div>
-          )
+          );
 
         case "left_right_section":
           return (
@@ -83,41 +93,37 @@ const PostSlices = ({ slices }) => {
             >
               {<LeftRightSlice slice={slice} />}
             </div>
-          )
+          );
 
         default:
-          return
+          return;
       }
-    })()
-    return res
-  })
-}
+    })();
+    return res;
+  });
+};
 
 const PageStyle = styled.div`
   section {
     padding: ${variable.sectionPadding} 0px;
   }
-`
+`;
 const Page = ({ data }) => {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
-  const node = data.page
-  const site = data.site
-  console.log(node)
+  const node = data.page;
+  const site = data.site;
+  console.log(node);
   return (
     <Layout slug={node.uid}>
       <SEO site={site} page={node} />
       <PageStyle>
-        {node.data.body && (
-          <PostSlices
-            slices={node.data.body}
-          />
-        )}
+        {node.data.body && <PostSlices slices={node.data.body} />}
       </PageStyle>
     </Layout>
-  )
-}
-export default Page
+  );
+};
+export default Page;
 
 export const postQuery = graphql`
   query PageBySlug($uid: String!) {
@@ -129,7 +135,6 @@ export const postQuery = graphql`
         meta_title
         meta_description
         donotindex
-        webinar
         title {
           text
         }
@@ -155,6 +160,21 @@ export const postQuery = graphql`
               }
               image_copy {
                 html
+              }
+            }
+          }
+          ... on PrismicPaBodyGallery {
+            id
+            slice_type
+            items {
+              gallery_image {
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 500) {
+                      ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    }
+                  }
+                }
               }
             }
           }
@@ -374,6 +394,7 @@ export const postQuery = graphql`
                             embed {
                               raw
                             }
+
                             left_background_image {
                               localFile {
                                 childImageSharp {
@@ -483,6 +504,9 @@ export const postQuery = graphql`
               slice_id {
                 text
               }
+              left_background_video {
+                url
+              }
               embed {
                 text
               }
@@ -491,9 +515,6 @@ export const postQuery = graphql`
               }
               active_campaign_form_number
               right_active_campaign_form_number
-              right_content_above_form {
-                raw
-              }
               left_background_image {
                 localFile {
                   childImageSharp {
@@ -550,4 +571,4 @@ export const postQuery = graphql`
       }
     }
   }
-`
+`;

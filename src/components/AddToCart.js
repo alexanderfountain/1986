@@ -8,7 +8,7 @@ function AddToCart(state) {
     const items = [
       {
         variantId: state.state.variant,
-        quantity: 1,
+        quantity: state.state.quantity,
       },
     ];
 

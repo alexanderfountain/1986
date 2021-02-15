@@ -1,13 +1,38 @@
-import styled from "styled-components"
-import React from "react"
-import BackgroundImage from "gatsby-background-image"
-import Container from "../container"
-import { RichText } from "prismic-reactjs"
-import * as variable from "../variables"
-import linkResolver from "../../utils/linkResolver"
-import prismicHtmlSerializer from "../../gatsby/htmlSerializer"
+import styled from "styled-components";
+import React from "react";
+import BackgroundImage from "gatsby-background-image";
+import Container from "../container";
+import { RichText } from "prismic-reactjs";
+import * as variable from "../variables";
+import linkResolver from "../../utils/linkResolver";
+import prismicHtmlSerializer from "../../gatsby/htmlSerializer";
 
 const LeftRightStyle = styled.div`
+.video-container-outer {
+  .video-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -100;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-content {
+      position: relative;
+      z-index: 1;
+      h2 {
+        color: white;
+        text-align: center;
+      }
+    }
+  }
+}
   ._form {
     display: block;
   }
@@ -65,19 +90,32 @@ const LeftRightStyle = styled.div`
     max-width: 100%;
     margin: 0 auto;
   }
-`
+`;
 
-export const addActive = id => {
+export const addActive = (id) => {
   if (typeof window !== "undefined") {
-    var script = document.createElement("script")
-    script.type = "text/javascript"
+    var script = document.createElement("script");
+    script.type = "text/javascript";
     script.src =
-      "https://prescriptivesolutions.activehosted.com/f/embed.php?id=" + id
-    document.getElementsByTagName("head")[0].appendChild(script)
+      "https://prescriptivesolutions.activehosted.com/f/embed.php?id=" + id;
+    document.getElementsByTagName("head")[0].appendChild(script);
   }
-}
+};
 
 function returnLeft(primary, leftWidth) {
+  var bg_video = null;
+  var bg_video_image = false;
+  if (
+    primary.left_background_video.url == "" &&
+    primary.left_background_image.localFile == null
+  ) {
+    bg_video_image = true;
+    console.log(bg_video_image);
+  }
+
+  if (primary.left_background_video != null) {
+    bg_video = primary.left_background_video.url;
+  }
   return (
     <React.Fragment>
       {primary.left_background_image.localFile && (
@@ -108,7 +146,28 @@ function returnLeft(primary, leftWidth) {
           </div>
         </BackgroundImage>
       )}
-      {!primary.left_background_image.localFile && (
+      {bg_video && (
+        <section class="video-container-outer">
+          <div class="video-container">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `
+    <video
+      muted
+      loop
+      autoplay="autoplay"
+      playsinline="true"
+      src="${bg_video}"
+      type="video/mp4"
+    />
+  `,
+              }}
+            />
+          </div>
+        </section>
+      )}
+
+      {bg_video_image && (
         <section>
           <div
           // style={{
@@ -139,7 +198,7 @@ function returnLeft(primary, leftWidth) {
         </section>
       )}
     </React.Fragment>
-  )
+  );
 }
 
 function returnRight(primary, rightWidth) {
@@ -225,17 +284,17 @@ function returnRight(primary, rightWidth) {
         </section>
       )}
     </React.Fragment>
-  )
+  );
 }
 
 export const LeftRightSlice = ({ slice }) => {
-  var leftWidth = 50
-  var rightWidth = 50
+  var leftWidth = 50;
+  var rightWidth = 50;
   if (slice.primary.right_width) {
-    var leftWidth = slice.primary.left_width
+    var leftWidth = slice.primary.left_width;
   }
   if (slice.primary.right_width) {
-    var rightWidth = slice.primary.right_width
+    var rightWidth = slice.primary.right_width;
   }
   return (
     <LeftRightStyle>
@@ -244,7 +303,7 @@ export const LeftRightSlice = ({ slice }) => {
         {returnRight(slice.primary, rightWidth)}
       </div>
     </LeftRightStyle>
-  )
-}
+  );
+};
 
-export default LeftRightSlice
+export default LeftRightSlice;

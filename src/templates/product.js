@@ -12,20 +12,24 @@ import AddToCart from "../components/AddToCart";
 import CheckoutLink from "../components/CheckoutLink";
 import ReactImageZoom from "react-image-zoom";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
-import AliceSlide from "../components/AliceSlide"
+import AliceSlide from "../components/AliceSlide";
+import Select from "react-select";
 const ProductStyle = styled.div`
-.color-variant{
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.color-blue{
-  background-color: ${variable.blue};
-}
-.color-orange{
-  background-color: orange;
-}
+  label {
+    display: block;
+  }
+  .color-variant {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .color-blue {
+    background-color: ${variable.blue};
+  }
+  .color-orange {
+    background-color: orange;
+  }
   .breadcrumb {
     display: flex;
     padding: 10px 0px;
@@ -59,6 +63,19 @@ const ProductStyle = styled.div`
   }
 `;
 
+const quantityOptions = [
+  { value: 1, label: "1" },
+  { value: 2, label: "2" },
+  { value: 3, label: "3" },
+  { value: 4, label: "4" },
+  { value: 5, label: "5" },
+  { value: 6, label: "6" },
+  { value: 7, label: "7" },
+  { value: 8, label: "8" },
+  { value: 9, label: "9" },
+  { value: 10, label: "10" },
+];
+
 class Product extends React.Component {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
@@ -73,20 +90,20 @@ class Product extends React.Component {
   // };
 
   constructor(props) {
-
     super(props);
     this.state = {
       galleryItems: props.data.product.images,
       currentIndex: 0,
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
+      quantity: 1,
     };
-    console.log(props)
   }
 
   items = this.props.data.product.images;
 
   componentDidUpdate() {
+    console.log(this.state);
   }
   // {this.props.data.product.images.map(
   //   (image, index) =>
@@ -96,81 +113,76 @@ class Product extends React.Component {
   // )}
   // galleryItems = () => {
   //   // var alt = this.state.variantImages
-    
+
   //   // this.items.map((item, index) => {
   //   //   if(alt == item.title){
   //   //     return(
   //   //       <h2 key={item}> {item}</h2>
   //   //     )
   //   //   }
-  //   // }   
+  //   // }
   //   // )
   // }
   galleryItems = () => {
-    
-    if(this.state !== undefined){
-      var alt = this.state.variantImages
-      console.log(alt)
-    return(
-        this.items.map((i) => (
-          // console.log(this)
+    if (this.state !== undefined) {
+      var alt = this.state.variantImages;
+      console.log(alt);
+      return this.items.map((i) => (
+        // console.log(this)
 
-          // if(alt == i.altText){
-          
-            <Img fluid={i.localFile.childImageSharp.fluid}/>
-          
-          // }
-        )
-        )
-      )
-    }
-    else{
-      console.log(this)
+        // if(alt == i.altText){
+
+        <Img fluid={i.localFile.childImageSharp.fluid} />
+
+        // }
+      ));
+    } else {
+      console.log(this);
     }
     // return this.items.map((i) => <Img fluid={i.localFile.childImageSharp.fluid}/>);
-  }
+  };
   variantChange = (variant, i) => {
-    return(
-      <div className={"color-variant color-"+variant.title} onClick={() => this.variantClick(variant, i)}></div>
-    )
-  }
+    return (
+      <div
+        className={"color-variant color-" + variant.title}
+        onClick={() => this.variantClick(variant, i)}
+      ></div>
+    );
+  };
+  quantityChange = (quantity) => {
+    this.setState({ quantity: quantity.value });
+  };
   variantClick = (variant, i) => {
-    this.setState({variant: variant.shopifyId})
-    this.setState({variantImages: variant.title})
+    this.setState({ variant: variant.shopifyId });
+    this.setState({ variantImages: variant.title });
     this.setState({ currentIndex: 0 });
-    var alt = variant.title
-    var newGalleryItems = []
-    console.log(alt)
+    var alt = variant.title;
+    var newGalleryItems = [];
+    console.log(alt);
     this.items.map((image, i) => {
       if (image.altText == alt) {
-        console.log(image)
-        newGalleryItems.push(image)
+        console.log(image);
+        newGalleryItems.push(image);
       }
-    }
-    )
-    this.setState({galleryItems: newGalleryItems})
- }
+    });
+    this.setState({ galleryItems: newGalleryItems });
+  };
   thumbItem = (item, i) => {
-    var alt = this.state.variantImages
-    console.log(i)
-    if(alt == item.altText){
-      return(
+    var alt = this.state.variantImages;
+    if (alt == item.altText) {
+      return (
         <span onClick={() => this.slideTo(i)}>
-    <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
-  </span>
-      )
+          <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
+        </span>
+      );
     }
-
   };
 
   variantImages = (item, i) => {
     if (item.altText == this.state.variantImages) {
-
-    return(
-      <Img fluid={item.localFile.childImageSharp.fluid} />
-    )
+      return <Img fluid={item.localFile.childImageSharp.fluid} />;
     }
-    
+
     // if (image.altText == this.state.variantImages) {
     //   return <h3>{image.altText}</h3>;
     // } else {
@@ -180,11 +192,9 @@ class Product extends React.Component {
 
   slideTo = (i) => {
     this.setState({ currentIndex: i });
-  }
+  };
 
   onSlideChanged = (e) => this.setState({ currentIndex: e.item });
-
-
 
   render() {
     const { galleryItems, currentIndex } = this.state;
@@ -207,6 +217,7 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
+    console.log(this.props);
     return (
       // <h2>test</h2>
       <Layout slug={product.shopifyId}>
@@ -218,8 +229,7 @@ class Product extends React.Component {
             </div>
             <div className="product-container">
               <div className="product-left">
-
-              <AliceSlide items={galleryItems} currentIndex={currentIndex} />
+                <AliceSlide items={galleryItems} currentIndex={currentIndex} />
 
                 <ul>{galleryItems.map(this.thumbItem)}</ul>
 
@@ -232,6 +242,7 @@ class Product extends React.Component {
               </div>
               <div className="product-right">
                 <h1>{product.title}</h1>
+                <label>Color</label>
                 {this.props.data.product.variants.map(this.variantChange)}
                 {/* {this.props.data.product.variants.map(
                     (variant) =>
@@ -241,6 +252,13 @@ class Product extends React.Component {
                       {variant.title}
                     </div>
                   )} */}
+                <label>Quantity</label>
+                <Select
+                  isSearchable={false}
+                  defaultValue={quantityOptions[0]}
+                  onChange={this.quantityChange}
+                  options={quantityOptions}
+                />
                 <AddToCart state={this.state} />
                 <CheckoutLink />
               </div>
@@ -261,7 +279,7 @@ export const productQuery = graphql`
           images {
             localFile {
               childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 800, maxHeight: 800) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
@@ -281,7 +299,7 @@ export const productQuery = graphql`
         altText
         localFile {
           childImageSharp {
-            fluid(maxWidth: 800) {
+            fluid(maxWidth: 800, maxHeight: 800) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
             fixed(width: 100, height: 100) {
