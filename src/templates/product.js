@@ -14,6 +14,8 @@ import ReactImageZoom from "react-image-zoom";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
 import AliceSlide from "../components/AliceSlide";
 import Select from "react-select";
+import OrangeVideo from "../videos/orange-example.mp4";
+import OrangeVideoThumb from "../images/mask-orange-video.png";
 const ProductStyle = styled.div`
   label {
     display: block;
@@ -127,15 +129,19 @@ class Product extends React.Component {
     if (this.state !== undefined) {
       var alt = this.state.variantImages;
       console.log(alt);
-      return this.items.map((i) => (
-        // console.log(this)
+      return (
+        <div>
+          {this.items.map((i) => (
+            // console.log(this)
 
-        // if(alt == i.altText){
+            // if(alt == i.altText){
 
-        <Img fluid={i.localFile.childImageSharp.fluid} />
+            <Img className="thumb" fluid={i.localFile.childImageSharp.fluid} />
 
-        // }
-      ));
+            // }
+          ))}
+        </div>
+      );
     } else {
       console.log(this);
     }
@@ -172,7 +178,10 @@ class Product extends React.Component {
     if (alt == item.altText) {
       return (
         <span onClick={() => this.slideTo(i)}>
-          <Img fixed={item.localFile.childImageSharp.fixed} />{" "}
+          <Img
+            className="the-thumb"
+            fixed={item.localFile.childImageSharp.fixed}
+          />{" "}
         </span>
       );
     }
@@ -231,7 +240,14 @@ class Product extends React.Component {
               <div className="product-left">
                 <AliceSlide items={galleryItems} currentIndex={currentIndex} />
 
-                <ul>{galleryItems.map(this.thumbItem)}</ul>
+                <ul>
+                  {galleryItems.map(this.thumbItem)}{" "}
+                  <span className="the-video">
+                    {/* <div className="the-thumb gatsby-image-wrapper">
+                      <img src={OrangeVideoThumb} />
+                    </div> */}
+                  </span>
+                </ul>
 
                 {/* <nav>   
            {data.product.images.map((image, index) => (
