@@ -7,7 +7,7 @@ import * as variable from "../variables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useCartCount } from "gatsby-theme-shopify-manager";
-
+import CartIcon from "../../images/shopping-cart.svg";
 const HeaderCartStyle = styled.div`
   padding: 10px 0px;
   background-color: #222222;
@@ -31,10 +31,17 @@ const HeaderCartStyle = styled.div`
       list-style: none;
       a {
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         text-decoration: none;
         text-transform: uppercase;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        img {
+          width: 20px;
+          height: auto;
+          margin-right: 5px;
+        }
         path {
           color: white;
         }
@@ -55,7 +62,7 @@ export const HeaderCart = () => {
           <ul>
             <li>
               <Link to="/cart">
-                <FontAwesomeIcon icon={faShoppingCart} />
+                <img src={CartIcon} />
                 CART ({cartCount})
               </Link>
             </li>

@@ -58,7 +58,7 @@ const LeftRightStyle = styled.div`
     display: flex;
     align-items: center;
     @media (max-width: ${variable.mobileWidth}) {
-      min-height:200px;
+      min-height:250px;
     }
     &:nth-child(1) {
       justify-content: flex-end;

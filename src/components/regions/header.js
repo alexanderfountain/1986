@@ -1,41 +1,11 @@
-import PropTypes, { nominalTypeHack } from "prop-types";
 import React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import Container from "../container";
-import BackgroundImage from "gatsby-background-image";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
-import Fade from "@material-ui/core/Fade";
-import Collapse from "@material-ui/core/Collapse";
-import { StaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import * as variable from "../variables";
 import MobileMenu from "../mobilemenu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { withPreview } from "gatsby-source-prismic-graphql";
-
-const HtmlTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: variable.medLightGray,
-    padding: "10px 20px",
-    fontSize: theme.typography.pxToRem(16),
-    border: "1px solid #dadde9",
-  },
-}))(Tooltip);
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    fontSize: 18,
-    color: variable.medLightGray,
-    textDecoration: "none",
-    paddingTop: 10,
-    paddingBottom: 10,
-    display: "block",
-  },
-}));
 
 const HeaderStyle = styled.header`
   background-color: rgba(255, 255, 255, 1);
@@ -91,6 +61,12 @@ const HeaderStyle = styled.header`
       }
     }
   }
+  .mobile-menu-container {
+    display: none;
+    @media (max-width: ${variable.tabletWidth}) {
+      display: block;
+    }
+  }
 `;
 const activeStyle = {
   color: variable.pink,
@@ -102,41 +78,33 @@ function menuRender(menuitem) {
     menuitem.items[0].sub_nav_link_label.text != "Dummy"
   ) {
     return (
-      <HtmlTooltip
-        TransitionComponent={Fade}
-        interactive
-        classes="tooltip"
-        id="the-tooltip"
-        title={
-          <React.Fragment>
-            {menuitem.items.map((submenuitem, index) => (
-              <div key={index}>
-                {console.log(submenuitem)}
-                {submenuitem.sub_nav_link.url && (
-                  <Link
-                    activeStyle={activeStyle}
-                    to={submenuitem.sub_nav_link.url}
-                  >
-                    {submenuitem.sub_nav_link_label.text}
-                  </Link>
-                )}
-                {submenuitem.relative_link.text && (
-                  <Link
-                    activeStyle={activeStyle}
-                    to={submenuitem.relative_link.text}
-                  >
-                    {submenuitem.sub_nav_link_label.text}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </React.Fragment>
-        }
-      >
+      <div>
         <Link activeStyle={activeStyle} to={menuitem.primary.link.url}>
           {menuitem.primary.label.text}
         </Link>
-      </HtmlTooltip>
+        <div className="sub-menu">
+          {menuitem.items.map((submenuitem, index) => (
+            <div key={index}>
+              {submenuitem.sub_nav_link.url && (
+                <Link
+                  activeStyle={activeStyle}
+                  to={submenuitem.sub_nav_link.url}
+                >
+                  {submenuitem.sub_nav_link_label.text}
+                </Link>
+              )}
+              {submenuitem.relative_link.text && (
+                <Link
+                  activeStyle={activeStyle}
+                  to={submenuitem.relative_link.text}
+                >
+                  {submenuitem.sub_nav_link_label.text}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     );
   } else {
     if (menuitem.primary.link.url != "") {
@@ -159,101 +127,96 @@ function menuRender(menuitem) {
   }
 }
 
-const query2 = graphql`
-  query menu {
-    allPrismicSiteInformation {
-      nodes {
-        data {
-          nav {
-            ... on PrismicSiteInformationNavNavItem {
-              id
-              items {
-                sub_nav_link {
-                  url
-                  link_type
+export const Header = () => {
+  const data = useStaticQuery(graphql`
+    query mainmenu {
+      site: allPrismicSiteInformation {
+        nodes {
+          data {
+            nav {
+              ... on PrismicSiteInformationNavNavItem {
+                id
+                items {
+                  sub_nav_link {
+                    url
+                    link_type
+                  }
+                  sub_nav_link_label {
+                    text
+                  }
+                  relative_link {
+                    text
+                  }
                 }
-                sub_nav_link_label {
-                  text
-                }
-                relative_link {
-                  text
-                }
-              }
-              primary {
-                label {
-                  text
-                }
-                link {
-                  url
-                  link_type
-                }
-                relative_link {
-                  text
-                }
-              }
-            }
-          }
-          logo {
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 400) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                primary {
+                  label {
+                    text
+                  }
+                  link {
+                    url
+                    link_type
+                  }
+                  relative_link {
+                    text
+                  }
                 }
               }
             }
-          }
-          twitter {
-            url
+            logo {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 400) {
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  }
+                }
+              }
+            }
+            twitter {
+              url
+            }
           }
         }
       }
     }
+  `);
+  const nav = data.site.nodes[0].data.nav;
+  const logo = data.site.nodes[0].data.logo.localFile.childImageSharp.fluid;
+  var twitter = null;
+  if (data.site.nodes[0].data.twitter) {
+    var twitter = data.site.nodes[0].data.twitter.url;
   }
-`;
-
-export const Header = () => (
-  <StaticQuery
-    query={query2}
-    render={withPreview((data) => {
-      const nav = data.allPrismicSiteInformation.nodes[0].data.nav;
-      const logo =
-        data.allPrismicSiteInformation.nodes[0].data.logo.localFile
-          .childImageSharp.fluid;
-      var twitter = null;
-      if (data.allPrismicSiteInformation.nodes[0].data.twitter) {
-        var twitter = data.allPrismicSiteInformation.nodes[0].data.twitter.url;
-      }
-      // const classes = useStyles()
-      return (
-        <HeaderStyle className="header">
-          {twitter && (
-            <div className="header-social-container">
-              <Container>
-                <div className="social-container">
-                  <a href={twitter} target="_blank" rel="noreferrer">
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </a>
-                </div>
-              </Container>
-            </div>
-          )}
-          <Container className="header-container">
-            <div className="header-inner">
-              <Link className="logo" to="/">
-                <Img fluid={logo} />
+  return (
+    <HeaderStyle className="header">
+      <Container className="header-container">
+        <div className="header-inner">
+          <Link className="logo" to="/">
+            <Img fluid={logo} alt="logo" />
+          </Link>
+          <div className="mobile-menu-container">{<MobileMenu />}</div>
+          <ul className="main-menu">
+            {/* {nav.map((menuitem, index) => (
+              <li key={index}>{menuRender(menuitem)}</li>
+            ))} */}
+            <li>
+              <Link activeStyle={activeStyle} to="/">
+                Home
               </Link>
-              <div className="mobile-menu-container">{<MobileMenu />}</div>
-              <ul className="main-menu">
-                {nav.map((menuitem, index) => (
-                  <li key={index}>{menuRender(menuitem)}</li>
-                ))}
-              </ul>
-            </div>
-          </Container>
-        </HeaderStyle>
-      );
-    }, query2)}
-  />
-);
+            </li>
+            <li>
+              <Link activeStyle={activeStyle} to="/color-changing-masks">
+                Color Changing Masks
+              </Link>
+            </li>
+            <li>
+              <Link activeStyle={activeStyle} to="/contact-us">
+                Contact Us
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </Container>
+    </HeaderStyle>
+  );
+};
 
 export default Header;
