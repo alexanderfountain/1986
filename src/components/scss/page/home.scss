@@ -80,9 +80,19 @@
   }
 }
 #slice-id-hero-safe {
+  @include mobile() {
+    margin-top: 40px;
+  }
   .left-right-container {
     min-height: 450px;
     text-align: right;
+    @include mobile() {
+      text-align: left;
+      flex-direction: column-reverse;
+      section {
+        padding: 0px;
+      }
+    }
     h3 {
       font-size: 32px;
       border-bottom: 5px solid $blue;
@@ -90,14 +100,24 @@
       padding-bottom: 10px;
     }
     p {
-      font-size: 24px;
-      line-height: 32px;
+      font-size: 22px;
+      line-height: 30px;
     }
   }
 }
 #slice-id-home-shipping {
+  @include mobile() {
+    margin-top: 40px;
+  }
   .left-right-container {
     min-height: 450px;
+    @include mobile() {
+      text-align: left;
+      flex-direction: column;
+      section {
+        padding: 0px;
+      }
+    }
     h3 {
       font-size: 32px;
       border-bottom: 5px solid $blue;
@@ -111,9 +131,19 @@
   }
 }
 #slice-id-home-cotton {
+  @include mobile() {
+    margin-top: 40px;
+  }
   .left-right-container {
     min-height: 450px;
     text-align: right;
+    @include mobile() {
+      text-align: left;
+      flex-direction: column-reverse;
+      section {
+        padding: 0px;
+      }
+    }
   }
   h3 {
     font-size: 32px;
@@ -122,14 +152,24 @@
     padding-bottom: 10px;
   }
   p {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
   }
 }
 #slice-id-home-business {
+  @include mobile() {
+    margin-top: 40px;
+  }
   .left-right-container {
     min-height: 450px;
     text-align: left;
+    @include mobile() {
+      text-align: left;
+      flex-direction: column;
+      section {
+        padding: 0px;
+      }
+    }
   }
   h3 {
     font-size: 32px;
@@ -138,8 +178,8 @@
     padding-bottom: 10px;
   }
   p {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
   }
 }
 #slice-id-home-info {
@@ -194,6 +234,9 @@
 }
 
 #slice-id-home-video-example {
+  @include mobile() {
+    margin-top: 20px;
+  }
   section {
     padding: 0px;
     > div {
@@ -212,7 +255,7 @@
     padding-bottom: 10px;
   }
   p {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
   }
 }

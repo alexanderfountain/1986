@@ -15,7 +15,12 @@ import { RadioGroup, RadioButton } from "react-radio-buttons";
 import AliceSlide from "../components/AliceSlide";
 import Select from "react-select";
 import OrangeVideo from "../videos/orange-example.mp4";
+import BlueVideo from "../videos/blue-example.mp4";
 import OrangeVideoThumb from "../images/mask-orange-video.png";
+import BlueTexture from "../images/blue-texture.png";
+import OrangeTexture from "../images/orange-texture.png";
+import ModalVideo from "react-modal-video";
+import "../../node_modules/react-modal-video/scss/modal-video.scss";
 const ProductStyle = styled.div`
   label {
     display: block;
@@ -25,12 +30,17 @@ const ProductStyle = styled.div`
     width: 50px;
     border-radius: 50%;
     display: inline-block;
+    margin-right: 10px;
   }
   .color-blue {
-    background-color: ${variable.blue};
+    background-image: url(${BlueTexture});
+    background-size: cover;
+    backgroun-repeat: no-repeat;
   }
   .color-orange {
-    background-color: orange;
+    background-image: url(${OrangeTexture});
+    background-size: cover;
+    backgroun-repeat: no-repeat;
   }
   .breadcrumb {
     display: flex;
@@ -56,11 +66,84 @@ const ProductStyle = styled.div`
   .product-container {
     display: flex;
     justify-content: space-between;
+    @media (max-width: ${variable.mobileWidth}) {
+      flex-direction: column;
+    }
     .product-left {
-      width: calc(50% - 20px);
+      width: calc(60% - 20px);
+      @media (max-width: ${variable.mobileWidth}) {
+        width: 100%;
+      }
     }
     .product-right {
-      width: calc(50% - 20px);
+      width: calc(40% - 20px);
+      @media (max-width: ${variable.mobileWidth}) {
+        width: 100%;
+      }
+      label {
+        font-size: 20px;
+        font-weight: bold;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        margin-top: 30px;
+        border-bottom: thin solid ${variable.lightGray};
+      }
+    }
+  }
+  .video-thumb {
+    cursor: pointer;
+  }
+  .thumb-ul {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    span {
+      margin: 0px 5px;
+    }
+  }
+  h1 {
+    margin: 0px;
+  }
+  .title-color {
+    text-transform: capitalize;
+  }
+  .variant-color-blue {
+    .color-blue {
+      border: 2px solid ${variable.darkGray};
+    }
+  }
+  .variant-color-orange {
+    .color-orange {
+      border: 2px solid ${variable.darkGray};
+    }
+  }
+  .add-to-cart {
+    margin-top: 20px;
+    button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: transparent;
+      color: rgb(255, 0, 108);
+      cursor: pointer;
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      padding: 21px 34px;
+      white-space: normal;
+      width: auto;
+      display: inline-block;
+      margin: 20px 0px 0px 0px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      border: 5px solid rgb(255, 0, 108);
+      text-transform: uppercase;
+      &:hover {
+        background-color: rgb(255, 0, 108);
+        color: white;
+      }
     }
   }
 `;
@@ -77,7 +160,6 @@ const quantityOptions = [
   { value: 9, label: "9" },
   { value: 10, label: "10" },
 ];
-
 class Product extends React.Component {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
@@ -99,9 +181,13 @@ class Product extends React.Component {
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
       quantity: 1,
+      isOpen: false,
     };
+    this.openModal = this.openModal.bind(this);
   }
-
+  openModal() {
+    this.setState({ isOpen: true });
+  }
   items = this.props.data.product.images;
 
   componentDidUpdate() {
@@ -226,7 +312,8 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-    console.log(this.props);
+    console.log(this.state.variantImages);
+
     return (
       // <h2>test</h2>
       <Layout slug={product.shopifyId}>
@@ -240,13 +327,42 @@ class Product extends React.Component {
               <div className="product-left">
                 <AliceSlide items={galleryItems} currentIndex={currentIndex} />
 
-                <ul>
+                <ul className="thumb-ul">
                   {galleryItems.map(this.thumbItem)}{" "}
-                  <span className="the-video">
-                    {/* <div className="the-thumb gatsby-image-wrapper">
-                      <img src={OrangeVideoThumb} />
-                    </div> */}
-                  </span>
+                  {this.state.variantImages == "orange" && (
+                    <React.Fragment>
+                      <ModalVideo
+                        channel="custom"
+                        isOpen={this.state.isOpen}
+                        url={OrangeVideo}
+                        onClose={() => this.setState({ isOpen: false })}
+                      />
+                      <span className="video-thumb" onClick={this.openModal}>
+                        <Img
+                          fixed={
+                            this.props.data.videoPlay.childImageSharp.fixed
+                          }
+                        />
+                      </span>
+                    </React.Fragment>
+                  )}
+                  {this.state.variantImages == "blue" && (
+                    <React.Fragment>
+                      <ModalVideo
+                        channel="custom"
+                        isOpen={this.state.isOpen}
+                        url={BlueVideo}
+                        onClose={() => this.setState({ isOpen: false })}
+                      />
+                      <span className="video-thumb" onClick={this.openModal}>
+                        <Img
+                          fixed={
+                            this.props.data.videoPlay.childImageSharp.fixed
+                          }
+                        />
+                      </span>
+                    </React.Fragment>
+                  )}
                 </ul>
 
                 {/* <nav>   
@@ -257,9 +373,16 @@ class Product extends React.Component {
                 {/* <nav>{this.items.map(this.thumbItem)}</nav> */}
               </div>
               <div className="product-right">
-                <h1>{product.title}</h1>
+                <h1>
+                  <span className="title-color">
+                    {this.state.variantImages}{" "}
+                  </span>
+                  {product.title}
+                </h1>
                 <label>Color</label>
-                {this.props.data.product.variants.map(this.variantChange)}
+                <div className={"variant-color-" + this.state.variantImages}>
+                  {this.props.data.product.variants.map(this.variantChange)}
+                </div>
                 {/* {this.props.data.product.variants.map(
                     (variant) =>
                     <div onClick={e => {
@@ -275,8 +398,10 @@ class Product extends React.Component {
                   onChange={this.quantityChange}
                   options={quantityOptions}
                 />
-                <AddToCart state={this.state} />
-                <CheckoutLink />
+                <div className="add-to-cart">
+                  <AddToCart state={this.state} />
+                </div>
+                {/* <CheckoutLink /> */}
               </div>
             </div>
           </Container>
@@ -322,6 +447,13 @@ export const productQuery = graphql`
               ...GatsbyImageSharpFixed_withWebp_tracedSVG
             }
           }
+        }
+      }
+    }
+    videoPlay: file(relativePath: { eq: "mask-orange-video.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed_withWebp_tracedSVG
         }
       }
     }
