@@ -60,13 +60,14 @@ function AddToCart(state) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="item">{item[0].title}</div>
-        {item[0].variant.selectedOptions.map(({ name, value }) => (
-          <li key={name}>
-            <strong>{name}: </strong>
-            {value}
-          </li>
-        ))}
+        {item[0] && <div className="item">{item[0].title}</div>}
+        {item[0] &&
+          item[0].variant.selectedOptions.map(({ name, value }) => (
+            <li key={name}>
+              <strong>{name}: </strong>
+              {value}
+            </li>
+          ))}
         <button onClick={closeModal}>close</button>
       </Modal>
       <button onClick={addToCart}>Add to cart.</button>
