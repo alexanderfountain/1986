@@ -99,6 +99,17 @@ const ProductStyle = styled.div`
     display: flex;
     justify-content: center;
     padding-top: 10px;
+    flex-wrap: wrap;
+    .gatsby-image-wrapper {
+      @media (max-width: ${variable.tabletWidth}) {
+        width: 75px !important;
+        height: 75px !important;
+      }
+      @media (max-width: ${variable.mobileWidth}) {
+        width: 50px !important;
+        height: 50px !important;
+      }
+    }
     span {
       margin: 0px 5px;
     }
@@ -177,7 +188,7 @@ class Product extends React.Component {
     super(props);
     this.state = {
       galleryItems: props.data.product.images,
-      currentIndex: 0,
+      currentIndex: 6,
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
       quantity: 1,
@@ -217,9 +228,8 @@ class Product extends React.Component {
       console.log(alt);
       return (
         <div>
+          {console.log(this)}
           {this.items.map((i) => (
-            // console.log(this)
-
             // if(alt == i.altText){
 
             <Img className="thumb" fluid={i.localFile.childImageSharp.fluid} />
@@ -293,6 +303,7 @@ class Product extends React.Component {
 
   render() {
     const { galleryItems, currentIndex } = this.state;
+    console.log(currentIndex);
     const product = this.props.data.product;
 
     // const cartCount = useCartCount();
@@ -325,7 +336,10 @@ class Product extends React.Component {
             </div>
             <div className="product-container">
               <div className="product-left">
-                <AliceSlide items={galleryItems} currentIndex={currentIndex} />
+                <AliceSlide
+                  items={galleryItems}
+                  currentIndex={this.state.currentIndex}
+                />
 
                 <ul className="thumb-ul">
                   {galleryItems.map(this.thumbItem)}{" "}

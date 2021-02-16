@@ -8,18 +8,22 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 const AliceStyle = styled.div``;
 
-export const AliceSlide = (items, currentIndex) => {
+export const AliceSlide = ({ items, currentIndex }) => {
+  console.log(currentIndex);
   return (
     <AliceStyle>
       <AliceCarousel
-        items={items.items}
-        slideToIndex={items.currentIndex}
+        items={items}
+        slideToIndex={currentIndex}
         // onSlideChanged={this.onSlideChanged}
         buttonsDisabled
         dotsDisabled
       >
-        {items.items.map((image, index) => (
-          <Img fluid={image.localFile.childImageSharp.fluid} />
+        {items.map((image, index) => (
+          <Img
+            className={"alice-" + index}
+            fluid={image.localFile.childImageSharp.fluid}
+          />
         ))}
       </AliceCarousel>
       {/* <Slide

@@ -40,7 +40,7 @@ const MobileContainer = styled.div`
         outline: none !important;
       }
       &.active {
-        color: ${variable.red};
+        color: ${variable.pink};
       }
     }
     ul {
@@ -85,7 +85,7 @@ const MobileContainer = styled.div`
   }
 `;
 const activeStyle = {
-  color: variable.red,
+  color: variable.pink,
 };
 const Wrapper = styled.div`
   * {
@@ -181,7 +181,7 @@ const MenuWrapper = styled.div`
         outline: none !important;
       }
       &.active {
-        color: ${variable.red};
+        color: ${variable.pink};
       }
     }
     ul {

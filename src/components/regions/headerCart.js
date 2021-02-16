@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useShoppingCart } from "use-shopping-cart";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import Container from "../container";
 import * as variable from "../variables";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useCartCount } from "gatsby-theme-shopify-manager";
 import CartIcon from "../../images/shopping-cart.svg";
 const HeaderCartStyle = styled.div`
