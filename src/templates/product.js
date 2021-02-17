@@ -20,6 +20,7 @@ import OrangeVideoThumb from "../images/mask-orange-video.png";
 import BlueTexture from "../images/blue-texture.png";
 import OrangeTexture from "../images/orange-texture.png";
 import ModalVideo from "react-modal-video";
+import Countdown from "react-countdown";
 import "../../node_modules/react-modal-video/scss/modal-video.scss";
 const ProductStyle = styled.div`
   label {
@@ -70,13 +71,13 @@ const ProductStyle = styled.div`
       flex-direction: column;
     }
     .product-left {
-      width: calc(60% - 20px);
+      width: calc(50% - 20px);
       @media (max-width: ${variable.mobileWidth}) {
         width: 100%;
       }
     }
     .product-right {
-      width: calc(40% - 20px);
+      width: calc(50% - 20px);
       @media (max-width: ${variable.mobileWidth}) {
         width: 100%;
       }
@@ -166,6 +167,17 @@ const ProductStyle = styled.div`
     font-size: 18px;
     line-height: 26px;
   }
+  .compare-price {
+    text-decoration: line-through;
+  }
+  .now-price {
+    color: ${variable.pink};
+    margin-left: 10px;
+  }
+  .count-sale {
+    font-size: 16px;
+    font-style: italic;
+  }
 `;
 
 const quantityOptions = [
@@ -180,6 +192,16 @@ const quantityOptions = [
   { value: 9, label: "9" },
   { value: 10, label: "10" },
 ];
+
+const renderer = ({ hours, minutes, seconds, completed }) => {
+  // Render a countdown
+  return (
+    <span>
+      00:{minutes}:{seconds}
+    </span>
+  );
+};
+
 class Product extends React.Component {
   //   const prismicContent = data.page.allPas.edges[0]
   //   if (!prismicContent) return null
@@ -202,6 +224,7 @@ class Product extends React.Component {
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
       variantPrice: props.data.product.variants[0].priceV2.amount,
+      comparePrice: props.data.product.variants[0].compareAtPriceV2.amount,
       variantDescription: props.data.product.variants[0].product.description,
       selectedOptions: props.data.product.variants[0].selectedOptions,
       variantImage:
@@ -270,6 +293,7 @@ class Product extends React.Component {
     this.setState({ variantImages: variant.title });
     this.setState({ currentIndex: 0 });
     this.setState({ variantPrice: variant.priceV2.amount });
+    this.setState({ comparePrice: variant.compareAtPriceV2.amount });
     this.setState({ variantDescription: variant.product.description });
     this.setState({
       variantImage: variant.image.localFile.childImageSharp.fluid,
@@ -408,7 +432,22 @@ class Product extends React.Component {
                   {product.title}
                 </h1>
                 <div className="product-price">
-                  ${Number(this.state.variantPrice).toFixed(2)}
+                  <div className="product-price-original">
+                    <label>Price</label>
+                    <div className="count-sale">
+                      30% off sale ends in&nbsp;
+                      <Countdown
+                        date={Date.now() + 1000000}
+                        renderer={renderer}
+                      />
+                    </div>
+                    <span className="compare-price">
+                      ${Number(this.state.comparePrice).toFixed(2)}
+                    </span>
+                    <span className="now-price">
+                      ${Number(this.state.variantPrice).toFixed(2)}
+                    </span>
+                  </div>
                 </div>
                 <div className="product-description">
                   {this.state.variantDescription}
@@ -426,6 +465,9 @@ class Product extends React.Component {
                     </div>
                   )} */}
                 <label>Quantity</label>
+                <div className="low-stock">
+                  Low in stock! Only <span>12</span> Remaining!
+                </div>
                 <Select
                   isSearchable={false}
                   defaultValue={quantityOptions[0]}
@@ -452,6 +494,9 @@ export const productQuery = graphql`
         selectedOptions {
           name
           value
+        }
+        compareAtPriceV2 {
+          amount
         }
         image {
           altText

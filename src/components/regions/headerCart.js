@@ -5,6 +5,17 @@ import Container from "../container";
 import * as variable from "../variables";
 import { useCartCount } from "gatsby-theme-shopify-manager";
 import CartIcon from "../../images/shopping-cart.svg";
+import Countdown from "react-countdown";
+
+const renderer = ({ hours, minutes, seconds, completed }) => {
+  // Render a countdown
+  return (
+    <span>
+      00:{minutes}:{seconds}
+    </span>
+  );
+};
+
 const HeaderCartStyle = styled.div`
   padding: 10px 0px;
   background-color: #222222;
@@ -14,7 +25,7 @@ const HeaderCartStyle = styled.div`
   z-index: 10;
   .header-cart-inner {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
   }
   ul {
@@ -48,6 +59,13 @@ const HeaderCartStyle = styled.div`
       }
     }
   }
+  .count-sale {
+    color: white;
+    text-align: center;
+    span {
+      color: white;
+    }
+  }
 `;
 
 export const HeaderCart = () => {
@@ -56,6 +74,10 @@ export const HeaderCart = () => {
     <HeaderCartStyle>
       <Container className="header-cart-container">
         <div class="header-cart-inner">
+          <div className="count-sale">
+            30% off sale ends in&nbsp;
+            <Countdown date={Date.now() + 1000000} renderer={renderer} />
+          </div>
           <ul>
             <li>
               <Link to="/cart">

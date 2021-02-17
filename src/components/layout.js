@@ -20,7 +20,6 @@ import { PopupboxManager, PopupboxContainer } from "react-popupbox";
 import "react-popupbox/dist/react-popupbox.css";
 // import { ContextProvider } from "gatsby-theme-shopify-manager";
 
-
 const Layout = ({ children, slug }) => {
   if (slug) {
     var pageId = slug;
@@ -33,11 +32,11 @@ const Layout = ({ children, slug }) => {
   }
   return (
     <div id={pageId}>
-        <HeaderCart />
-        <Header />
-        <PopupboxContainer />
-        <main>{children}</main>
-        <Footer />
+      <HeaderCart />
+      <Header />
+      <PopupboxContainer />
+      <main>{children}</main>
+      <Footer />
     </div>
   );
 };
