@@ -187,10 +187,12 @@ class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: props.data.product.title,
       galleryItems: props.data.product.images,
       currentIndex: 6,
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
+      variantPrice: props.data.product.variants[0].priceV2.amount,
       quantity: 1,
       isOpen: false,
     };
@@ -323,7 +325,7 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-    console.log(this.state.variantImages);
+    console.log(product);
 
     return (
       // <h2>test</h2>
@@ -415,7 +417,6 @@ class Product extends React.Component {
                 <div className="add-to-cart">
                   <AddToCart state={this.state} />
                 </div>
-                {/* <CheckoutLink /> */}
               </div>
             </div>
           </Container>

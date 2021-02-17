@@ -9,7 +9,7 @@ function CheckoutLink() {
   ) : (
     <p>
       <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
-        Complete Your Order →
+        CHECKOUT
       </a>
     </p>
   );

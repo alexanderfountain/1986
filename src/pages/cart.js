@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from "react";
 import Container from "../components/container";
 import Layout from "../components/layout";
@@ -177,47 +178,49 @@ const CartPage = () => {
     emptyCart
   ) : (
     <Layout>
-      <Styled.h1>Cart</Styled.h1>
-      {lineItems.map((item) => (
-        <React.Fragment key={item.id}>
-          <LineItem key={item.id} item={item} />
-          <Divider sx={{ my: 3 }} />
-        </React.Fragment>
-      ))}
-      <div sx={{ display: "flex" }}>
-        <Card sx={{ marginLeft: "auto", minWidth: "10rem", p: 4 }}>
-          <Styled.h3 sx={{ mt: 0, mb: 3 }}>Cart Summary</Styled.h3>
-          <Divider />
+      <Container>
+        <Styled.h1>Cart</Styled.h1>
+        {lineItems.map((item) => (
+          <React.Fragment key={item.id}>
+            <LineItem key={item.id} item={item} />
+            <Divider sx={{ my: 4 }} />
+          </React.Fragment>
+        ))}
+        <div sx={{ display: "flex" }}>
+          <Card sx={{ marginLeft: "auto", minWidth: "10rem", p: 4 }}>
+            <Styled.h3 sx={{ mt: 0, mb: 3 }}>Cart Summary</Styled.h3>
+            <Divider />
 
-          <Grid gap={1} columns={2} sx={{ my: 3 }}>
-            <Text>Subtotal:</Text>
-            <Text sx={{ marginLeft: "auto" }}>{total}</Text>
-            <Text>Shipping:</Text>
-            <Text sx={{ marginLeft: "auto" }}> - </Text>
-            <Text>Tax: </Text>
-            <Text sx={{ marginLeft: "auto" }}>{tax}</Text>
-          </Grid>
+            <Grid gap={1} columns={2} sx={{ my: 3 }}>
+              <Text>Subtotal:</Text>
+              <Text sx={{ marginLeft: "auto" }}>{total}</Text>
+              <Text>Shipping:</Text>
+              <Text sx={{ marginLeft: "auto" }}> - </Text>
+              <Text>Tax: </Text>
+              <Text sx={{ marginLeft: "auto" }}>{tax}</Text>
+            </Grid>
 
-          <Divider />
-          <Grid gap={1} columns={2}>
-            <Text variant="bold">Estimated Total:</Text>
-            <Text variant="bold" sx={{ marginLeft: "auto" }}>
-              {total}
-            </Text>
-          </Grid>
-          <br />
-          {checkoutUrl != null ? (
-            <a
-              sx={{ mt: 4, width: "100%" }}
-              href={checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Checkout
-            </a>
-          ) : null}
-        </Card>
-      </div>
+            <Divider />
+            <Grid gap={1} columns={2}>
+              <Text variant="bold">Estimated Total:</Text>
+              <Text variant="bold" sx={{ marginLeft: "auto" }}>
+                {total}
+              </Text>
+            </Grid>
+            <br />
+            {checkoutUrl != null ? (
+              <a
+                sx={{ mt: 4, width: "100%" }}
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Checkout
+              </a>
+            ) : null}
+          </Card>
+        </div>
+      </Container>
     </Layout>
   );
 };

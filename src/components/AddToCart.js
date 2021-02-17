@@ -5,7 +5,97 @@ import {
   useCartItems,
 } from "gatsby-theme-shopify-manager";
 import Modal from "react-modal";
+import styled from "styled-components";
+import * as variable from "../components/variables";
+import CheckoutLink from "../components/CheckoutLink";
+import { Link } from "gatsby";
+import check from "../images/check.svg";
 
+const CartStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  .cart-color {
+    text-transform: capitalize;
+  }
+  .cart-popup-image {
+    width: 100px;
+    img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .cart-pop-right {
+    width: calc(100% - 120px);
+    .cart-pop-added-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid ${variable.lightGray};
+      a {
+        color: ${variable.pink};
+        text-decoration: none;
+      }
+    }
+  }
+  .check-continue-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    .continue-shopping {
+      color: ${variable.pink};
+      cursor: pointer;
+    }
+    .or {
+      margin: 0px 10px;
+    }
+    .checkout {
+      a {
+        background-color: rgb(255, 0, 108);
+        color: white;
+        cursor: pointer;
+        font-family: Poppins, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+        padding: 10px 20px;
+        white-space: normal;
+        width: auto;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 10px;
+        border: 5px solid rgb(255, 0, 108);
+        text-transform: uppercase;
+        &:hover {
+          color: rgb(255, 0, 108);
+          background: transparent;
+        }
+      }
+    }
+  }
+  .item {
+    margin-bottom: 5px;
+  }
+  .item-variant {
+    text-transform: capitalize;
+  }
+  .cart-pop-quantity-container {
+    margin-top: 20px;
+    color: ${variable.gray};
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .x {
+    margin: 0px 5px;
+  }
+`;
 const customStyles = {
   content: {
     top: "50%",
@@ -14,6 +104,8 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    width: "90%",
+    maxWidth: "520px",
   },
 };
 function AddToCart(state) {
@@ -51,6 +143,7 @@ function AddToCart(state) {
   }
   const item = useCartItems();
 
+  console.log(state);
   return (
     <div>
       <Modal
@@ -60,15 +153,54 @@ function AddToCart(state) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        {item[0] && <div className="item">{item[0].title}</div>}
-        {item[0] &&
-          item[0].variant.selectedOptions.map(({ name, value }) => (
-            <li key={name}>
-              <strong>{name}: </strong>
-              {value}
-            </li>
-          ))}
-        <button onClick={closeModal}>close</button>
+        <CartStyle>
+          {item[0] && (
+            <div className="cart-popup-image">
+              <img src={item[0].variant.image.src} />
+            </div>
+          )}
+          <div className="cart-pop-right">
+            <div className="cart-pop-added-container">
+              <div className="cart-pop-added">
+                <span>
+                  <img src={check} />
+                </span>
+                JUST ADDED
+              </div>
+              <div className="cart-pop-view-cart">
+                <Link to="/cart">View Cart</Link>
+              </div>
+            </div>
+            {item[0] && (
+              <div className="item">
+                <strong>{item[0].title}</strong>
+              </div>
+            )}
+            {item[0] &&
+              item[0].variant.selectedOptions.map(({ name, value }) => (
+                <li className="item-variant" key={name}>
+                  <strong>{name}: </strong>
+                  {value}
+                </li>
+              ))}
+            {item[0] && (
+              <div className="cart-pop-quantity-container">
+                <div className="cart-pop-quantity">{item[0].quantity}</div>
+                <div className="x">x</div>
+                <div className="cart-pop-price">
+                  ${Number(item[0].variant.priceV2.amount).toFixed(2)}
+                </div>
+              </div>
+            )}
+            <div className="check-continue-container">
+              <div className="checkout">{<CheckoutLink />}</div>
+              <div className="or">or</div>
+              <div className="continue-shopping" onClick={closeModal}>
+                Continue Shopping
+              </div>
+            </div>
+          </div>
+        </CartStyle>
       </Modal>
       <button onClick={addToCart}>Add to cart.</button>
     </div>
