@@ -154,23 +154,10 @@ const CartPage = () => {
 
   const emptyCart = (
     <Layout>
-      <Styled.h1>Cart</Styled.h1>
-      <Styled.p>Your shopping cart is empty.</Styled.p>
-      <Button
-        sx={{ mt: 4 }}
-        onClick={() =>
-          addItemToCart(
-            variants[Math.floor(Math.random() * (variants.length - 1))]
-              .shopifyId,
-            1
-          )
-        }
-      >
-        <span role="img" aria-label="Dice Emoji">
-          🎲
-        </span>{" "}
-        Random item plz
-      </Button>
+      <Container>
+        <Styled.h1>Cart</Styled.h1>
+        <Styled.p>Your shopping cart is empty.</Styled.p>
+      </Container>
     </Layout>
   );
 

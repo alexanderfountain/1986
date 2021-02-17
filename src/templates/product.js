@@ -157,6 +157,15 @@ const ProductStyle = styled.div`
       }
     }
   }
+  .product-price {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  .product-description {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 26px;
+  }
 `;
 
 const quantityOptions = [
@@ -193,6 +202,10 @@ class Product extends React.Component {
       variant: props.data.product.variants[0].shopifyId,
       variantImages: props.data.product.variants[0].title,
       variantPrice: props.data.product.variants[0].priceV2.amount,
+      variantDescription: props.data.product.variants[0].product.description,
+      selectedOptions: props.data.product.variants[0].selectedOptions,
+      variantImage:
+        props.data.product.variants[0].image.localFile.childImageSharp.fluid,
       quantity: 1,
       isOpen: false,
     };
@@ -203,9 +216,6 @@ class Product extends React.Component {
   }
   items = this.props.data.product.images;
 
-  componentDidUpdate() {
-    console.log(this.state);
-  }
   // {this.props.data.product.images.map(
   //   (image, index) =>
   //     // <VariantImages image={image}></VariantImages>
@@ -227,10 +237,8 @@ class Product extends React.Component {
   galleryItems = () => {
     if (this.state !== undefined) {
       var alt = this.state.variantImages;
-      console.log(alt);
       return (
         <div>
-          {console.log(this)}
           {this.items.map((i) => (
             // if(alt == i.altText){
 
@@ -257,15 +265,20 @@ class Product extends React.Component {
     this.setState({ quantity: quantity.value });
   };
   variantClick = (variant, i) => {
+    console.log(variant);
     this.setState({ variant: variant.shopifyId });
     this.setState({ variantImages: variant.title });
     this.setState({ currentIndex: 0 });
+    this.setState({ variantPrice: variant.priceV2.amount });
+    this.setState({ variantDescription: variant.product.description });
+    this.setState({
+      variantImage: variant.image.localFile.childImageSharp.fluid,
+    });
+    this.setState({ selectedOptions: variant.selectedOptions });
     var alt = variant.title;
     var newGalleryItems = [];
-    console.log(alt);
     this.items.map((image, i) => {
       if (image.altText == alt) {
-        console.log(image);
         newGalleryItems.push(image);
       }
     });
@@ -305,7 +318,6 @@ class Product extends React.Component {
 
   render() {
     const { galleryItems, currentIndex } = this.state;
-    console.log(currentIndex);
     const product = this.props.data.product;
 
     // const cartCount = useCartCount();
@@ -325,7 +337,7 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-    console.log(product);
+    console.log(this.state);
 
     return (
       // <h2>test</h2>
@@ -395,6 +407,12 @@ class Product extends React.Component {
                   </span>
                   {product.title}
                 </h1>
+                <div className="product-price">
+                  ${Number(this.state.variantPrice).toFixed(2)}
+                </div>
+                <div className="product-description">
+                  {this.state.variantDescription}
+                </div>
                 <label>Color</label>
                 <div className={"variant-color-" + this.state.variantImages}>
                   {this.props.data.product.variants.map(this.variantChange)}
@@ -431,12 +449,39 @@ export const productQuery = graphql`
   query ProductBySlug($shopifyId: String!) {
     product: shopifyProduct(shopifyId: { eq: $shopifyId }) {
       variants {
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          altText
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 200, maxHeight: 200) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+            url
+          }
+        }
         product {
           images {
             localFile {
               childImageSharp {
                 fluid(maxWidth: 800, maxHeight: 800) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                }
+              }
+            }
+          }
+          description
+          variants {
+            image {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 200, maxHeight: 200) {
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  }
                 }
               }
             }

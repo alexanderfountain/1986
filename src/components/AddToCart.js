@@ -10,6 +10,7 @@ import * as variable from "../components/variables";
 import CheckoutLink from "../components/CheckoutLink";
 import { Link } from "gatsby";
 import check from "../images/check.svg";
+import Img from "gatsby-image";
 
 const CartStyle = styled.div`
   display: flex;
@@ -154,11 +155,9 @@ function AddToCart(state) {
         contentLabel="Example Modal"
       >
         <CartStyle>
-          {item[0] && (
-            <div className="cart-popup-image">
-              <img src={item[0].variant.image.src} />
-            </div>
-          )}
+          <div className="cart-popup-image">
+            <Img fluid={state.state.variantImage} />
+          </div>
           <div className="cart-pop-right">
             <div className="cart-pop-added-container">
               <div className="cart-pop-added">
@@ -171,27 +170,22 @@ function AddToCart(state) {
                 <Link to="/cart">View Cart</Link>
               </div>
             </div>
-            {item[0] && (
-              <div className="item">
-                <strong>{item[0].title}</strong>
+            <div className="item">
+              <strong>{state.state.title}</strong>
+            </div>
+            {state.state.selectedOptions.map(({ name, value }) => (
+              <li className="item-variant" key={name}>
+                <strong>{name}: </strong>
+                {value}
+              </li>
+            ))}
+            <div className="cart-pop-quantity-container">
+              <div className="cart-pop-quantity">{state.state.quantity}</div>
+              <div className="x">x</div>
+              <div className="cart-pop-price">
+                ${Number(state.state.variantPrice).toFixed(2)}
               </div>
-            )}
-            {item[0] &&
-              item[0].variant.selectedOptions.map(({ name, value }) => (
-                <li className="item-variant" key={name}>
-                  <strong>{name}: </strong>
-                  {value}
-                </li>
-              ))}
-            {item[0] && (
-              <div className="cart-pop-quantity-container">
-                <div className="cart-pop-quantity">{item[0].quantity}</div>
-                <div className="x">x</div>
-                <div className="cart-pop-price">
-                  ${Number(item[0].variant.priceV2.amount).toFixed(2)}
-                </div>
-              </div>
-            )}
+            </div>
             <div className="check-continue-container">
               <div className="checkout">{<CheckoutLink />}</div>
               <div className="or">or</div>
