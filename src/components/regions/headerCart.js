@@ -6,7 +6,7 @@ import * as variable from "../variables";
 import { useCartCount } from "gatsby-theme-shopify-manager";
 import CartIcon from "../../images/shopping-cart.svg";
 import Countdown from "react-countdown";
-
+import CheckoutLink from "../../components/CheckoutLink";
 const renderer = ({ hours, minutes, seconds, completed }) => {
   // Render a countdown
   return (
@@ -27,6 +27,9 @@ const HeaderCartStyle = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    p {
+      margin: 0px;
+    }
   }
   ul {
     display: flex;
@@ -85,6 +88,7 @@ export const HeaderCart = () => {
                 CART ({cartCount})
               </Link>
             </li>
+            {cartCount && <li>{<CheckoutLink />}</li>}
             <li>
               {/* <a
                 disabled={loading}

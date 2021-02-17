@@ -80,12 +80,17 @@ const htmlSerializer = (type, element, content, children) => {
     // First differentiate between a label and a preformatted field (e.g. the Code Block slice)
     case Elements.label: {
       // Use the inline code for labels that are in the array of "codeInline"
+      console.log(element.data);
+
       if (codeInline.includes(element.data.label)) {
         return `<code class="language-${element.data.label}">${content}</code>`;
       }
       // Use the blockquote for labels with the name "quote"
       if (element.data.label === "quote") {
         return `<blockquote><p>${content}</p></blockquote>`;
+      }
+      if (element.data.label === "cta-masks") {
+        return <Link to="/color-changing-masks">{content}</Link>;
       }
       // Use the code block for labels that are in the array of "codeBlock"
       // Choose the right PrismJS highlighting with the label name

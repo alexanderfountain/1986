@@ -22,6 +22,9 @@ import OrangeTexture from "../images/orange-texture.png";
 import ModalVideo from "react-modal-video";
 import Countdown from "react-countdown";
 import "../../node_modules/react-modal-video/scss/modal-video.scss";
+import Reviews from "../components/reviews";
+import star from "../images/star.svg";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 const ProductStyle = styled.div`
   label {
     display: block;
@@ -177,6 +180,27 @@ const ProductStyle = styled.div`
   .count-sale {
     font-size: 16px;
     font-style: italic;
+    color: ${variable.red};
+  }
+  .low-stock {
+    color: ${variable.red};
+    margin-bottom: 5px;
+    font-style: italic;
+    span {
+      color: ${variable.darkGray};
+    }
+  }
+  .reviews-outer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    .stars {
+      margin-right: 5px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 `;
 
@@ -203,18 +227,6 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
 };
 
 class Product extends React.Component {
-  //   const prismicContent = data.page.allPas.edges[0]
-  //   if (!prismicContent) return null
-  // const product = data.prices;
-  // const productGatsby = data.product;
-  // const site = data.site;
-  // const newSku = {
-  //   sku: product.id,
-  //   name: product.product.name,
-  //   price: product.unit_amount,
-  //   currency: product.currency,
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -343,7 +355,8 @@ class Product extends React.Component {
   render() {
     const { galleryItems, currentIndex } = this.state;
     const product = this.props.data.product;
-
+    const reviews = this.props.data.review.nodes;
+    const reviewCount = reviews.length;
     // const cartCount = useCartCount();
     // const addItemsToCart = useAddItemsToCart();
     // async function addToCart() {
@@ -361,7 +374,7 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-    console.log(this.state);
+    console.log(reviews.length);
 
     return (
       // <h2>test</h2>
@@ -431,6 +444,20 @@ class Product extends React.Component {
                   </span>
                   {product.title}
                 </h1>
+                <div className="reviews-outer">
+                  <span className="stars">
+                    <img src={star} />
+                    <img src={star} />
+                    <img src={star} />
+                    <img src={star} />
+                    <img src={star} />
+                  </span>
+                  <span>
+                    <AnchorLink href="#reviews-anchor">
+                      {reviewCount} reviews
+                    </AnchorLink>
+                  </span>
+                </div>
                 <div className="product-price">
                   <div className="product-price-original">
                     <label>Price</label>
@@ -478,6 +505,9 @@ class Product extends React.Component {
                   <AddToCart state={this.state} />
                 </div>
               </div>
+            </div>
+            <div id="reviews-anchor">
+              <Reviews reviews={reviews}></Reviews>
             </div>
           </Container>
         </ProductStyle>
@@ -551,6 +581,22 @@ export const productQuery = graphql`
             fixed(width: 100, height: 100) {
               ...GatsbyImageSharpFixed_withWebp_tracedSVG
             }
+          }
+        }
+      }
+    }
+    review: allPrismicReview {
+      nodes {
+        first_publication_date(formatString: "MMM d, Y")
+
+        data {
+          name {
+            text
+          }
+          product
+          stars
+          review {
+            text
           }
         }
       }
