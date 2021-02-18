@@ -397,9 +397,10 @@ class Product extends React.Component {
                   {this.state.variantImages == "orange" && (
                     <React.Fragment>
                       <ModalVideo
-                        channel="custom"
+                        channel="youtube"
+                        youtube={{ mute: 1, autoplay: 1 }}
                         isOpen={this.state.isOpen}
-                        url={OrangeVideo}
+                        videoId="sw2XrP8d-XM"
                         onClose={() => this.setState({ isOpen: false })}
                       />
                       <span className="video-thumb" onClick={this.openModal}>
@@ -414,10 +415,11 @@ class Product extends React.Component {
                   {this.state.variantImages == "blue" && (
                     <React.Fragment>
                       <ModalVideo
-                        channel="custom"
+                        channel="youtube"
                         isOpen={this.state.isOpen}
-                        url={BlueVideo}
+                        videoId="dYUPTyNsmc4"
                         onClose={() => this.setState({ isOpen: false })}
+                        youtube={{ mute: 1, autoplay: 1 }}
                       />
                       <span className="video-thumb" onClick={this.openModal}>
                         <Img
