@@ -103,6 +103,7 @@ const LeftRightStyle = styled.div`
 
       @media (max-width: ${variable.mobileWidth}) {
         max-width: calc(${variable.mobileWidth} / 1);
+        padding:0px 0px;
       }
     }
   }

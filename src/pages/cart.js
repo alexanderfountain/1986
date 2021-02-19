@@ -5,7 +5,9 @@ import Layout from "../components/layout";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { Grid, Divider, Button, Card, Text } from "@theme-ui/components";
 import { Styled, jsx } from "theme-ui";
+import styled from "styled-components";
 import Img from "gatsby-image";
+import * as variable from "../components/variables";
 import {
   useAddItemToCart,
   useCartItems,
@@ -13,6 +15,14 @@ import {
   useCart,
   useUpdateItemQuantity,
 } from "gatsby-theme-shopify-manager";
+
+const CartStyle = styled.div`
+  button {
+    background-color: ${variable.darkGray};
+    cursor: pointer;
+  }
+`;
+
 const CartPage = () => {
   const {
     allShopifyProductVariant: { nodes: variants },
@@ -25,7 +35,7 @@ const CartPage = () => {
           image {
             localFile {
               childImageSharp {
-                fluid(maxWidth: 120) {
+                fluid(maxWidth: 800) {
                   ...GatsbyImageSharpFluid_withWebp
                 }
               }
@@ -105,110 +115,154 @@ const CartPage = () => {
 
   const LineItem = ({ item }) => (
     <div
+      className="line-item"
       sx={{
-        display: "grid",
-        gridGap: "15px",
-        gridTemplateColumns: "120px 2fr 80px 80px",
+        display: "flex",
+        justifyContent: ["flex-start", "space-between"],
         alignItems: "center",
+        flexDirection: ["column", "row"],
       }}
     >
-      <div>
-        <div sx={{ padding: 1, border: "1px solid gray" }}>
-          <Img fluid={getImageFluidForVariant(item.variant.id)} />
-        </div>
-      </div>
-      <div>
-        <Link
-          url={`/product/${getHandleForVariant(item.variant.id)}`}
-          sx={{ fontSize: 3, m: 0, fontWeight: 700 }}
-        >
-          {item.title}
-        </Link>
-        <Styled.ul sx={{ mt: 2, mb: 0, padding: 0, listStyle: "none" }}>
-          {item.variant.selectedOptions.map(({ name, value }) => (
-            <li key={name}>
-              <strong>{name}: </strong>
-              {value}
-            </li>
-          ))}
-          <li key="quantity">
-            <strong>Quantity: </strong>
-            {item.quantity}
-          </li>
-        </Styled.ul>
-      </div>
-      <Button variant="link" onClick={() => removeFromCart(item.variant.id)}>
-        Delete
-      </Button>
-      <Text
+      <div
         sx={{
-          fontSize: 4,
-          fontWeight: 700,
-          marginLeft: "auto",
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-start",
+          maxWidth: ["100%", "60%"],
         }}
       >
-        ${Number(item.variant.priceV2.amount).toFixed(2)}
-      </Text>
+        <div
+          sx={{
+            padding: 1,
+            border: "1px solid gray",
+            width: "100%",
+            maxWidth: ["100%", "120px"],
+            marginRight: "20px",
+          }}
+        >
+          <Img fluid={getImageFluidForVariant(item.variant.id)} />
+        </div>
+        <div
+          sx={{
+            width: "100%",
+            maxWidth: ["100%", "calc(100% - 120px)"],
+          }}
+        >
+          <Link
+            url={`/product/${getHandleForVariant(item.variant.id)}`}
+            sx={{ fontSize: 3, m: 0, fontWeight: 700 }}
+          >
+            {item.title}
+          </Link>
+          <Styled.ul sx={{ mt: 2, mb: 0, padding: 0, listStyle: "none" }}>
+            {item.variant.selectedOptions.map(({ name, value }) => (
+              <li key={name}>
+                <strong>{name}: </strong>
+                {value}
+              </li>
+            ))}
+            <li key="quantity">
+              <strong>Quantity: </strong>
+              {item.quantity}
+            </li>
+          </Styled.ul>
+        </div>
+      </div>
+      <div
+        sx={{
+          width: "100%",
+          maxWidth: ["100%", "40%"],
+          marginTop: ["20px", "0px"],
+          display: "flex",
+          justifyContent: ["flex-start", "flex-end"],
+          alignItems: "center",
+        }}
+      >
+        <Button variant="link" onClick={() => removeFromCart(item.variant.id)}>
+          Delete
+        </Button>
+
+        <Text
+          sx={{
+            fontSize: 4,
+            fontWeight: 700,
+            marginLeft: "20px",
+          }}
+        >
+          ${Number(item.variant.priceV2.amount).toFixed(2)}
+        </Text>
+      </div>
     </div>
   );
 
   const emptyCart = (
-    <Layout>
-      <Container>
-        <Styled.h1>Cart</Styled.h1>
-        <Styled.p>Your shopping cart is empty.</Styled.p>
-      </Container>
-    </Layout>
+    <CartStyle>
+      <Layout>
+        <Container>
+          <Styled.h1>Cart</Styled.h1>
+          <Styled.p>Your shopping cart is empty.</Styled.p>
+        </Container>
+      </Layout>
+    </CartStyle>
   );
 
   return lineItems.length < 1 ? (
     emptyCart
   ) : (
-    <Layout>
-      <Container>
-        <Styled.h1>Cart</Styled.h1>
-        {lineItems.map((item) => (
-          <React.Fragment key={item.id}>
-            <LineItem key={item.id} item={item} />
-            <Divider sx={{ my: 4 }} />
-          </React.Fragment>
-        ))}
-        <div sx={{ display: "flex" }}>
-          <Card sx={{ marginLeft: "auto", minWidth: "10rem", p: 4 }}>
-            <Styled.h3 sx={{ mt: 0, mb: 3 }}>Cart Summary</Styled.h3>
-            <Divider />
+    <CartStyle>
+      <Layout>
+        <Container>
+          <Styled.h1>Cart</Styled.h1>
+          {lineItems.map((item) => (
+            <React.Fragment key={item.id}>
+              <LineItem key={item.id} item={item} />
+              <Divider sx={{ my: 4 }} />
+            </React.Fragment>
+          ))}
+          <div sx={{ display: "flex" }}>
+            <Card
+              sx={{
+                marginLeft: ["0px", "auto"],
+                width: "100%",
+                maxWidth: ["100%", "400px"],
+                margin: "20px 0px",
+              }}
+            >
+              <Styled.h3 sx={{ mt: 0, mb: 3 }}>Cart Summary</Styled.h3>
+              <Divider />
 
-            <Grid gap={1} columns={2} sx={{ my: 3 }}>
-              <Text>Subtotal:</Text>
-              <Text sx={{ marginLeft: "auto" }}>{total}</Text>
-              <Text>Shipping:</Text>
-              <Text sx={{ marginLeft: "auto" }}> - </Text>
-              <Text>Tax: </Text>
-              <Text sx={{ marginLeft: "auto" }}>{tax}</Text>
-            </Grid>
+              <Grid gap={1} columns={2} sx={{ my: 3 }}>
+                <Text>Subtotal:</Text>
+                <Text sx={{ marginLeft: "auto" }}>{total}</Text>
+                <Text>Shipping:</Text>
+                <Text sx={{ marginLeft: "auto" }}> - </Text>
+                <Text>Tax: </Text>
+                <Text sx={{ marginLeft: "auto" }}>{tax}</Text>
+              </Grid>
 
-            <Divider />
-            <Grid gap={1} columns={2}>
-              <Text variant="bold">Estimated Total:</Text>
-              <Text variant="bold" sx={{ marginLeft: "auto" }}>
-                {total}
-              </Text>
-            </Grid>
-            <br />
-            {checkoutUrl != null ? (
-              <a
-                sx={{ mt: 4, width: "100%" }}
-                href={checkoutUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Checkout
-              </a>
-            ) : null}
-          </Card>
-        </div>
-      </Container>
-    </Layout>
+              <Divider />
+              <Grid gap={1} columns={2}>
+                <Text variant="bold">Estimated Total:</Text>
+                <Text variant="bold" sx={{ marginLeft: "auto" }}>
+                  {total}
+                </Text>
+              </Grid>
+              <br />
+              {checkoutUrl != null ? (
+                <a
+                  href={checkoutUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cart-checkout"
+                >
+                  Checkout
+                </a>
+              ) : null}
+            </Card>
+          </div>
+        </Container>
+      </Layout>
+    </CartStyle>
   );
 };
 export default CartPage;
