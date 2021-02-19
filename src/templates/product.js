@@ -460,6 +460,10 @@ class Product extends React.Component {
                     </AnchorLink>
                   </span>
                 </div>
+                <label>Color</label>
+                <div className={"variant-color-" + this.state.variantImages}>
+                  {this.props.data.product.variants.map(this.variantChange)}
+                </div>
                 <div className="product-price">
                   <div className="product-price-original">
                     <label>Price</label>
@@ -480,10 +484,6 @@ class Product extends React.Component {
                 </div>
                 <div className="product-description">
                   {this.state.variantDescription}
-                </div>
-                <label>Color</label>
-                <div className={"variant-color-" + this.state.variantImages}>
-                  {this.props.data.product.variants.map(this.variantChange)}
                 </div>
                 {/* {this.props.data.product.variants.map(
                     (variant) =>

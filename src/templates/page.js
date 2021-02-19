@@ -504,6 +504,9 @@ export const postQuery = graphql`
               slice_id {
                 text
               }
+              left_youtube_background {
+                embed_url
+              }
               left_background_video {
                 url
               }

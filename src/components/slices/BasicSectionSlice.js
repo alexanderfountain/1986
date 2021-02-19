@@ -4,7 +4,7 @@ import BackgroundImage from "gatsby-background-image";
 import Container from "../container";
 import { RichText, Date } from "prismic-reactjs";
 import { Link } from "gatsby";
-
+import YoutubeBackground from "react-youtube-background";
 // import { RichText } from "prismic-dom"
 import YouTube from "react-youtube";
 import ResponsiveEmbed from "react-responsive-embed";
@@ -273,8 +273,9 @@ export const BasicSectionSlice = ({ slice }) => {
       {bg_video && (
         <div class="video-container-outer">
           <div class="video-container">
-
-              <div dangerouslySetInnerHTML={{ __html: `
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `
     <video
       muted
       loop
@@ -283,8 +284,9 @@ export const BasicSectionSlice = ({ slice }) => {
       src="${bg_video}"
       type="video/mp4"
     />
-  ` }}
-  />
+  `,
+              }}
+            />
             <Container>
               <section>
                 <div class="video-content">
@@ -300,15 +302,20 @@ export const BasicSectionSlice = ({ slice }) => {
         </div>
       )}
       {video_id && (
-        <div class="youtube-video-container">
-          <ResponsiveEmbed
-            src={
-              "https://www.youtube.com/embed/" +
-              video_id +
-              "?loop=1&autoplay=1&mute=1&showinfo=0&controls=0&rel=0&iv_load_policy=3&modestbranding=1&autohide=1&playlist=" +
-              video_id
-            }
-          />
+        <div className="youtube-bg">
+          <YoutubeBackground videoId={video_id}>
+            <Container>
+              <section>
+                <div class="video-content">
+                  <RichText
+                    render={slice.primary.content.raw}
+                    linkResolver={linkResolver}
+                    htmlSerializer={prismicHtmlSerializer}
+                  />
+                </div>
+              </section>
+            </Container>
+          </YoutubeBackground>
         </div>
       )}
       {bg_video_image && (

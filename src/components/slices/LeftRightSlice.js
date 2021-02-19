@@ -6,6 +6,7 @@ import { RichText } from "prismic-reactjs";
 import * as variable from "../variables";
 import linkResolver from "../../utils/linkResolver";
 import prismicHtmlSerializer from "../../gatsby/htmlSerializer";
+import YoutubeBackground from "react-youtube-background";
 
 const LeftRightStyle = styled.div`
 .video-container-outer {
@@ -93,6 +94,13 @@ const LeftRightStyle = styled.div`
     max-width: 100%;
     margin: 0 auto;
   }
+  .left-video-bg{
+    height:100%;
+    > div{
+      height:100%;
+    }
+
+  }
 `;
 
 export const addActive = (id) => {
@@ -110,12 +118,19 @@ function returnLeft(primary, leftWidth) {
   var bg_video_image = false;
   if (
     primary.left_background_video.url == "" &&
-    primary.left_background_image.localFile == null
+    primary.left_background_image.localFile == null &&
+    primary.left_youtube_background.embed_url == null
   ) {
     bg_video_image = true;
     console.log(bg_video_image);
   }
-
+  if (primary.left_youtube_background.embed_url != null) {
+    var video_id = primary.left_youtube_background.embed_url.split("v=")[1];
+    var ampersandPosition = video_id.indexOf("&");
+    if (ampersandPosition != -1) {
+      video_id = video_id.substring(0, ampersandPosition);
+    }
+  }
   if (primary.left_background_video != null) {
     bg_video = primary.left_background_video.url;
   }
@@ -149,24 +164,13 @@ function returnLeft(primary, leftWidth) {
           </div>
         </BackgroundImage>
       )}
-      {bg_video && (
-        <section class="video-container-outer">
-          <div class="video-container">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: `
-    <video
-      muted
-      loop
-      autoplay="autoplay"
-      playsinline="true"
-      src="${bg_video}"
-      type="video/mp4"
-    />
-  `,
-              }}
-            />
-          </div>
+
+      {video_id && (
+        <section>
+          <YoutubeBackground
+            className="left-video-bg"
+            videoId={video_id}
+          ></YoutubeBackground>
         </section>
       )}
 
