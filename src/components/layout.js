@@ -18,7 +18,7 @@ import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import "../components/scss/layout/layout.scss";
 import { PopupboxManager, PopupboxContainer } from "react-popupbox";
 import "react-popupbox/dist/react-popupbox.css";
-
+import { myContext } from "../../provider";
 const Layout = ({ children, slug }) => {
   if (slug) {
     var pageId = slug;
@@ -30,13 +30,17 @@ const Layout = ({ children, slug }) => {
     currentWindow = window.location.origin;
   }
   return (
-    <div id={pageId}>
-      <HeaderCart />
-      <Header />
-      <PopupboxContainer />
-      <main>{children}</main>
-      <Footer />
-    </div>
+    <myContext.Consumer>
+      {(context) => (
+        <div id={pageId}>
+          <HeaderCart saleDate={context.saleDate} />
+          <Header />
+          <PopupboxContainer />
+          <main>{children}</main>
+          <Footer />
+        </div>
+      )}
+    </myContext.Consumer>
   );
 };
 

@@ -7,14 +7,6 @@ import { useCartCount } from "gatsby-theme-shopify-manager";
 import CartIcon from "../../images/shopping-cart.svg";
 import Countdown from "react-countdown";
 import CheckoutLink from "../../components/CheckoutLink";
-const renderer = ({ hours, minutes, seconds, completed }) => {
-  // Render a countdown
-  return (
-    <span>
-      00:{minutes}:{seconds}
-    </span>
-  );
-};
 
 const HeaderCartStyle = styled.div`
   padding: 10px 0px;
@@ -27,6 +19,7 @@ const HeaderCartStyle = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
     p {
       margin: 0px;
     }
@@ -35,9 +28,11 @@ const HeaderCartStyle = styled.div`
     display: flex;
     margin: 0px;
     padding: 0px;
+    align-items: center;
+    justify-content: flex-end;
     li {
-      &:nth-child(1) {
-        margin-right: 20px;
+      &:nth-child(2) {
+        margin-left: 20px;
       }
       list-style: none;
       a {
@@ -48,10 +43,17 @@ const HeaderCartStyle = styled.div`
         cursor: pointer;
         display: flex;
         align-items: center;
+        @media (max-width: ${variable.mobileWidth}) {
+          font-size: 12px;
+        }
         img {
           width: 20px;
           height: auto;
           margin-right: 5px;
+          @media (max-width: ${variable.mobileWidth}) {
+            width: 15px;
+            margin-right: 3px;
+          }
         }
         path {
           color: white;
@@ -65,21 +67,30 @@ const HeaderCartStyle = styled.div`
   .count-sale {
     color: white;
     text-align: center;
+    font-size: 16px;
+    @media (max-width: ${variable.mobileWidth}) {
+      font-size: 12px;
+    }
     span {
       color: white;
     }
   }
 `;
 
-export const HeaderCart = () => {
+export const HeaderCart = ({ saleDate }) => {
   const cartCount = useCartCount();
+  var emptyCart = false;
+  if (cartCount != null && cartCount != 0) {
+    emptyCart = true;
+  }
+  console.log(saleDate);
   return (
     <HeaderCartStyle>
       <Container className="header-cart-container">
         <div class="header-cart-inner">
           <div className="count-sale">
             30% off sale ends in&nbsp;
-            <Countdown date={Date.now() + 1000000} renderer={renderer} />
+            <Countdown date={saleDate} daysInHours={true} />
           </div>
           <ul>
             <li>
@@ -88,18 +99,7 @@ export const HeaderCart = () => {
                 CART ({cartCount})
               </Link>
             </li>
-            {cartCount && <li>{<CheckoutLink />}</li>}
-            <li>
-              {/* <a
-                disabled={loading}
-                onClick={() => {
-                  setLoading(true);
-                  redirectToCheckout();
-                }}
-              >
-                {loading ? "LOADING..." : "CHECKOUT"}
-              </a> */}
-            </li>
+            {emptyCart && <li>{<CheckoutLink />}</li>}
           </ul>
         </div>
       </Container>

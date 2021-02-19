@@ -25,6 +25,8 @@ import "../../node_modules/react-modal-video/scss/modal-video.scss";
 import Reviews from "../components/reviews";
 import star from "../images/star.svg";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import { myContext } from "../../provider";
+
 const ProductStyle = styled.div`
   label {
     display: block;
@@ -83,6 +85,7 @@ const ProductStyle = styled.div`
       width: calc(50% - 20px);
       @media (max-width: ${variable.mobileWidth}) {
         width: 100%;
+        margin-top: 20px;
       }
       label {
         font-size: 20px;
@@ -239,6 +242,7 @@ class Product extends React.Component {
       comparePrice: props.data.product.variants[0].compareAtPriceV2.amount,
       variantDescription: props.data.product.variants[0].product.description,
       selectedOptions: props.data.product.variants[0].selectedOptions,
+      limitedQuantity: "12",
       variantImage:
         props.data.product.variants[0].image.localFile.childImageSharp.fluid,
       quantity: 1,
@@ -311,6 +315,12 @@ class Product extends React.Component {
       variantImage: variant.image.localFile.childImageSharp.fluid,
     });
     this.setState({ selectedOptions: variant.selectedOptions });
+    if (variant.title == "blue") {
+      this.setState({ limitedQuantity: "12" });
+    }
+    if (variant.title == "orange") {
+      this.setState({ limitedQuantity: "10" });
+    }
     var alt = variant.title;
     var newGalleryItems = [];
     this.items.map((image, i) => {
@@ -467,13 +477,17 @@ class Product extends React.Component {
                 <div className="product-price">
                   <div className="product-price-original">
                     <label>Price</label>
-                    <div className="count-sale">
-                      30% off sale ends in&nbsp;
-                      <Countdown
-                        date={Date.now() + 1000000}
-                        renderer={renderer}
-                      />
-                    </div>
+                    <myContext.Consumer>
+                      {(context) => (
+                        <div className="count-sale">
+                          30% off sale ends in&nbsp;
+                          <Countdown
+                            date={context.saleDate}
+                            daysInHours={true}
+                          />
+                        </div>
+                      )}
+                    </myContext.Consumer>
                     <span className="compare-price">
                       ${Number(this.state.comparePrice).toFixed(2)}
                     </span>
@@ -495,8 +509,10 @@ class Product extends React.Component {
                   )} */}
                 <label>Quantity</label>
                 <div className="low-stock">
-                  Low in stock! Only <span>12</span> Remaining!
+                  Low in stock! Only <span>{this.state.limitedQuantity}</span>{" "}
+                  Remaining!
                 </div>
+
                 <Select
                   isSearchable={false}
                   defaultValue={quantityOptions[0]}

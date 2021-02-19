@@ -4,7 +4,7 @@ import BackgroundImage from "gatsby-background-image";
 import Container from "../container";
 import { RichText, Date } from "prismic-reactjs";
 import { Link } from "gatsby";
-import YoutubeBackground from "react-youtube-background";
+// import YoutubeBackground from "react-youtube-background";
 // import { RichText } from "prismic-dom"
 import YouTube from "react-youtube";
 import ResponsiveEmbed from "react-responsive-embed";
@@ -16,6 +16,37 @@ import * as variable from "../variables";
 import prismicHtmlSerializer from "../../gatsby/htmlSerializer";
 
 // const linkResolver = require("../../utils/linkResolver")
+import loadable from "@loadable/component";
+
+// import YoutubeBackground from "react-youtube-background";
+const LoadYoutube = ({ video_id, slice }) => {
+  console.log(slice);
+  if (typeof window !== "undefined") {
+    // browser code
+    const YoutubeBackground = loadable(() =>
+      import(`react-youtube-background`)
+    );
+    return (
+      <div className="youtube-bg">
+        <YoutubeBackground videoId={video_id}>
+          <Container>
+            <section>
+              <div class="video-content">
+                <RichText
+                  render={slice.primary.content.raw}
+                  linkResolver={linkResolver}
+                  htmlSerializer={prismicHtmlSerializer}
+                />
+              </div>
+            </section>
+          </Container>
+        </YoutubeBackground>
+      </div>
+    );
+  } else {
+    return <h4>uhuh</h4>;
+  }
+};
 
 const BasicStyle = styled.div`
   .video-container-outer {
@@ -302,21 +333,7 @@ export const BasicSectionSlice = ({ slice }) => {
         </div>
       )}
       {video_id && (
-        <div className="youtube-bg">
-          <YoutubeBackground videoId={video_id}>
-            <Container>
-              <section>
-                <div class="video-content">
-                  <RichText
-                    render={slice.primary.content.raw}
-                    linkResolver={linkResolver}
-                    htmlSerializer={prismicHtmlSerializer}
-                  />
-                </div>
-              </section>
-            </Container>
-          </YoutubeBackground>
-        </div>
+        <LoadYoutube video_id={video_id} slice={slice}></LoadYoutube>
       )}
       {bg_video_image && (
         <div style={{ backgroundColor: bg_color }}>

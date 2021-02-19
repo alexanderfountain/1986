@@ -41,8 +41,16 @@ const ReviewsStyle = styled.div`
   .star-based {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    @media (max-width: ${variable.mobileWidth}) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     .based-on {
       margin-left: 5px;
+      @media (max-width: ${variable.mobileWidth}) {
+        margin-left: 0px;
+      }
     }
   }
   .review-inner {

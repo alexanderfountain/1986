@@ -6,7 +6,28 @@ import { RichText } from "prismic-reactjs";
 import * as variable from "../variables";
 import linkResolver from "../../utils/linkResolver";
 import prismicHtmlSerializer from "../../gatsby/htmlSerializer";
-import YoutubeBackground from "react-youtube-background";
+// import loadable from "@loadable/component";
+
+import loadable from "@loadable/component";
+
+// import YoutubeBackground from "react-youtube-background";
+const LoadYoutube = ({ video_id }) => {
+  if (typeof window !== "undefined") {
+    // browser code
+    const YoutubeBackground = loadable(() =>
+      import(`react-youtube-background`)
+    );
+    return (
+      <YoutubeBackground videoId={video_id}>
+        <Container>
+          <section></section>
+        </Container>
+      </YoutubeBackground>
+    );
+  } else {
+    return <h4>null</h4>;
+  }
+};
 
 const LeftRightStyle = styled.div`
 .video-container-outer {
@@ -101,6 +122,16 @@ const LeftRightStyle = styled.div`
     }
 
   }
+  .youtube-container-inner{
+    /* height:100%;
+    padding:0px;
+    > div{
+      height:100%;
+    } */
+    > div{
+      height:100%;
+    }
+  }
 `;
 
 export const addActive = (id) => {
@@ -164,16 +195,11 @@ function returnLeft(primary, leftWidth) {
           </div>
         </BackgroundImage>
       )}
-
       {video_id && (
-        <section>
-          <YoutubeBackground
-            className="left-video-bg"
-            videoId={video_id}
-          ></YoutubeBackground>
+        <section className="youtube-container-inner">
+          <LoadYoutube video_id={video_id}></LoadYoutube>
         </section>
       )}
-
       {bg_video_image && (
         <section>
           <div
