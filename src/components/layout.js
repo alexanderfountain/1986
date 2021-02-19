@@ -18,7 +18,6 @@ import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import "../components/scss/layout/layout.scss";
 import { PopupboxManager, PopupboxContainer } from "react-popupbox";
 import "react-popupbox/dist/react-popupbox.css";
-import ExitPopup from "./ExitPopup";
 
 const Layout = ({ children, slug }) => {
   if (slug) {
@@ -32,7 +31,6 @@ const Layout = ({ children, slug }) => {
   }
   return (
     <div id={pageId}>
-      <ExitPopup></ExitPopup>
       <HeaderCart />
       <Header />
       <PopupboxContainer />
