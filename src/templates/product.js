@@ -240,7 +240,8 @@ class Product extends React.Component {
       variantImages: props.data.product.variants[0].title,
       variantPrice: props.data.product.variants[0].priceV2.amount,
       comparePrice: props.data.product.variants[0].compareAtPriceV2.amount,
-      variantDescription: props.data.product.variants[0].product.description,
+      variantDescription:
+        props.data.product.variants[0].product.descriptionHtml,
       selectedOptions: props.data.product.variants[0].selectedOptions,
       limitedQuantity: "12",
       variantImage:
@@ -310,7 +311,7 @@ class Product extends React.Component {
     this.setState({ currentIndex: 0 });
     this.setState({ variantPrice: variant.priceV2.amount });
     this.setState({ comparePrice: variant.compareAtPriceV2.amount });
-    this.setState({ variantDescription: variant.product.description });
+    this.setState({ variantDescription: variant.product.descriptionHtml });
     this.setState({
       variantImage: variant.image.localFile.childImageSharp.fluid,
     });
@@ -384,7 +385,7 @@ class Product extends React.Component {
     //     alert("There was a problem adding that item to your cart.");
     //   }
     // }
-    console.log(reviews.length);
+    console.log(product);
 
     return (
       // <h2>test</h2>
@@ -497,7 +498,11 @@ class Product extends React.Component {
                   </div>
                 </div>
                 <div className="product-description">
-                  {this.state.variantDescription}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.variantDescription,
+                    }}
+                  />
                 </div>
                 {/* {this.props.data.product.variants.map(
                     (variant) =>
@@ -568,6 +573,7 @@ export const productQuery = graphql`
             }
           }
           description
+          descriptionHtml
           variants {
             image {
               localFile {
