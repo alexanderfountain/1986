@@ -3,9 +3,8 @@ import Container from "../container";
 import styled from "styled-components";
 import * as variable from "../variables";
 const ContactStyle = styled.div`
-  padding: 75px 0px;
+  padding: 0px 0px 40px 0px;
   margin: 0 auto;
-  max-width: 900px;
   .contact-outer {
     display: flex;
     justify-content: space-between;
@@ -107,7 +106,7 @@ export const ContactSlice = ({ slice }) => {
       <ContactStyle>
         <div className="contact-outer">
           <div className="contact-form-left">
-            <p>We're here to help, and respondwith tempo.</p>
+            <p>We're here to help, and respond with tempo.</p>
             <form
               name="contact"
               method="POST"
