@@ -18,6 +18,7 @@ import LeftRightSlice from "../components/slices/LeftRightSlice";
 import HeroSlice from "../components/slices/HeroSlice";
 import BlockReferenceSlice from "../components/slices/BlockReferenceSlice";
 import GallerySlice from "../components/slices/GallerySlice";
+import ContactSlice from "../components/slices/ContactSlice";
 // Sort and display the different slice options
 const PostSlices = ({ slices }) => {
   return slices.map((slice, index) => {
@@ -81,6 +82,17 @@ const PostSlices = ({ slices }) => {
               className="slice-wrapper slice-columns"
             >
               {<ColumnSectionSlice slice={slice} />}
+            </div>
+          );
+
+        case "contact":
+          return (
+            <div
+              id={"slice-id-" + sliceID}
+              key={index}
+              className="slice-wrapper slice-contact"
+            >
+              {<ContactSlice slice={slice} />}
             </div>
           );
 
@@ -462,6 +474,10 @@ export const postQuery = graphql`
                 text
               }
             }
+          }
+          ... on PrismicPaBodyContact {
+            id
+            slice_type
           }
           ... on PrismicPaBodyColumnsSection {
             id

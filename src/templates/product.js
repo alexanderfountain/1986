@@ -185,6 +185,10 @@ const ProductStyle = styled.div`
     font-style: italic;
     color: ${variable.red};
   }
+  .free-shipping {
+    margin-bottom: 5px;
+    font-style: italic;
+  }
   .low-stock {
     color: ${variable.red};
     margin-bottom: 5px;
@@ -481,7 +485,7 @@ class Product extends React.Component {
                     <myContext.Consumer>
                       {(context) => (
                         <div className="count-sale">
-                          30% off sale ends in&nbsp;
+                          50% off sale ends in&nbsp;
                           <Countdown
                             date={context.saleDate}
                             daysInHours={true}
@@ -517,13 +521,16 @@ class Product extends React.Component {
                   Low in stock! Only <span>{this.state.limitedQuantity}</span>{" "}
                   Remaining!
                 </div>
-
+                <div className="free-shipping">
+                  Free Shipping with orders of 3 or more masks!
+                </div>
                 <Select
                   isSearchable={false}
                   defaultValue={quantityOptions[0]}
                   onChange={this.quantityChange}
                   options={quantityOptions}
                 />
+
                 <div className="add-to-cart">
                   <AddToCart state={this.state} />
                 </div>

@@ -20,6 +20,9 @@ const HeaderCartStyle = styled.div`
     justify-content: space-between;
     width: 100%;
     align-items: center;
+    @media (max-width: ${variable.mobileWidth}) {
+      flex-direction: column;
+    }
     p {
       margin: 0px;
     }
@@ -30,6 +33,14 @@ const HeaderCartStyle = styled.div`
     padding: 0px;
     align-items: center;
     justify-content: flex-end;
+    @media (max-width: ${variable.mobileWidth}) {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: thin white solid;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
     li {
       &:nth-child(2) {
         margin-left: 20px;
@@ -65,11 +76,13 @@ const HeaderCartStyle = styled.div`
     }
   }
   .count-sale {
-    color: white;
-    text-align: center;
-    font-size: 16px;
-    @media (max-width: ${variable.mobileWidth}) {
-      font-size: 12px;
+    div {
+      color: white;
+      text-align: center;
+      font-size: 15px;
+      @media (max-width: ${variable.mobileWidth}) {
+        font-size: 12px;
+      }
     }
     span {
       color: white;
@@ -83,14 +96,16 @@ export const HeaderCart = ({ saleDate }) => {
   if (cartCount != null && cartCount != 0) {
     emptyCart = true;
   }
-  console.log(saleDate);
   return (
     <HeaderCartStyle>
       <Container className="header-cart-container">
         <div class="header-cart-inner">
           <div className="count-sale">
-            30% off sale ends in&nbsp;
-            <Countdown date={saleDate} daysInHours={true} />
+            <div>
+              50% off sale ends in&nbsp;
+              <Countdown date={saleDate} daysInHours={true} />
+            </div>
+            <div>Free Shipping with orders of 3 or more masks!</div>
           </div>
           <ul>
             <li>

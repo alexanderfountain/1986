@@ -13,9 +13,12 @@ const HeaderStyle = styled.header`
   // position: fixed;
   top: 0px;
   width: 100%;
-  margin-top: 39px;
+  margin-top: 55px;
   box-shadow: rgb(204, 204, 204) 0px 1px 2px;
   z-index: 10;
+  @media (max-width: ${variable.tabletWidth}) {
+    margin-top: 85px;
+  }
   .header-inner {
     display: flex;
     -webkit-box-pack: justify;
