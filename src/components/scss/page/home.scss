@@ -111,12 +111,17 @@
   }
   .left-right-container {
     min-height: 450px;
+    section {
+      padding: 0px;
+      > div {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+      }
+    }
     @include mobile() {
       text-align: left;
       flex-direction: column;
-      section {
-        padding: 0px;
-      }
     }
     h3 {
       font-size: 32px;
@@ -243,6 +248,9 @@
       width: 100%;
       max-width: 100%;
       padding: 20px;
+      @include mobile() {
+        padding: 0px;
+      }
     }
   }
   .left-right-container {
