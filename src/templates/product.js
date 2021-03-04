@@ -169,9 +169,12 @@ const ProductStyle = styled.div`
     font-size: 24px;
   }
   .product-description {
-    margin-top: 20px;
+    margin-top: 40px;
+    padding: 20px 0px;
     font-size: 18px;
     line-height: 26px;
+    border-top: thin solid ${variable.blue};
+    border-bottom: thin solid ${variable.blue};
   }
   .compare-price {
     text-decoration: line-through;
@@ -475,13 +478,8 @@ class Product extends React.Component {
                     </AnchorLink>
                   </span>
                 </div>
-                <label>Color</label>
-                <div className={"variant-color-" + this.state.variantImages}>
-                  {this.props.data.product.variants.map(this.variantChange)}
-                </div>
                 <div className="product-price">
                   <div className="product-price-original">
-                    <label>Price</label>
                     <myContext.Consumer>
                       {(context) => (
                         <div className="count-sale">
@@ -501,12 +499,9 @@ class Product extends React.Component {
                     </span>
                   </div>
                 </div>
-                <div className="product-description">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: this.state.variantDescription,
-                    }}
-                  />
+                <label>Choose your color:</label>
+                <div className={"variant-color-" + this.state.variantImages}>
+                  {this.props.data.product.variants.map(this.variantChange)}
                 </div>
                 {/* {this.props.data.product.variants.map(
                     (variant) =>
@@ -516,7 +511,13 @@ class Product extends React.Component {
                       {variant.title}
                     </div>
                   )} */}
-                <label>Quantity</label>
+                <label>How many would you like?</label>
+                <Select
+                  isSearchable={false}
+                  defaultValue={quantityOptions[0]}
+                  onChange={this.quantityChange}
+                  options={quantityOptions}
+                />
                 <div className="low-stock">
                   Low in stock! Only <span>{this.state.limitedQuantity}</span>{" "}
                   Remaining!
@@ -524,17 +525,17 @@ class Product extends React.Component {
                 <div className="free-shipping">
                   Free Shipping with orders of 3 or more masks!
                 </div>
-                <Select
-                  isSearchable={false}
-                  defaultValue={quantityOptions[0]}
-                  onChange={this.quantityChange}
-                  options={quantityOptions}
-                />
-
                 <div className="add-to-cart">
                   <AddToCart state={this.state} />
                 </div>
               </div>
+            </div>
+            <div className="product-description">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: this.state.variantDescription,
+                }}
+              />
             </div>
             <div id="reviews-anchor">
               <Reviews reviews={reviews}></Reviews>
