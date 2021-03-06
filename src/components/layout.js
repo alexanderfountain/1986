@@ -19,6 +19,7 @@ import "../components/scss/layout/layout.scss";
 import { PopupboxManager, PopupboxContainer } from "react-popupbox";
 import "react-popupbox/dist/react-popupbox.css";
 import { myContext } from "../../provider";
+import ExitPopup from "../components/ExitPopup";
 const Layout = ({ children, slug }) => {
   if (slug) {
     var pageId = slug;
@@ -35,6 +36,7 @@ const Layout = ({ children, slug }) => {
         <div id={pageId}>
           <HeaderCart saleDate={context.saleDate} />
           <Header />
+          <ExitPopup></ExitPopup>
           <PopupboxContainer />
           <main>{children}</main>
           <Footer />

@@ -188,10 +188,6 @@ function AddToCart(state) {
             </div>
             <div className="check-continue-container">
               <div className="checkout">{<CheckoutLink />}</div>
-              <div className="or">or</div>
-              <div className="continue-shopping" onClick={closeModal}>
-                Continue Shopping
-              </div>
             </div>
           </div>
         </CartStyle>
