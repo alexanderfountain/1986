@@ -8,7 +8,12 @@ function CheckoutLink() {
     <p>There is no active checkout.</p>
   ) : (
     <p>
-      <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+      <a
+        className="checkout-link"
+        href={checkoutUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         CHECKOUT
       </a>
     </p>
