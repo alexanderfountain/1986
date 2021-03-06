@@ -1,40 +1,46 @@
 {
-    "Main": {
-      "name": {
-        "type": "StructuredText",
-        "config": {
-          "single": "heading2",
-          "label": "Name"
-        }
-      },
-      "review": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "paragraph",
-          "label": "Review"
-        }
-      },
-      "stars": {
-        "type": "Select",
-        "config": {
-          "options": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "label": "Stars"
-        }
-      },
-      "product": {
-        "type": "Select",
-        "config": {
-          "options": [
-            "Masks"
-          ],
-          "label": "Product"
-        }
+  "Main": {
+    "name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Name"
+      }
+    },
+    "review": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph",
+        "label": "Review"
+      }
+    },
+    "review_date": {
+      "type": "Date",
+      "config": {
+        "label": "Review Date"
+      }
+    },
+    "stars": {
+      "type": "Select",
+      "config": {
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "label": "Stars"
+      }
+    },
+    "product": {
+      "type": "Select",
+      "config": {
+        "options": [
+          "Masks"
+        ],
+        "label": "Product"
       }
     }
   }
+}

@@ -197,7 +197,7 @@ function AddToCart(state) {
         </CartStyle>
       </Modal>
       <button id="add-to-cart-button-click" onClick={addToCart}>
-        Add to cart.
+        Buy Mask Now!
       </button>
     </div>
   );

@@ -32,11 +32,10 @@ const ProductStyle = styled.div`
     display: block;
   }
   .color-variant {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 10px;
   }
   .color-blue {
     background-image: url(${BlueTexture});
@@ -129,12 +128,12 @@ const ProductStyle = styled.div`
   }
   .variant-color-blue {
     .color-blue {
-      border: 2px solid ${variable.darkGray};
+      border: 4px solid ${variable.pink};
     }
   }
   .variant-color-orange {
     .color-orange {
-      border: 2px solid ${variable.darkGray};
+      border: 4px solid ${variable.pink};
     }
   }
   .add-to-cart {
@@ -190,7 +189,7 @@ const ProductStyle = styled.div`
     color: ${variable.red};
   }
   .free-shipping {
-    margin-bottom: 5px;
+    margin-top: 5px;
     font-style: italic;
   }
   .low-stock {
@@ -213,19 +212,24 @@ const ProductStyle = styled.div`
       }
     }
   }
+  .variant-color-container {
+    display: inline-block;
+    text-align: center;
+    margin-right: 30px;
+  }
 `;
 
 const quantityOptions = [
-  { value: 1, label: "1" },
-  { value: 2, label: "2" },
-  { value: 3, label: "3" },
-  { value: 4, label: "4" },
-  { value: 5, label: "5" },
-  { value: 6, label: "6" },
-  { value: 7, label: "7" },
-  { value: 8, label: "8" },
-  { value: 9, label: "9" },
-  { value: 10, label: "10" },
+  { value: 1, label: "1 Mask" },
+  { value: 2, label: "2 Masks" },
+  { value: 3, label: "3 Masks" },
+  { value: 4, label: "4 Masks" },
+  { value: 5, label: "5 Masks" },
+  { value: 6, label: "6 Masks" },
+  { value: 7, label: "7 Masks" },
+  { value: 8, label: "8 Masks" },
+  { value: 9, label: "9 Masks" },
+  { value: 10, label: "10 Masks" },
 ];
 
 const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -303,10 +307,13 @@ class Product extends React.Component {
   };
   variantChange = (variant, i) => {
     return (
-      <div
-        className={"color-variant color-" + variant.title}
-        onClick={() => this.variantClick(variant, i)}
-      ></div>
+      <div className="variant-color-container">
+        <div className="variant-color-title">{variant.title}</div>
+        <div
+          className={"color-variant color-" + variant.title}
+          onClick={() => this.variantClick(variant, i)}
+        ></div>
+      </div>
     );
   };
   quantityChange = (quantity) => {
@@ -481,17 +488,6 @@ class Product extends React.Component {
                 </div>
                 <div className="product-price">
                   <div className="product-price-original">
-                    <myContext.Consumer>
-                      {(context) => (
-                        <div className="count-sale">
-                          50% off sale ends in&nbsp;
-                          <Countdown
-                            date={context.saleDate}
-                            daysInHours={true}
-                          />
-                        </div>
-                      )}
-                    </myContext.Consumer>
                     <span className="compare-price">
                       ${Number(this.state.comparePrice).toFixed(2)}
                     </span>
@@ -519,10 +515,6 @@ class Product extends React.Component {
                   onChange={this.quantityChange}
                   options={quantityOptions}
                 />
-                <div className="low-stock">
-                  Low in stock! Only <span>{this.state.limitedQuantity}</span>{" "}
-                  Remaining!
-                </div>
                 <div className="free-shipping">
                   Free Shipping with orders of 3 or more masks!
                 </div>
