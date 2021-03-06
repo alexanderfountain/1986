@@ -110,7 +110,7 @@ function ExitPopup() {
                 have entered your shipping information.
               </p>
               <p>
-                <div className="use-on-masks">
+                <div className="use-on-masks" onClick={closeModal}>
                   Use Coupon On our Color-Changing Masks.
                 </div>
               </p>
