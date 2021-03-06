@@ -142,8 +142,8 @@ const ProductStyle = styled.div`
     button {
       -webkit-appearance: none;
       -moz-appearance: none;
-      background: transparent;
-      color: rgb(255, 0, 108);
+      background: rgb(255, 0, 108);
+      color: white;
       cursor: pointer;
       font-family: Poppins, sans-serif;
       font-size: 20px;
@@ -161,6 +161,7 @@ const ProductStyle = styled.div`
       &:hover {
         background-color: rgb(255, 0, 108);
         color: white;
+        text-decoration: underline;
       }
     }
   }
