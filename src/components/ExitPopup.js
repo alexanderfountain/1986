@@ -72,20 +72,22 @@ function ExitPopup() {
   }
 
   // Initialise
-  const removeExitIntent = exitIntent({
-    maxDisplays: 99999, // default 99999
-    eventThrottle: 100, // default 200
-    showAfterInactiveSecondsDesktop: 20, // default 60
-    showAfterInactiveSecondsMobile: 20, // default 40
-    showAgainAfterSeconds: 10, // default 10
-    onExitIntent: () => {
-      openModal();
-    },
-    debug: false,
-  });
+  if (typeof document !== `undefined`) {
+    const removeExitIntent = exitIntent({
+      maxDisplays: 99999, // default 99999
+      eventThrottle: 100, // default 200
+      showAfterInactiveSecondsDesktop: 20, // default 60
+      showAfterInactiveSecondsMobile: 20, // default 40
+      showAgainAfterSeconds: 10, // default 10
+      onExitIntent: () => {
+        openModal();
+      },
+      debug: false,
+    });
 
-  // Destroy
-  removeExitIntent();
+    // Destroy
+    removeExitIntent();
+  }
 
   return (
     <Modal
