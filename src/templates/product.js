@@ -488,6 +488,17 @@ class Product extends React.Component {
                 </div>
                 <div className="product-price">
                   <div className="product-price-original">
+                    <myContext.Consumer>
+                      {(context) => (
+                        <div className="count-sale">
+                          65% off sale ends in&nbsp;
+                          <Countdown
+                            date={context.saleDate}
+                            daysInHours={true}
+                          />
+                        </div>
+                      )}
+                    </myContext.Consumer>
                     <span className="compare-price">
                       ${Number(this.state.comparePrice).toFixed(2)}
                     </span>
@@ -515,6 +526,10 @@ class Product extends React.Component {
                   onChange={this.quantityChange}
                   options={quantityOptions}
                 />
+                <div className="low-stock">
+                  Low in stock! Only <span>{this.state.limitedQuantity}</span>{" "}
+                  Remaining!
+                </div>
                 <div className="free-shipping">
                   Free Shipping with orders of 3 or more masks!
                 </div>

@@ -76,9 +76,9 @@ function ExitPopup() {
     const removeExitIntent = exitIntent({
       maxDisplays: 99999, // default 99999
       eventThrottle: 100, // default 200
-      showAfterInactiveSecondsDesktop: 20, // default 60
-      showAfterInactiveSecondsMobile: 20, // default 40
-      showAgainAfterSeconds: 10, // default 10
+      showAfterInactiveSecondsDesktop: 30, // default 60
+      showAfterInactiveSecondsMobile: 30, // default 40
+      showAgainAfterSeconds: 20, // default 10
       onExitIntent: () => {
         openModal();
       },
@@ -104,7 +104,7 @@ function ExitPopup() {
             <h2>Don't Go!</h2>
             <h5>We have a COUPON CODE for you!</h5>
             <p>
-              Get an extra 10% off when you use the code: <span>DONTGO</span>
+              Get an extra 5% off when you use the code: <span>DONTGO</span>
             </p>
             <div className="extra-ten">
               <p>

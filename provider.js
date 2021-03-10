@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const myContext = React.createContext();
 
 const Provider = (props) => {
-  const saleDateInitial = Date.now() + 1133000;
+  const saleDateInitial = Date.now() + 499900;
   const [saleDate] = useState(saleDateInitial);
 
   return (
