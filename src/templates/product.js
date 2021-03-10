@@ -531,7 +531,7 @@ class Product extends React.Component {
                   Remaining!
                 </div>
                 <div className="free-shipping">
-                  Free Shipping with orders of 3 or more masks!
+                  Free Shipping with orders of 4 or more masks!
                 </div>
                 <div className="add-to-cart">
                   <AddToCart state={this.state} />
