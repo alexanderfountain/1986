@@ -491,7 +491,7 @@ class Product extends React.Component {
                     <myContext.Consumer>
                       {(context) => (
                         <div className="count-sale">
-                          65% off sale ends in&nbsp;
+                          75% off sale ends in&nbsp;
                           <Countdown
                             date={context.saleDate}
                             daysInHours={true}
@@ -531,7 +531,7 @@ class Product extends React.Component {
                   Remaining!
                 </div>
                 <div className="free-shipping">
-                  Free Shipping with orders of 4 or more masks!
+                  Free Shipping with orders of 3 or more masks!
                 </div>
                 <div className="add-to-cart">
                   <AddToCart state={this.state} />

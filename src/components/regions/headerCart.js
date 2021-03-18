@@ -102,7 +102,7 @@ export const HeaderCart = ({ saleDate }) => {
         <div class="header-cart-inner">
           <div className="count-sale">
             <div>
-              65% off sale ends in&nbsp;
+              75% off sale ends in&nbsp;
               <Countdown date={saleDate} daysInHours={true} />
             </div>
             <div>Free Shipping with orders of 4 or more masks!</div>
