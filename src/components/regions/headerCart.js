@@ -105,7 +105,7 @@ export const HeaderCart = ({ saleDate }) => {
               75% off sale ends in&nbsp;
               <Countdown date={saleDate} daysInHours={true} />
             </div>
-            <div>Free Shipping with orders of 4 or more masks!</div>
+            <div>Free Shipping with orders of 3 or more masks!</div>
           </div>
           <ul>
             <li>
